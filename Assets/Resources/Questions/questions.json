@@ -1,0 +1,23 @@
+[
+  {
+    "questionText" : "Какой тип данных в C# используется для хранения целых чисел?",
+    "answers" : [
+      "int",
+      "float",
+      "string",
+      "double"
+    ],
+    "questionTime" : 20,
+    "correctAnswer" : "1"
+  },
+  {
+    "questionText" : "Какой тип данных в C# используется для хранения строк?",
+    "answers" : [
+      "string"
+    ],
+    "questionTime" :
+    20,
+    "correctAnswer" :
+    "string"
+  }
+]

@@ -12,9 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbd5e82cd441274c8cf52ef2abece60, type: 3}
   m_Name: GameParameters
   m_EditorClassIdentifier: 
-  environmentParameters:
-    rooms:
-    - {fileID: 869282141592852364, guid: 7b6b7151c70494640a8dd3c7e1d92038, type: 3}
-    people:
-    - humanSprite: {fileID: 0}
-    addCountRoomThroughFloor: 0
+  people: []
+  maze:
+    maxRoomRows: 15
+    maxRoomColumns: 15
+    width: 40
+    height: 40
+    floorTile: {fileID: 11400000, guid: ee6e82781e7ceb64099104d21943cc68, type: 2}
+    wallTile: {fileID: 11400000, guid: 8329b1b50a6e7394ebed2a1df9243419, type: 2}
+  dialog:
+    buttonAnswer: {fileID: 7133902616031782360, guid: 10a1d612c7d06ef4899b7f38da8a7593, type: 3}
+    questionFontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+    buttonFontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+    buttonTrueColor: {r: 0, g: 1, b: 0.085513115, a: 1}
+    buttonFalseColor: {r: 1, g: 0.19639501, b: 0, a: 1}
+    url: 
+    filePath: ..\\The Labyrinth of GSTU\\Assets\\Resources\\Questions\\questions.json

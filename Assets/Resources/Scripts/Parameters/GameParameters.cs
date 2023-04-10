@@ -1,10 +1,15 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Parameters", fileName = "GamePatameters")]
 public class GameParameters : ScriptableObject
 {
-    [SerializeField] private EnvironmentParameters environmentParameters;
+    [SerializeField] private List<PeopleParameters> people;
+    [SerializeField] private MazeParameters maze;
+    [SerializeField] private DialogParameters dialog;
 
-    public EnvironmentParameters EnvironmentParameters { get { return environmentParameters; } }
+    public List<PeopleParameters> People => people;
+    public MazeParameters Maze => maze;
+    public DialogParameters Dialog => dialog;
 
 }
