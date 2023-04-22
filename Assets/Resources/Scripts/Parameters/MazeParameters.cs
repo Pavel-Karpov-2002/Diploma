@@ -12,6 +12,7 @@ public class MazeParameters
     [SerializeField] private int height = 40;
     [SerializeField] private Tile floorTile;
     [SerializeField] private Tile wallTile;
+    [SerializeField][Min(0)] private int minNPCCountOnFloor;
 
     public int MaxRoomRows => maxRoomRows;
     public int MaxRoomColumns => maxRoomColumns;
@@ -19,4 +20,6 @@ public class MazeParameters
     public int Height => height;
     public Tile FloorTile => floorTile;
     public Tile WallTile => wallTile;
+    public int MinNPCCountOnFloor => minNPCCountOnFloor;
+
 }

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TestingAnswersScript" Collapsed="true">
+    <Position X="6.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABQAEAACAAAASAAAAAAAAABABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Resources\Scripts\UI\CommunicateWithPlayer\TestingAnswersScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScoresUI" Collapsed="true">
+    <Position X="11.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAACAEAAAAAAAAAAAABABAAAAQAAQAQAAAAAA=</HashCode>
+      <FileName>Assets\Resources\Scripts\UI\ScoresUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DialogPanelSingleton" Collapsed="true">
+    <Position X="11.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAACAAAAAAAAAAAAAABABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Resources\Scripts\UI\CommunicateWithPlayer\DialogPanelSingleton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DialogScript" Collapsed="true">
+    <Position X="7.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABQAAAEAgAIACAAAAAAIAABBREAAAUQAAAAAEAAEA=</HashCode>
+      <FileName>Assets\Resources\Scripts\UI\CommunicateWithPlayer\DialogScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnteringResponseScript" Collapsed="true">
+    <Position X="8.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAACAAAACCAAAAAAACBIBAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Assets\Resources\Scripts\UI\CommunicateWithPlayer\EnteringResponseScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Question" Collapsed="true">
+    <Position X="9.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAEgAAAAIAAAEBAAIgAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Resources\Scripts\UI\CommunicateWithPlayer\Question.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnswerButton" Collapsed="true">
+    <Position X="9.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAQAAACAgAAAgAAACAAAAAAAgEQAAAJAgBACAQ=</HashCode>
+      <FileName>Assets\Resources\Scripts\UI\CommunicateWithPlayer\AnswerButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -7,17 +7,18 @@
       "string",
       "double"
     ],
-    "questionTime" : 20,
-    "correctAnswer" : "1"
+    "questionTime" : 5,
+    "correctAnswer" : "1",
+    "questionType" : "test"
   },
   {
     "questionText" : "Какой тип данных в C# используется для хранения строк?",
     "answers" : [
-      "string"
     ],
     "questionTime" :
-    20,
+    5,
     "correctAnswer" :
-    "string"
+    "string",
+    "questionType" : "entering"
   }
 ]

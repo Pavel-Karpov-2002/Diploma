@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 [Serializable]
 public class DialogParameters
@@ -12,6 +13,9 @@ public class DialogParameters
     [SerializeField] private Color buttonFalseColor;
     [SerializeField] private string url;
     [SerializeField] private string filePath;
+    [SerializeField][Min(0)] private float timeToRespond;
+    [SerializeField][Min(0)] private float timeAfterResponse;
+    [SerializeField][Min(0)] private int amountQuestionPerOneNPC;
 
     public GameObject ButtonAnswer => buttonAnswer;
     public TMP_FontAsset QuestionFontAsset => questionFontAsset;
@@ -20,4 +24,7 @@ public class DialogParameters
     public Color ButtonFalseColor => buttonFalseColor;
     public string Url => url;
     public string FilePath => filePath;
+    public float TimeToRespond => timeToRespond;
+    public float TimeAfterResponse => timeAfterResponse;
+    public int AmountQuestionPerOneNPC => amountQuestionPerOneNPC;
 }

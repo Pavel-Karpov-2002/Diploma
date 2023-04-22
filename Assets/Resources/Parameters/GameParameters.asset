@@ -14,17 +14,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   people: []
   maze:
-    maxRoomRows: 15
-    maxRoomColumns: 15
-    width: 40
-    height: 40
+    maxRoomRows: 9
+    maxRoomColumns: 9
+    width: 20
+    height: 55
     floorTile: {fileID: 11400000, guid: ee6e82781e7ceb64099104d21943cc68, type: 2}
     wallTile: {fileID: 11400000, guid: 8329b1b50a6e7394ebed2a1df9243419, type: 2}
+    minNPCCountOnFloor: 5
   dialog:
     buttonAnswer: {fileID: 7133902616031782360, guid: 10a1d612c7d06ef4899b7f38da8a7593, type: 3}
-    questionFontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
-    buttonFontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+    questionFontAsset: {fileID: 11400000, guid: 1eb95138fdc7dc643995fca3b5a06b31, type: 2}
+    buttonFontAsset: {fileID: 11400000, guid: 1eb95138fdc7dc643995fca3b5a06b31, type: 2}
     buttonTrueColor: {r: 0, g: 1, b: 0.085513115, a: 1}
     buttonFalseColor: {r: 1, g: 0.19639501, b: 0, a: 1}
     url: 
     filePath: ..\\The Labyrinth of GSTU\\Assets\\Resources\\Questions\\questions.json
+    timeToRespond: 20
+    timeAfterResponse: 1
+    amountQuestionPerOneNPC: 5
+  player:
+    playerSpeed: 5
+    npcTriggerDistance: 2
+    activateKey: 101
+    npcLayer:
+      serializedVersion: 2
+      m_Bits: 128
+    minPointsForQuestion: 10
+  timeLoadSceneAttenuation: 1
