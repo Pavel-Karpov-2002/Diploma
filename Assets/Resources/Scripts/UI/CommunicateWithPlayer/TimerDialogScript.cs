@@ -9,22 +9,12 @@ public class TimerDialogScript : MonoBehaviour
     private float timeDuration;
 
     public bool IsPaused { get; set; }
+    public float TimeDuration { get { return timeDuration; } set { timeDuration = value; } }
 
     private static TimerDialogScript instance;
     public delegate void TimeEnd();
 
     public static event TimeEnd TimerEnd;
-    
-    public void StartTimer(float timeDuration)
-    {
-        if (instance == null)
-            instance = this;
-
-        IsPaused = false;
-        timer = new();
-        this.timeDuration = timeDuration;
-        timer.Start(this.timeDuration);
-    }
 
     private void FixedUpdate()
     {
@@ -35,6 +25,17 @@ public class TimerDialogScript : MonoBehaviour
             TimerEnd?.Invoke();
 
         timerUI.value = (timer.GetRemainingTime() / timeDuration);
+    }
+
+    public void StartTimer(float timeDuration)
+    {
+        if (instance == null)
+            instance = this;
+
+        IsPaused = false;
+        timer = new();
+        this.timeDuration = timeDuration;
+        timer.Start(this.timeDuration);
     }
 
     public static TimerDialogScript GetInstance()

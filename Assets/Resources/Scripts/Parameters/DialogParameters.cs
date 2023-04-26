@@ -11,8 +11,10 @@ public class DialogParameters
     [SerializeField] private TMP_FontAsset buttonFontAsset;
     [SerializeField] private Color buttonTrueColor;
     [SerializeField] private Color buttonFalseColor;
-    [SerializeField] private string url;
-    [SerializeField] private string filePath;
+    [SerializeField] private string urlForStudents;
+    [SerializeField] private string filePathForStudents;
+    [SerializeField] private string urlForTeachers;
+    [SerializeField] private string filePathForTeachers;
     [SerializeField][Min(0)] private float timeToRespond;
     [SerializeField][Min(0)] private float timeAfterResponse;
     [SerializeField][Min(0)] private int amountQuestionPerOneNPC;
@@ -22,8 +24,10 @@ public class DialogParameters
     public TMP_FontAsset ButtonFontAsset => buttonFontAsset;
     public Color ButtonTrueColor => buttonTrueColor;
     public Color ButtonFalseColor => buttonFalseColor;
-    public string Url => url;
-    public string FilePath => filePath;
+    public string UrlForStudents => urlForStudents;
+    public string FilePathForStudents => filePathForStudents;
+    public string UrlForTeachers => urlForTeachers;
+    public string FilePathForTeachers => filePathForTeachers;
     public float TimeToRespond => timeToRespond;
     public float TimeAfterResponse => timeAfterResponse;
     public int AmountQuestionPerOneNPC => amountQuestionPerOneNPC;

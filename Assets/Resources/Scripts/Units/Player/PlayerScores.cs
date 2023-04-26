@@ -1,46 +1,39 @@
-using UnityEngine;
-
 public class PlayerScores : PlayerConstructor
 {
-    [SerializeField] private PlayerLoseScript playerLose;
-
     private int scores;
     private static int recordScores;
 
     public int Scores 
     { 
         get { return scores; } 
-        set 
+        private set 
         {  
             scores = value;
-
-            if (scores < 0)
-            {
-                playerLose.PlayerLosed();
-                return;
-            }
 
             ScoresUI.GetInstance().ChangeScoresText(scores);
 
             if (scores > recordScores)
                 recordScores = scores;
-        } 
+        }
     }
+
+    public int NumberOfPointsPerQuestions { get; set; }
 
     public static int RecordScores => recordScores;
 
     private void Start()
     {
-        AnswerButton.OnPlayerAnswered += ChangeScores;
+        if (NumberOfPointsPerQuestions == 0)
+            NumberOfPointsPerQuestions = PlayerParameters.MinPointsForQuestion;
     }
 
-    private void ChangeScores(bool isCorrectAnswer)
+    public void ChangeScores(bool isCorrectAnswer)
     {
-        Scores += PlayerParameters.MinPointsForQuestion * (isCorrectAnswer ? 1 : -1);
+        Scores += NumberOfPointsPerQuestions * (isCorrectAnswer ? 1 : -1);
     }
 
-    private void OnDestroy()
+    public void ChangeScores(int countPoints)
     {
-        AnswerButton.OnPlayerAnswered -= ChangeScores;
+        Scores += countPoints;
     }
 }

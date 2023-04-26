@@ -10,22 +10,22 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] protected Tilemap floorMap;
     [SerializeField] private NPCGeneratorScript npcGeneratorScript;
     [SerializeField] private Vector2 gridScale;
-    [SerializeField] private GameParameters parameters;
+    [SerializeField] private GameParameters gameParameters;
 
     [NonSerialized] public static List<Rect> rooms;
 
     private void Start()
     {
-        GenerateDungeon(parameters.Maze);
+        GenerateDungeon(gameParameters);
     }
 
-    public void GenerateDungeon(MazeParameters parameters)
+    public void GenerateDungeon(GameParameters parameters)
     {
         wallsMap.ClearAllTiles();
         floorMap.ClearAllTiles();
         rooms = new List<Rect>();
-        BinarySpacePartitioningAlgorithm.StartGenerate(wallsMap, floorMap, parameters);
+        BinarySpacePartitioningAlgorithm.StartGenerate(wallsMap, floorMap, parameters.Maze);
         npcGeneratorScript.Generator(parameters, rooms, gridScale);
-        PlayerGeneratorScript.SetPlayerPosition(parameters, rooms, gridScale);
+        PlayerGeneratorScript.SetPlayerPosition(parameters.Maze, rooms, gridScale);
     }
 }

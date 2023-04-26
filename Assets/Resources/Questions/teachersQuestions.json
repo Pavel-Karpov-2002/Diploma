@@ -1,0 +1,24 @@
+[
+  {
+    "questionText" : "Test test etset stes?",
+    "answers" : [
+      "int",
+      "float",
+      "string",
+      "double"
+    ],
+    "questionTime" : 5,
+    "correctAnswer" : "1",
+    "questionType" : "test"
+  },
+  {
+    "questionText" : "sdfg dgfdsg fdg df?",
+    "answers" : [
+    ],
+    "questionTime" :
+    5,
+    "correctAnswer" :
+    "string",
+    "questionType" : "entering"
+  }
+]

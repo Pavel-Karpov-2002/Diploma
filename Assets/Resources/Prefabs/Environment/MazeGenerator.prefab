@@ -50,7 +50,7 @@ MonoBehaviour:
   floorMap: {fileID: 0}
   npcGeneratorScript: {fileID: 8617009676532587285}
   gridScale: {x: 1.5, y: 1.5}
-  parameters: {fileID: 11400000, guid: 5c9843972f45f8d48bba9dd477373a0e, type: 2}
+  gameParameters: {fileID: 11400000, guid: 5c9843972f45f8d48bba9dd477373a0e, type: 2}
 --- !u!114 &8617009676532587285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,7 +63,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4611d1fc23bf4c74e8acd009d7bc85df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NPC: {fileID: 7540113902059384606, guid: 6ed891e6772533141b8e2bb96e1870f2, type: 3}
+  student: {fileID: 7540113902059384606, guid: 6ed891e6772533141b8e2bb96e1870f2, type: 3}
+  teacher: {fileID: 1970863908904599056, guid: 9323ed9090d85224aa479ed054cecc71, type: 3}
   layerForNPC: {fileID: 0}
 --- !u!114 &8617009676532587288
 MonoBehaviour:

@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffbd5e82cd441274c8cf52ef2abece60, type: 3}
   m_Name: GameParameters
   m_EditorClassIdentifier: 
-  people: []
+  npc:
+    studentsSprites: []
+    teachersSprites: []
+    additionalNPCTroughtFloor: 5
+    percentageOfCorrectAnswers: 40
+    minPercentageOfCompletion: 40
   maze:
     maxRoomRows: 9
     maxRoomColumns: 9
@@ -27,8 +32,10 @@ MonoBehaviour:
     buttonFontAsset: {fileID: 11400000, guid: 1eb95138fdc7dc643995fca3b5a06b31, type: 2}
     buttonTrueColor: {r: 0, g: 1, b: 0.085513115, a: 1}
     buttonFalseColor: {r: 1, g: 0.19639501, b: 0, a: 1}
-    url: 
-    filePath: ..\\The Labyrinth of GSTU\\Assets\\Resources\\Questions\\questions.json
+    urlForStudents: 
+    filePathForStudents: ..\\The Labyrinth of GSTU\\Assets\\Resources\\Questions\\studentsQuestions.json
+    urlForTeachers: 
+    filePathForTeachers: ..\\The Labyrinth of GSTU\\Assets\\Resources\\Questions\\teachersQuestions.json
     timeToRespond: 20
     timeAfterResponse: 1
     amountQuestionPerOneNPC: 5

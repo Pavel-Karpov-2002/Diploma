@@ -1,9 +1,7 @@
 using System;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static AnswerButton;
 
 public class TestingAnswersScript : DialogScript
 {
@@ -11,11 +9,16 @@ public class TestingAnswersScript : DialogScript
 
     private static TestingAnswersScript instance;
 
+    public GameObject ButtonsPanel => buttonsPanel;
+
     private void Start()
     {
         if (instance == null)
             instance = this;
+    }
 
+    private void OnEnable()
+    {
         AnswerButton.OnPlayerAnswered += ChangeInterectableAtButtons;
     }
 
@@ -66,9 +69,13 @@ public class TestingAnswersScript : DialogScript
         return instance;
     }
 
+    private void OnDisable()
+    {
+        AnswerButton.OnPlayerAnswered -= ChangeInterectableAtButtons;
+    }
+
     private void OnDestroy()
     {
         instance = null;
-        AnswerButton.OnPlayerAnswered -= ChangeInterectableAtButtons;
     }
 }

@@ -1,16 +1,16 @@
-using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class EnteringResponseScript : DialogScript
 {
     [SerializeField] private TMP_InputField enteredText;
     [SerializeField] private AnswerButton answerButton;
 
-
     private static EnteringResponseScript instance;
     private int numQuestion;
+
+    public AnswerButton AnswerButton => answerButton;
 
     private void Start()
     {
@@ -18,9 +18,19 @@ public class EnteringResponseScript : DialogScript
             instance = this;
     }
 
+    private void OnEnable()
+    {
+        StartCoroutine(SetAnswer());
+    }
+
+    private IEnumerator SetAnswer()
+    {
+        yield return new WaitForSeconds(0.5f);
+        answerButton.Answer = Questions[numQuestion].correctAnswer;
+    }
+
     public void ClickToCompareAnswer()
     {
-        answerButton.Answer = Questions[numQuestion].correctAnswer;
         answerButton.AnswerTheQuestion(enteredText.text, DialogParameters.TimeAfterResponse);
     }
 

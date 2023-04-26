@@ -17,10 +17,13 @@ public class AnswerButton : MonoBehaviour
     public delegate void PlayerAnswered(bool isCorrect);
 
     public static event PlayerAnswered OnPlayerAnswered;
-    public event ChangeButtonColor ChangeButton;
+    public event ChangeButtonColor ChangeAnswerButton;
+
     private IEnumerator nextQuestionCoroutine;
     private bool coroutineIsNotProcessed = true;
-    public static bool isSetChangeColor = true;
+    private static bool isSetChangeColor = true;
+
+    public static bool ChangeColorButton { get => isSetChangeColor; set => isSetChangeColor = value; }
 
     private void OnEnable()
     {
@@ -30,16 +33,16 @@ public class AnswerButton : MonoBehaviour
 
     public void AnswerTheQuestion(string answer, float timeAfterQuestion)
     {
-        ChangeColorButton(gameParameters.Dialog.ButtonFalseColor);
+        ChangeButton(gameParameters.Dialog.ButtonFalseColor);
 
         bool isCorrect = CheckCorrectAnswer(answer);
 
         if (isCorrect)
-            ChangeColorButton(gameParameters.Dialog.ButtonTrueColor);
+            ChangeButton(gameParameters.Dialog.ButtonTrueColor);
         
         if (coroutineIsNotProcessed)
         {
-            nextQuestionCoroutine = (NextQuestion(timeAfterQuestion));
+            nextQuestionCoroutine = NextQuestion(timeAfterQuestion);
             StartCoroutine(nextQuestionCoroutine);
         }
 
@@ -50,18 +53,18 @@ public class AnswerButton : MonoBehaviour
         thisButton.interactable = false;
     }
 
-    private void ChangeColorButton(Color color)
+    private void ChangeButton(Color color)
     {
         if (!isSetChangeColor)
         {
-            ChangeButton = null;
+            ChangeAnswerButton = null;
             return;
         }
 
-        ChangeButton = ChangeColor;
+        ChangeAnswerButton = ChangeColor;
 
-        if (ChangeButton != null)
-            ChangeButton.Invoke(color);
+        if (ChangeAnswerButton != null)
+            ChangeAnswerButton.Invoke(color);
     }
 
     private bool CheckCorrectAnswer(string answer)
@@ -76,7 +79,7 @@ public class AnswerButton : MonoBehaviour
 
         DialogScript.GetInstance().ShowNewQuestion();
 
-        ChangeButton = null;
+        ChangeAnswerButton = null;
         coroutineIsNotProcessed = true;
     }
 
@@ -84,4 +87,6 @@ public class AnswerButton : MonoBehaviour
     {
         buttonImage.color = color;
     }
+
+    public static void ResetOnPlayerAnswered() => OnPlayerAnswered = null;
 }

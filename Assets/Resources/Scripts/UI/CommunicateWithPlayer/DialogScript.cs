@@ -1,25 +1,24 @@
-using Newtonsoft.Json;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Networking;
-using static TimerDialogScript;
 
 public abstract class DialogScript : MonoBehaviour
 {
     [SerializeField] private GameParameters gameParameters;
     [SerializeField] protected TextMeshProUGUI questionText;
 
+    private int countQuestionPerOneNPC;
     private Question[] questions;
-    private IEnumerator getQuestion;
     private HashSet<int> enteringQuestion;
     private static DialogScript instance;
-    private int countQuestionPerOneNPC;
 
     protected Question[] Questions => questions;
+
     protected DialogParameters DialogParameters => gameParameters.Dialog;
+
+    public int AmountQuestionPerOneNPC { get; set; }
+    public static string FilePath { get; set; }
+    public static string UrlSiteQuestion { get; set; }
 
     private void Awake()
     {
@@ -27,72 +26,54 @@ public abstract class DialogScript : MonoBehaviour
             instance = this;
 
         enteringQuestion = new HashSet<int>();
-        getQuestion = GetQuestion(DialogParameters.Url, DialogParameters.FilePath);
-        StartCoroutine(getQuestion);
+        FilePath = DialogParameters.FilePathForStudents;
+        UrlSiteQuestion = DialogParameters.UrlForStudents;
+        AmountQuestionPerOneNPC = DialogParameters.AmountQuestionPerOneNPC;
+        RefreshQuestinoList(FilePath, UrlSiteQuestion);
+
         TimerDialogScript.TimerEnd += ShowNewQuestion;
-    }
-
-    public IEnumerator GetQuestion(string url, string path)
-    {
-        UnityWebRequest request = UnityWebRequestTexture.GetTexture(url);
-        yield return request.SendWebRequest();
-
-        if ((questions = GetOnline(request)) == null)
-            questions = GetFromFile(path);
-    }
-
-    private Question[] GetOnline(UnityWebRequest request)
-    {
-        if (request.result == UnityWebRequest.Result.ProtocolError)
-        {
-            return null;
-        }
-
-        try
-        {
-            return JsonConvert.DeserializeObject<Question[]>(request.downloadHandler.text);
-        }
-        catch
-        {
-            return null;
-        }
-    }
-
-    private Question[] GetFromFile(string path)
-    {
-        using (StreamReader reader = new StreamReader(path))
-        {
-            string json = reader.ReadToEnd();
-            return JsonConvert.DeserializeObject<Question[]>(json);
-        }
+        TimerDialogScript.TimerEnd += TakeAwayPoints;
+        NPC.OnUpdateQuestions += SetNewListQuestion;
     }
 
     public void ShowNewQuestion()
     {
-        if (enteringQuestion == null)
-            enteringQuestion = new HashSet<int>();
+        ExitDialog();
+        RefreshQuestinoList(FilePath, UrlSiteQuestion);
+        InitializeQuestion();
+    }
 
+    public void SetNewListQuestion(string filePath, string url)
+    {
+        questions = QuestionLogic.GetQuestion(filePath, url);
+    }
+
+    public abstract void WriteQuestion(int numQuestion);
+
+    private void ExitDialog()
+    { 
         countQuestionPerOneNPC++;
 
-        if (countQuestionPerOneNPC >= DialogParameters.AmountQuestionPerOneNPC + 1)
+        if (countQuestionPerOneNPC > AmountQuestionPerOneNPC)
         {
             CloseDialogWindow();
             return;
         }
-
-        if (questions.Length <= enteringQuestion.Count)
-            enteringQuestion.Clear();
-
-        InitializeQuestion();
     }
 
-    private void CloseDialogWindow()
+    private void RefreshQuestinoList(string filePath, string url)
     {
-        EnteringResponseScript.GetInstance().gameObject.SetActive(false);
-        TestingAnswersScript.GetInstance().gameObject.SetActive(false);
-        DialogPanelSingleton.GetInstance().gameObject.SetActive(false);
-        MovementJoystick.GetInstance().gameObject.SetActive(true);
-        countQuestionPerOneNPC = 0;
+        if (questions == null)
+        {
+            SetNewListQuestion(filePath, url);
+            return;
+        }
+
+        if (questions.Length <= enteringQuestion.Count)
+        {
+            enteringQuestion.Clear();
+            SetNewListQuestion(filePath, url);
+        }
     }
 
     private void InitializeQuestion()
@@ -100,7 +81,7 @@ public abstract class DialogScript : MonoBehaviour
         int numberQuestion = GetRandomNumber.GenerateRandomNumberNotUsed(0, questions.Length, enteringQuestion);
         enteringQuestion.Add(numberQuestion);
 
-        switch (Questions[numberQuestion].questionType)
+        switch (questions[numberQuestion].questionType)
         {
             case (Question.QuestionType.Test):
                 EnteringResponseScript.GetInstance().gameObject.SetActive(false);
@@ -114,10 +95,25 @@ public abstract class DialogScript : MonoBehaviour
                 break;
         }
 
-        TimerDialogScript.GetInstance().StartTimer(Questions[numberQuestion].questionTime);
+        TimerDialogScript.GetInstance().StartTimer(questions[numberQuestion].questionTime);
     }
 
-    public abstract void WriteQuestion(int numQuestion);
+    private void CloseDialogWindow()
+    {
+        EnteringResponseScript.GetInstance().gameObject.SetActive(false);
+        TestingAnswersScript.GetInstance().gameObject.SetActive(false);
+        DialogPanelSingleton.GetInstance().gameObject.SetActive(false);
+        MovementJoystick.GetInstance().gameObject.SetActive(true);
+        AnswerButton.ResetOnPlayerAnswered();
+        enteringQuestion.Clear();
+        
+        countQuestionPerOneNPC = 0;
+    }
+
+    private void TakeAwayPoints()
+    {
+        ((PlayerScores)PlayerConstructor.GetInstance()).ChangeScores(false);
+    }
 
     public static DialogScript GetInstance()
     {

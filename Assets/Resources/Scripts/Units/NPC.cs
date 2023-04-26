@@ -1,31 +1,32 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class NPC : Unit
+public abstract class NPC : Unit
 {
-    [SerializeField] private GameParameters gameParameters;
+    [SerializeField] protected GameParameters gameParameters;
 
-    private bool isWaiting;
+    private bool isExpectation;
 
-    public bool IsWaiting { get => isWaiting; set => isWaiting = value; }
+    public bool IsExpectation { get => isExpectation; protected set => isExpectation = value; }
 
-    private void Start()
+    public delegate void UpdateQuestions(string filePath, string url);
+
+    public static event UpdateQuestions OnUpdateQuestions;
+
+    private void Awake()
     {
-        isWaiting = true;
+        isExpectation = true;
     }
 
-    private void ChangeClothes()
+    public abstract void SetExpectation(bool expectation);
+
+    protected void NewQuestions(string filePath, string url)
     {
-        // рандомная генерация одежды
+        OnUpdateQuestions?.Invoke(filePath, url);
     }
 
-    private void ChangeClothesFromAbove()
+    private void SetSkin()
     {
-        // изменить верхнюю одежду
-    }
-
-    private void ChangeClothesFromBelow()
-    {
-        // изменить нижнюю одежду
+        // рандомная генерация модельки
     }
 }
