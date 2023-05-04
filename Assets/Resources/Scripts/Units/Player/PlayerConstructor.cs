@@ -13,7 +13,7 @@ public abstract class PlayerConstructor : Unit
     private void Awake()
     {
         PlayerParameters = gameParameters.Player;
-        if (instance == null)
+        if (instance == null && (this is PlayerScores))
             instance = this;
     }
 

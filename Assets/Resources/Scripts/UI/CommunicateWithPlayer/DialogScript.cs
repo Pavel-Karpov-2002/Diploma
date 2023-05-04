@@ -98,7 +98,7 @@ public abstract class DialogScript : MonoBehaviour
         TimerDialogScript.GetInstance().StartTimer(questions[numberQuestion].questionTime);
     }
 
-    private void CloseDialogWindow()
+    public void CloseDialogWindow()
     {
         EnteringResponseScript.GetInstance().gameObject.SetActive(false);
         TestingAnswersScript.GetInstance().gameObject.SetActive(false);

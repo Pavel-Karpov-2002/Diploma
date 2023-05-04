@@ -13,7 +13,7 @@ public class ScoresUI : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-        scoresText.text = textScores + "0";
+        scoresText.text = textScores + ((PlayerScores)PlayerConstructor.GetInstance()).Scores.ToString();
         scoresText.font = gameParameters.Dialog.QuestionFontAsset;
     }
 

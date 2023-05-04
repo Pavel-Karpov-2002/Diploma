@@ -1,24 +1,23 @@
 [
   {
-    "questionText" : "Test test etset stes?",
+    "questionText" : "Какой тип данных в C# используется для хранения строк?",
     "answers" : [
       "int",
       "float",
       "string",
       "double"
     ],
-    "questionTime" : 5,
-    "correctAnswer" : "1",
-    "questionType" : "test"
-  },
-  {
-    "questionText" : "sdfg dgfdsg fdg df?",
-    "answers" : [
-    ],
     "questionTime" :
     5,
     "correctAnswer" :
-    "string",
+    "3",
+    "questionType" : "test"},
+  {
+    "questionText" : "Какой тип данных в C# используется для хранения целых чисел?",
+    "answers" : [
+    ],
+    "questionTime" : 5,
+    "correctAnswer" : "int",
     "questionType" : "entering"
   }
 ]

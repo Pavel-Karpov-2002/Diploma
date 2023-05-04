@@ -1,15 +1,10 @@
-public class Skill
+using UnityEngine;
+
+public abstract class Skill : ScriptableObject
 {
-    public string NameInformation => SetNameInformation();
-    public const string nameInformation = "Свойство: ";
+    public abstract string SkillInformation { get; }
+    public abstract string SkillName { get; }
 
-    public virtual void Activate()
-    {
-        return;
-    }
-
-    protected virtual string SetNameInformation()
-    {
-        return nameInformation;
-    } 
+    public abstract void Activate();
+    public abstract void InitializeSkill();
 }

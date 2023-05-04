@@ -46,5 +46,31 @@ MonoBehaviour:
     npcLayer:
       serializedVersion: 2
       m_Bits: 128
-    minPointsForQuestion: 10
+    minPointsForCorrectAnswer: 10
+    minPointsForWrongAnswer: 5
+  skills:
+    amountUseTimeSkill: 3
+    addedPercentTimeCountSkill: 30
+    amountAdditionalQuestions: 2
+    amountIncreasedPoints: 10
+    amountSkipQuestion: 3
+    amountUsesGetResponse: 2
   timeLoadSceneAttenuation: 1
+  itemStatusWindow:
+    itemSlot: {fileID: 3805791345632618619, guid: f75e6dbc6132c724aa02dee5420600c7, type: 3}
+    countItems: 3
+    distanceActivateItemDrop: 5
+    layerActivateItemDrop:
+      serializedVersion: 2
+      m_Bits: 256
+  items:
+  - skill: {fileID: 11400000, guid: f84ece4964284274ead6001a6eb6f729, type: 2}
+    itemSprite: {fileID: 21300000, guid: c5ce6e24e74341f499b92ad2b2fe0259, type: 3}
+  - skill: {fileID: 11400000, guid: 26fae48875e6efd4c8668c1113a120d9, type: 2}
+    itemSprite: {fileID: 21300000, guid: b58e301b86974ef49b7f79e03d240eef, type: 3}
+  - skill: {fileID: 11400000, guid: 09786eb5fde5ccc4db12b01f5ff75474, type: 2}
+    itemSprite: {fileID: 21300000, guid: 0ff3a000bf238854cab6abf046e317f2, type: 3}
+  - skill: {fileID: 11400000, guid: 8a8d50c2327206b4194a6207de819944, type: 2}
+    itemSprite: {fileID: 21300000, guid: e7de1093f5932f14699acdf8803acec4, type: 3}
+  - skill: {fileID: 11400000, guid: 99339eb2b06e9334dbcd9f942dcdf11e, type: 2}
+    itemSprite: {fileID: 21300000, guid: bd0c4685dba3b7549b55d3793073ae06, type: 3}

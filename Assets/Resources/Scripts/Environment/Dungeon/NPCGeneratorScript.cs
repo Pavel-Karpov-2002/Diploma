@@ -51,7 +51,7 @@ public class NPCGeneratorScript : MonoBehaviour
 
                         saveRooms.Remove(saveRooms[i]);
                         countNPC++;
-                        if (countNPC >= parameters.Maze.MinNPCCountOnFloor + (FloorInformation.OccupiedFloor / parameters.NPC.AdditionalNPCTroughtFloor))
+                        if (countNPC >= parameters.Maze.MinNPCCountOnFloor + (GameSaveParameters.OccupiedFloor / parameters.NPC.AdditionalNPCTroughtFloor))
                             return;
                     }
                 }

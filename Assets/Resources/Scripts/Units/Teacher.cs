@@ -18,15 +18,15 @@ public class Teacher : NPC
     {
         dialog = gameParameters.Dialog;
         startScores = ((PlayerScores)PlayerConstructor.GetInstance()).Scores;
-        countedScoreToSay = SetCountedScoreToSay();
+        countedScoreToSay = SetCountedScoreToSay() + startScores;
         scoreToHave.text = "<color=#" + colorText.ToHexString() + ">" + countedScoreToSay.ToString() + "</color>";
     }
 
     private int SetCountedScoreToSay()
     {
         NPCParameters nPCParameters = gameParameters.NPC;
-        int countNPCOnFloor = (gameParameters.Maze.MinNPCCountOnFloor - 1) + (FloorInformation.OccupiedFloor / nPCParameters.AdditionalNPCTroughtFloor);
-        int countPointsPerNPC = dialog.AmountQuestionPerOneNPC * gameParameters.Player.MinPointsForQuestion;
+        int countNPCOnFloor = (gameParameters.Maze.MinNPCCountOnFloor - 1) + (GameSaveParameters.OccupiedFloor / nPCParameters.AdditionalNPCTroughtFloor);
+        int countPointsPerNPC = dialog.AmountQuestionPerOneNPC * gameParameters.Player.MinPointsForCorrectAnswer;
         float percentOfCorrectAnswers = nPCParameters.PercentOfCorrectAnswers / 100;
         return (int)(countNPCOnFloor * countPointsPerNPC * percentOfCorrectAnswers);
     }
@@ -57,13 +57,28 @@ public class Teacher : NPC
         if (isCorrect)
             countCorrectAnswers++;
 
-        if (DialogScript.GetInstance().AmountQuestionPerOneNPC > countResponses)
+        int amountQuestionPerOneNPC = DialogScript.GetInstance().AmountQuestionPerOneNPC;
+
+        if (amountQuestionPerOneNPC > countResponses)
             return;
 
         NPCParameters nPCParameters = gameParameters.NPC;
         float min = nPCParameters.MinPercentageOfCompletion / 100;
-        int countPointsPerNPC = DialogScript.GetInstance().AmountQuestionPerOneNPC * gameParameters.Player.MinPointsForQuestion;
+        int countQuestions = amountQuestionPerOneNPC;
+        PlayerScores scores = ((PlayerScores)PlayerConstructor.GetInstance());
 
-        ((PlayerScores)PlayerConstructor.GetInstance()).ChangeScores(countCorrectAnswers >= (int)(DialogScript.GetInstance().AmountQuestionPerOneNPC * min) ? countPointsPerNPC : -countPointsPerNPC);
+        bool isPassed = countCorrectAnswers >= (int)(countQuestions * min);
+
+        scores.ChangeScores(isPassed ? countQuestions * scores.NumberOfPointsForCorrectAnswer : (countQuestions * scores.NumberOfPointsForWrongAnswer * -1));
+
+        DialogScript.GetInstance().CloseDialogWindow();
+
+        if (isPassed && scores.Scores > 0)
+        {
+            SceneChangeScript.GetInstance().NextFloor();
+            return;
+        }
+
+        SceneChangeScript.GetInstance().LoseScene();
     }
 }
