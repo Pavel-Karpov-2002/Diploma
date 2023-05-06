@@ -37,9 +37,8 @@ public class SceneChangeScript : MonoBehaviour
         NextSceneWithAttenuation(1, gameParameters.TimeLoadSceneAttenuation, mainMenu);
     }
 
-    public void NextFloor()
+    public void GoToFloor()
     {
-        GameSaveParameters.OccupiedFloor += 1;
         NextSceneWithAttenuation(1, gameParameters.TimeLoadSceneAttenuation, floorScene);
     }
 

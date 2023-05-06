@@ -5,49 +5,46 @@ using UnityEngine.UI;
 
 public class AnswerButton : MonoBehaviour
 {
-    [SerializeField] protected GameParameters gameParameters;
+    [SerializeField] protected DialogParameters dialogParameters;
     [SerializeField] private Image buttonImage;
     [SerializeField] private Button thisButton;
 
     public string Answer { get; set; }
+
     public Button Button => thisButton;
     public Image ButtonImage => buttonImage;
 
     public delegate void ChangeButtonColor(Color color);
-    public delegate void PlayerAnswered(bool isCorrect);
+    public delegate void PlayerAnswered(int countPoints);
 
     public static event PlayerAnswered OnPlayerAnswered;
     public event ChangeButtonColor ChangeAnswerButton;
 
     private IEnumerator nextQuestionCoroutine;
     private bool coroutineIsNotProcessed = true;
-    private static bool isSetChangeColor = true;
 
-    public static bool ChangeColorButton { get => isSetChangeColor; set => isSetChangeColor = value; }
+    public static bool ChangeColorButton = true;
 
     private void OnEnable()
     {
         if (isActiveAndEnabled)
             thisButton.interactable = true;
+        ChangeAnswerButton = ChangeColor;
     }
 
-    public void AnswerTheQuestion(string answer, float timeAfterQuestion)
+    public void AnswerTheQuestion(Question question, string answer)
     {
-        ChangeButton(gameParameters.Dialog.ButtonFalseColor);
-
         bool isCorrect = CheckCorrectAnswer(answer);
+        ChangeButton(isCorrect ? dialogParameters.ButtonTrueColor : dialogParameters.ButtonFalseColor);
 
-        if (isCorrect)
-            ChangeButton(gameParameters.Dialog.ButtonTrueColor);
-        
         if (coroutineIsNotProcessed)
         {
-            nextQuestionCoroutine = NextQuestion(timeAfterQuestion);
+            nextQuestionCoroutine = NextQuestion(dialogParameters.TimeAfterResponse);
             StartCoroutine(nextQuestionCoroutine);
         }
 
         if (OnPlayerAnswered != null)
-            OnPlayerAnswered?.Invoke(isCorrect);
+            OnPlayerAnswered?.Invoke(isCorrect ? question.PointsForCorrectAnswer : -question.PointsForWrongAnswer);
 
         TimerDialogScript.GetInstance().IsPaused = true;
         thisButton.interactable = false;
@@ -55,16 +52,9 @@ public class AnswerButton : MonoBehaviour
 
     private void ChangeButton(Color color)
     {
-        if (!isSetChangeColor)
-        {
-            ChangeAnswerButton = null;
+        if (!ChangeColorButton)
             return;
-        }
-
-        ChangeAnswerButton = ChangeColor;
-
-        if (ChangeAnswerButton != null)
-            ChangeAnswerButton.Invoke(color);
+        ChangeAnswerButton.Invoke(color);
     }
 
     private bool CheckCorrectAnswer(string answer)
@@ -77,9 +67,8 @@ public class AnswerButton : MonoBehaviour
         coroutineIsNotProcessed = false;
         yield return new WaitForSeconds(timeAfterQuestion);
 
-        DialogScript.GetInstance().ShowNewQuestion();
+        DialogPanelSingleton.GetInstance().ShowNewQuestion();
 
-        ChangeAnswerButton = null;
         coroutineIsNotProcessed = true;
     }
 

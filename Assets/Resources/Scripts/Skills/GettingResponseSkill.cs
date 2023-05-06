@@ -1,7 +1,7 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
-[CreateAssetMenu(fileName = "GettingResponseSkill.Asset", menuName = "Skills/GettingResponseSkill")]
+[CreateAssetMenu(fileName = "GettingResponseSkill.Asset", menuName = "CustomParameters/Skills/GettingResponseSkill")]
 public class GettingResponseSkill : Skill
 {
     private int amountUses;
@@ -20,12 +20,12 @@ public class GettingResponseSkill : Skill
 
     public override void Activate()
     {
-        if (responseText == null)
+        if (responseText == null || amountUses <= 0)
             return;
 
         amountUses--;
 
-        TestingAnswersScript buttonsAnswersTest = TestingAnswersScript.GetInstance();
+        TestingAnswersScript buttonsAnswersTest = DialogPanelSingleton.GetInstance().Testing;
 
         if (buttonsAnswersTest.gameObject.activeSelf)
         {
@@ -39,7 +39,7 @@ public class GettingResponseSkill : Skill
             }
         }
 
-        EnteringResponseScript buttonEnteringAnswer = EnteringResponseScript.GetInstance();
+        EnteringResponseScript buttonEnteringAnswer = DialogPanelSingleton.GetInstance().EnteringResponse;
 
         if (buttonEnteringAnswer.gameObject.activeSelf)
         {

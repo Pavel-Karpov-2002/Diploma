@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SkipQuestionSkill.Asset", menuName = "Skills/SkipQuestionSkill")]
+[CreateAssetMenu(fileName = "SkipQuestionSkill.Asset", menuName = "CustomParameters/Skills/SkipQuestionSkill")]
 public class SkipQuestionSkill : Skill
 {
     private int amountSkipQuestions;
@@ -20,7 +20,7 @@ public class SkipQuestionSkill : Skill
         if (amountSkipQuestions < 0)
             return;
 
-        DialogScript.GetInstance().ShowNewQuestion();
+        DialogPanelSingleton.GetInstance().ShowNewQuestion();
         amountSkipQuestions--;
     }
 

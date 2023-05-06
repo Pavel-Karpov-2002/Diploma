@@ -4,17 +4,18 @@ using UnityEngine.UI;
 
 public class CreateSkills : MonoBehaviour
 {
-    public static Skill CreateGiveAdditionalQuestionSkill(SkillsParameters skillsParameters)
+    public static Skill CreateIncreaseSpeedSkill(SkillsParameters skillsParameters)
     {
-        GiveAdditionalQuestionSkill skill = new GiveAdditionalQuestionSkill(skillsParameters.AmountAdditionalQuestions);
+        IncreaseSpeedSkill skill = new IncreaseSpeedSkill(skillsParameters.AmountAdditionPercentagelSpeed);
         skill.Activate();
+        Debug.Log(skill.GetType() + " activate");
 
         return skill;
     }
 
     public static Skill CreateIncreasedScoresSkill(SkillsParameters skillsParameters)
     {
-        IncreasedScoresSkill skill = new IncreasedScoresSkill(skillsParameters.AmountIncreasedPoints);
+        IncreasedScoresSkill skill = new IncreasedScoresSkill(skillsParameters.AmountIncreasedPointsInPercentage);
         skill.Activate();
 
         return skill;

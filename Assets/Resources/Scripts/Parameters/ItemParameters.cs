@@ -1,8 +1,7 @@
-using System;
 using UnityEngine;
 
-[Serializable]
-public class ItemParameters
+[CreateAssetMenu(fileName = "ItemParameters", menuName = "CustomParameters/ItemParameters")]
+public class ItemParameters : ScriptableObject
 {
     [SerializeField] private ItemSlot itemSlot;
     [SerializeField][Min(0)] private int countItems;

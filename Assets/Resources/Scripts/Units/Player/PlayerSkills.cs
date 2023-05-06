@@ -6,6 +6,7 @@ public class PlayerSkills : PlayerConstructor
     [SerializeField] private GameObject skillButton;
     [SerializeField] private GameObject skillsPanel;
     [SerializeField] private TextMeshProUGUI response;
+    [SerializeField] private SkillsParameters skillsParameters;
 
     public delegate Skill GetPassiveSkillsDelegate(SkillsParameters skillsParameters);
     public delegate GameObject GetActiveSkillsDelegate(GameObject skillButton, GameObject skillsPanel, SkillsParameters skillsParameters);
@@ -17,8 +18,10 @@ public class PlayerSkills : PlayerConstructor
 
     private void Start()
     {
-        SkillsParameters skillsParameters = GameParameters.Skills;
-
+        foreach (var item in GameSaveParameters.PlayerItems)
+        {
+            item.Skill.InitializeSkill();
+        }
         GetPassiveSkills?.Invoke(skillsParameters);
         GetActiveSkills?.Invoke(skillButton, skillsPanel, skillsParameters);
         GetResponseSkill?.Invoke(skillButton, skillsPanel, skillsParameters, response);

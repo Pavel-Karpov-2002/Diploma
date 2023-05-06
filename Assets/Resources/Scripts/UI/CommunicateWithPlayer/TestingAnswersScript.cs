@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,52 +6,46 @@ public class TestingAnswersScript : DialogScript
 {
     [SerializeField] private GameObject buttonsPanel;
 
-    private static TestingAnswersScript instance;
-
     public GameObject ButtonsPanel => buttonsPanel;
-
-    private void Start()
-    {
-        if (instance == null)
-            instance = this;
-    }
 
     private void OnEnable()
     {
         AnswerButton.OnPlayerAnswered += ChangeInterectableAtButtons;
     }
 
-    public override void WriteQuestion(int numQuestion)
+    public override void WriteQuestion(Question question)
+    {
+        ClearButtonsPanel();
+        questionText.text = question.QuestionText;
+        AddButtonToPanel(question);
+    }
+
+    private void ClearButtonsPanel()
     {
         foreach (var buttons in buttonsPanel.GetComponentsInChildren<Transform>())
         {
             if (buttons.gameObject != buttonsPanel)
                 Destroy(buttons.gameObject);
         }
+    }
 
-        questionText.font = DialogParameters.QuestionFontAsset;
-        questionText.text = Questions[numQuestion].questionText;
-
-        int answer = Convert.ToInt32(Questions[numQuestion].correctAnswer);
-
-        for (int i = 0; i < Questions[0].answers.Length; i++)
+    private void AddButtonToPanel(Question question)
+    {
+        for (int i = 0; i < question.Answers.Length; i++)
         {
-            CreateButtonAnswers(Questions[numQuestion].answers[i], answer - 1 == i);
+            CreateButtonAnswers(question, question.Answers[i]);
         }
     }
 
-    private void CreateButtonAnswers(string answer, bool isCorrect)
+    private void CreateButtonAnswers(Question question, string answer)
     {
         GameObject button = Instantiate(DialogParameters.ButtonAnswer, buttonsPanel.transform);
-        button.GetComponentInChildren<TextMeshProUGUI>().font = DialogParameters.ButtonFontAsset;
         button.GetComponentInChildren<TextMeshProUGUI>().text = answer;
-        button.GetComponent<Button>().onClick.AddListener(() => button.GetComponent<AnswerButton>().AnswerTheQuestion(answer, DialogParameters.TimeAfterResponse));
-        
-        if (isCorrect)
-            button.GetComponent<AnswerButton>().Answer = answer;
+        button.GetComponent<Button>().onClick.AddListener(() => button.GetComponent<AnswerButton>().AnswerTheQuestion(question, answer));
+        button.GetComponent<AnswerButton>().Answer = question.CorrectAnswer;
     }
 
-    private void ChangeInterectableAtButtons(bool isCorrect)
+    private void ChangeInterectableAtButtons(int change)
     {
         foreach (var button in buttonsPanel.GetComponentsInChildren<Button>())
         {
@@ -61,21 +54,8 @@ public class TestingAnswersScript : DialogScript
         }
     }
 
-    public static new TestingAnswersScript GetInstance()
-    {
-        if (instance == null)
-            instance = Resources.FindObjectsOfTypeAll<TestingAnswersScript>()[0];
-
-        return instance;
-    }
-
     private void OnDisable()
     {
         AnswerButton.OnPlayerAnswered -= ChangeInterectableAtButtons;
-    }
-
-    private void OnDestroy()
-    {
-        instance = null;
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class OperationWithItems : MonoBehaviour
 {
+    [SerializeField] private ItemParameters itemParameters;
     [SerializeField] private GameParameters gameParameters;
     [SerializeField] private ItemSlot droppedItemButton;
     [SerializeField] private ShowItemInformation showItemInformation;
@@ -11,7 +12,6 @@ public class OperationWithItems : MonoBehaviour
     private List<ItemSlot> itemsInventory;
     private Item activeItem;
     private Item droppedItem;
-    private ItemParameters itemParameters;
 
     public Item ActiveItem { get => activeItem; set => activeItem = value; }
     public Item DroppedItem => droppedItem;
@@ -20,7 +20,6 @@ public class OperationWithItems : MonoBehaviour
 
     private void Start()
     {
-        itemParameters = gameParameters.ItemStatusWindow;
         itemsInventory = new List<ItemSlot>();
         GetPlayerItems();
     }

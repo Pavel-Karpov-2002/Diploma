@@ -1,21 +1,16 @@
-using System;
 using UnityEngine;
 
-[Serializable]
-public class PlayerParameters
+[CreateAssetMenu(fileName = "PlayerParameters", menuName = "CustomParameters/PlayerParameters")]
+public class PlayerParameters : ScriptableObject
 {
     [SerializeField] private float playerSpeed;
     [SerializeField][Min(0)] private float npcTriggerDistance;
-    [SerializeField] private KeyCode activateKey;
     [SerializeField] private LayerMask npcLayer;
-    [SerializeField][Min(0)] private int minPointsForCorrectAnswer;
-    [SerializeField][Min(0)] private int minPointsForWrongAnswer;
+    [SerializeField] private ItemParameters itemStatusWindow;
 
     public float PlayerSpeed => playerSpeed;
     public float NPCTriggerDistance => npcTriggerDistance;
-    public KeyCode ActivateKey => activateKey;
     public LayerMask NPCLayer => npcLayer;
-    public int MinPointsForCorrectAnswer => minPointsForCorrectAnswer;
-    public int MinPointsForWrongAnswer => minPointsForWrongAnswer;
+    public ItemParameters ItemStatusWindow => itemStatusWindow;
 
 }

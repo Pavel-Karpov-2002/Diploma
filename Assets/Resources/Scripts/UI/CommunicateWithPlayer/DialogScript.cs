@@ -4,127 +4,119 @@ using UnityEngine;
 
 public abstract class DialogScript : MonoBehaviour
 {
-    [SerializeField] private GameParameters gameParameters;
+    [SerializeField] private DialogParameters dialogParameters;
     [SerializeField] protected TextMeshProUGUI questionText;
 
-    private int countQuestionPerOneNPC;
-    private Question[] questions;
+    public delegate NPCQuestions GetQuestionsDelegate(string path);
+    public static event GetQuestionsDelegate GetQuestions;
+
     private HashSet<int> enteringQuestion;
-    private static DialogScript instance;
+    private NPCQuestionsInformation questionsInformation;
+    private Question[] questions;
+    private int numberQuestion;
+    private int countQuestionPerOneNPC;
+    private NPCQuestions npcQuestions;
 
-    protected Question[] Questions => questions;
-
-    protected DialogParameters DialogParameters => gameParameters.Dialog;
-
-    public int AmountQuestionPerOneNPC { get; set; }
-    public static string FilePath { get; set; }
-    public static string UrlSiteQuestion { get; set; }
+    public static string Path { get; set; }
+    public static NPCType NpcType { get; set; }
+    protected DialogParameters DialogParameters => dialogParameters;
 
     private void Awake()
     {
-        if (instance == null)
-            instance = this;
-
         enteringQuestion = new HashSet<int>();
-        FilePath = DialogParameters.FilePathForStudents;
-        UrlSiteQuestion = DialogParameters.UrlForStudents;
-        AmountQuestionPerOneNPC = DialogParameters.AmountQuestionPerOneNPC;
-        RefreshQuestinoList(FilePath, UrlSiteQuestion);
+        questionText.font = DialogParameters.QuestionFontAsset;
 
         TimerDialogScript.TimerEnd += ShowNewQuestion;
         TimerDialogScript.TimerEnd += TakeAwayPoints;
-        NPC.OnUpdateQuestions += SetNewListQuestion;
+
+        npcQuestions = GetQuestions?.Invoke(Path);
+        countQuestionPerOneNPC = npcQuestions.Student.AmountQuestionsForTest;
+
+        DialogPanelSingleton.GetInstance().NpcQuestions = npcQuestions;
+        DialogPanelSingleton.ShowQuestionDialog += ShowNewQuestion;
     }
 
     public void ShowNewQuestion()
     {
-        ExitDialog();
-        RefreshQuestinoList(FilePath, UrlSiteQuestion);
-        InitializeQuestion();
+        SetQuestionType();
+        if (!ExitDialog())
+            InitializeQuestion();
     }
 
-    public void SetNewListQuestion(string filePath, string url)
-    {
-        questions = QuestionLogic.GetQuestion(filePath, url);
-    }
-
-    public abstract void WriteQuestion(int numQuestion);
-
-    private void ExitDialog()
-    { 
-        countQuestionPerOneNPC++;
-
-        if (countQuestionPerOneNPC > AmountQuestionPerOneNPC)
-        {
-            CloseDialogWindow();
-            return;
-        }
-    }
-
-    private void RefreshQuestinoList(string filePath, string url)
-    {
-        if (questions == null)
-        {
-            SetNewListQuestion(filePath, url);
-            return;
-        }
-
-        if (questions.Length <= enteringQuestion.Count)
-        {
-            enteringQuestion.Clear();
-            SetNewListQuestion(filePath, url);
-        }
-    }
+    public abstract void WriteQuestion(Question question);
 
     private void InitializeQuestion()
     {
-        int numberQuestion = GetRandomNumber.GenerateRandomNumberNotUsed(0, questions.Length, enteringQuestion);
-        enteringQuestion.Add(numberQuestion);
+        questions = questionsInformation.Questions;
+        numberQuestion = GetRandomNumber.GenerateRandomNumberNotUsed(0, questions.Length, enteringQuestion);
 
-        switch (questions[numberQuestion].questionType)
+        if (numberQuestion == -1)
         {
-            case (Question.QuestionType.Test):
-                EnteringResponseScript.GetInstance().gameObject.SetActive(false);
-                TestingAnswersScript.GetInstance().gameObject.SetActive(true);
-                TestingAnswersScript.GetInstance().WriteQuestion(numberQuestion);
-                break;
-            case (Question.QuestionType.Entering):
-                TestingAnswersScript.GetInstance().gameObject.SetActive(false);
-                EnteringResponseScript.GetInstance().gameObject.SetActive(true);
-                EnteringResponseScript.GetInstance().WriteQuestion(numberQuestion);
-                break;
+            ExitDialog();
+            return;
         }
 
-        TimerDialogScript.GetInstance().StartTimer(questions[numberQuestion].questionTime);
+        enteringQuestion.Add(numberQuestion);
+        TimerDialogScript.GetInstance().StartTimer(questions[numberQuestion].QuestionTime);
+        ChangeActiveTestingPanel(questions[numberQuestion].IsTest(), questions[numberQuestion]);
     }
 
-    public void CloseDialogWindow()
+    private void ChangeActiveTestingPanel(bool isActive, Question question)
     {
-        EnteringResponseScript.GetInstance().gameObject.SetActive(false);
-        TestingAnswersScript.GetInstance().gameObject.SetActive(false);
-        DialogPanelSingleton.GetInstance().gameObject.SetActive(false);
-        MovementJoystick.GetInstance().gameObject.SetActive(true);
-        AnswerButton.ResetOnPlayerAnswered();
-        enteringQuestion.Clear();
-        
-        countQuestionPerOneNPC = 0;
+        DialogPanelSingleton.GetInstance().EnteringResponse.gameObject.SetActive(!isActive);
+        DialogPanelSingleton.GetInstance().Testing.gameObject.SetActive(isActive);
+
+        if (isActive)
+            DialogPanelSingleton.GetInstance().Testing.WriteQuestion(question);
+        else
+            DialogPanelSingleton.GetInstance().EnteringResponse.WriteQuestion(question);
+    }
+
+    private void SetQuestionType()
+    {
+        if (questionsInformation == null)
+        {
+            if (NpcType == NPCType.Student)
+            {
+                questionsInformation = npcQuestions.Student;
+                countQuestionPerOneNPC = npcQuestions.Student.AmountQuestionsForTest + 1;
+            }
+            else
+            {
+                countQuestionPerOneNPC = npcQuestions.Teacher.AmountQuestionsForTest + 1;
+                questionsInformation = npcQuestions.Teacher;
+            }
+        }
     }
 
     private void TakeAwayPoints()
     {
-        ((PlayerScores)PlayerConstructor.GetInstance()).ChangeScores(false);
+        PlayerScores.GetInstance().ChangeScores(-questions[numberQuestion].PointsForWrongAnswer);
     }
 
-    public static DialogScript GetInstance()
+    private bool ExitDialog()
     {
-        if (instance == null)
-            instance = FindObjectOfType<DialogScript>();
+        countQuestionPerOneNPC--;
+        if (countQuestionPerOneNPC <= 0 || numberQuestion == -1)
+        {
+            questionsInformation = null;
+            CloseDialogWindow();
+            return true;
+        }
+        return false;
+    }
 
-        return instance;
+    public void CloseDialogWindow()
+    {
+        DialogPanelSingleton.GetInstance().gameObject.SetActive(false);
+        MovementJoystick.GetInstance().gameObject.SetActive(true);
+        AnswerButton.ResetOnPlayerAnswered();
+        enteringQuestion.Clear();
+        countQuestionPerOneNPC = 0;
     }
 
     private void OnDestroy()
     {
-        instance = null;
+        GetQuestions = null;
     }
 }

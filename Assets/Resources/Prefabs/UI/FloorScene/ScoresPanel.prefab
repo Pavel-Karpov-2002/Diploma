@@ -195,4 +195,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoresText: {fileID: 4771369503281360132}
-  gameParameters: {fileID: 11400000, guid: 5c9843972f45f8d48bba9dd477373a0e, type: 2}
+  dialogParameters: {fileID: 11400000, guid: 23fca8b260c9ad744a281cb553520d1a, type: 2}

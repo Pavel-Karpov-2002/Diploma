@@ -4,7 +4,7 @@ using UnityEngine;
 public class ScoresUI : MonoBehaviour
 {
     [SerializeField] protected TextMeshProUGUI scoresText;
-    [SerializeField] private GameParameters gameParameters;
+    [SerializeField] private DialogParameters dialogParameters;
 
     private static string textScores = "Ваши баллы: ";
     private static ScoresUI instance;
@@ -13,8 +13,8 @@ public class ScoresUI : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-        scoresText.text = textScores + ((PlayerScores)PlayerConstructor.GetInstance()).Scores.ToString();
-        scoresText.font = gameParameters.Dialog.QuestionFontAsset;
+        scoresText.text = textScores + PlayerScores.GetInstance().Scores.ToString();
+        scoresText.font = dialogParameters.QuestionFontAsset;
     }
 
     public void ChangeScoresText(int scores)

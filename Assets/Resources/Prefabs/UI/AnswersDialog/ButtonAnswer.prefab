@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b417221604326f747b6908ea7eafcc4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameParameters: {fileID: 11400000, guid: 5c9843972f45f8d48bba9dd477373a0e, type: 2}
+  dialogParameters: {fileID: 11400000, guid: 23fca8b260c9ad744a281cb553520d1a, type: 2}
   buttonImage: {fileID: 7133902616031782365}
   thisButton: {fileID: 7133902616031782366}
 --- !u!1001 &815216699060958601

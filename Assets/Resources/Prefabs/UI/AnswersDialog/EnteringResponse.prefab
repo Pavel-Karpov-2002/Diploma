@@ -147,8 +147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b417221604326f747b6908ea7eafcc4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameParameters: {fileID: 11400000, guid: 5c9843972f45f8d48bba9dd477373a0e, type: 2}
+  dialogParameters: {fileID: 0}
   buttonImage: {fileID: 1041527425}
+  thisButton: {fileID: 0}
 --- !u!1 &1887150778
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,10 +640,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6266787041157136478}
   - component: {fileID: 6266787041157136475}
+  - component: {fileID: 1138882126}
   - component: {fileID: 6266787041157136472}
   - component: {fileID: 6266787041157136473}
   - component: {fileID: 6266787041157136474}
-  - component: {fileID: 1138882126}
   m_Layer: 5
   m_Name: EnteringResponse
   m_TagString: Untagged
@@ -679,6 +680,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6266787041157136479}
   m_CullTransparentMesh: 1
+--- !u!114 &1138882126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6266787041157136479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74c546a73393160439122b137bf7cb38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogParameters: {fileID: 11400000, guid: 23fca8b260c9ad744a281cb553520d1a, type: 2}
+  questionText: {fileID: 0}
+  enteredText: {fileID: 6266787041157136473}
+  answerButton: {fileID: 1041527423}
 --- !u!114 &6266787041157136472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -827,19 +844,3 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 2
---- !u!114 &1138882126
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6266787041157136479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74c546a73393160439122b137bf7cb38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameParameters: {fileID: 11400000, guid: 5c9843972f45f8d48bba9dd477373a0e, type: 2}
-  questionText: {fileID: 0}
-  enteredText: {fileID: 6266787040310489710}
-  answerButton: {fileID: 1041527423}

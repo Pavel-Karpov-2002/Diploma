@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 2659374031605472682}
   - component: {fileID: 8752508798144651935}
   - component: {fileID: 1640258915}
-  - component: {fileID: 9004229128892523597}
   - component: {fileID: 4161470101407774883}
   - component: {fileID: 6459344913045676494}
   - component: {fileID: 5427798063366714409}
@@ -105,7 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d56de7e4401a4343a2de590a017e510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameParameters: {fileID: 11400000, guid: 5c9843972f45f8d48bba9dd477373a0e, type: 2}
+  playerParameters: {fileID: 11400000, guid: 15b8cfeca889a1747a0a53747253cae9, type: 2}
   animation: {fileID: 6459344913045676494}
   playerSprite: {fileID: 5427798063366714412}
 --- !u!114 &2659374031605472682
@@ -120,8 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef806b866b92c19479d8a18aa438179e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameParameters: {fileID: 11400000, guid: 5c9843972f45f8d48bba9dd477373a0e, type: 2}
-  playerLose: {fileID: 9004229128892523597}
+  playerParameters: {fileID: 0}
 --- !u!114 &8752508798144651935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,10 +132,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c35c38fc6c204049a7abe174c97ed1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameParameters: {fileID: 11400000, guid: 5c9843972f45f8d48bba9dd477373a0e, type: 2}
+  playerParameters: {fileID: 11400000, guid: 15b8cfeca889a1747a0a53747253cae9, type: 2}
   skillButton: {fileID: 3385638375452462869, guid: 3328f6ed6d12b0a408ed5b9769a404f3, type: 3}
   skillsPanel: {fileID: 0}
   response: {fileID: 0}
+  skillsParameters: {fileID: 11400000, guid: e6aafd4d7a2c5ec46b2f8532611f6696, type: 2}
 --- !u!114 &1640258915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,19 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a99c6f5ab77cfb48b868762e44f1e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameParameters: {fileID: 11400000, guid: 5c9843972f45f8d48bba9dd477373a0e, type: 2}
---- !u!114 &9004229128892523597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5427798063366714413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6925cc713db0f643b851b950858a359, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  playerParameters: {fileID: 11400000, guid: 15b8cfeca889a1747a0a53747253cae9, type: 2}
 --- !u!95 &4161470101407774883
 Animator:
   serializedVersion: 5

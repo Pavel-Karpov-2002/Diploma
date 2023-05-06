@@ -50,7 +50,7 @@ MonoBehaviour:
   floorMap: {fileID: 0}
   npcGeneratorScript: {fileID: 8617009676532587285}
   gridScale: {x: 1.5, y: 1.5}
-  gameParameters: {fileID: 11400000, guid: 5c9843972f45f8d48bba9dd477373a0e, type: 2}
+  mazeParameters: {fileID: 11400000, guid: 6cda15ec8ed2fbd46b4448f0dd47e40a, type: 2}
 --- !u!114 &8617009676532587285
 MonoBehaviour:
   m_ObjectHideFlags: 0

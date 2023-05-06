@@ -1,29 +1,46 @@
 using Newtonsoft.Json;
+using System.Collections;
 using System.IO;
+using UnityEngine;
 using UnityEngine.Networking;
 
-public static class QuestionLogic
+public static class QuestionLogic 
 {
-    public static Question[] GetQuestion(string filePath, string url)
+    public static NPCQuestions GetFileQuestions(string filePath)
     {
-        Question[] questions;
-        UnityWebRequest request = UnityWebRequest.Get(url);
-        request.SendWebRequest();
-
-        if ((questions = GetOnline(request)) == null)
-            questions = GetFromFile(filePath);
-
-        return questions;
+        return GetFromFile(filePath);
     }
 
-    private static Question[] GetOnline(UnityWebRequest request)
+    public static NPCQuestions GetQuestionsFromSite(string url)
+    {
+        return (NPCQuestions)ProcessRequest(url);
+    }
+
+    private static IEnumerator ProcessRequest(string url)
+    {
+        using (UnityWebRequest request = UnityWebRequest.Get(url))
+        {
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.ConnectionError)
+            {
+                Debug.Log("Error: " + request.error);
+            }
+            else
+            {
+                yield return JsonConvert.DeserializeObject<NPCQuestions>(request.downloadHandler.text);
+            }
+        }
+    }
+
+    private static NPCQuestions GetOnline(UnityWebRequest request)
     {
         if (request.result == UnityWebRequest.Result.ProtocolError)
             return null;
 
         try
         {
-            return JsonConvert.DeserializeObject<Question[]>(request.downloadHandler.text);
+            return JsonConvert.DeserializeObject<NPCQuestions>(request.downloadHandler.text);
         }
         catch
         {
@@ -31,7 +48,7 @@ public static class QuestionLogic
         }
     }
 
-    private static Question[] GetFromFile(string path)
+    private static NPCQuestions GetFromFile(string path)
     {
         try
         {
@@ -40,7 +57,7 @@ public static class QuestionLogic
                 string json = reader.ReadToEnd();
                 try
                 {
-                    return JsonConvert.DeserializeObject<Question[]>(json);
+                    return JsonConvert.DeserializeObject<NPCQuestions>(json);
                 }
                 catch
                 {

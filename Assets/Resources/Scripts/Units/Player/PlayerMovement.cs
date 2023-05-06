@@ -6,11 +6,16 @@ public class PlayerMovement : PlayerConstructor
     [SerializeField] private new PlayerAnimation animation;
     [SerializeField] private SpriteRenderer playerSprite;
 
+    private float speed;
     private Rigidbody2D rb;
+    private static PlayerMovement instance;
 
-    private void Start()
+    public float Speed { get => speed; set => speed = value; }
+
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        speed = PlayerParameters.PlayerSpeed;
     }
 
     private void Update()
@@ -25,7 +30,7 @@ public class PlayerMovement : PlayerConstructor
 
         if (MovementJoystick.GetInstance().JoystickDirection.y != 0)
         {
-            rb.velocity = new Vector2(MovementJoystick.GetInstance().JoystickDirection.x * PlayerParameters.PlayerSpeed, MovementJoystick.GetInstance().JoystickDirection.y * PlayerParameters.PlayerSpeed);
+            rb.velocity = new Vector2(MovementJoystick.GetInstance().JoystickDirection.x * speed, MovementJoystick.GetInstance().JoystickDirection.y * speed);
         }
         else
         {
@@ -33,5 +38,18 @@ public class PlayerMovement : PlayerConstructor
         }
 
         animation.ChangeAnimation(MovementJoystick.GetInstance().JoystickDirection.x, MovementJoystick.GetInstance().JoystickDirection.y, playerSprite);
+    }
+
+    public static PlayerMovement GetInstance()
+    {
+        if (instance == null)
+            instance = Resources.FindObjectsOfTypeAll<PlayerMovement>()[0];
+
+        return instance;
+    }
+
+    private void OnDestroy()
+    {
+        instance = null;
     }
 }

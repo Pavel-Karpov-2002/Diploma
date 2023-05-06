@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "AddingTimeSkill.Asset", menuName = "Skills/AddingTimeSkill")]
+[CreateAssetMenu(fileName = "AddingTimeSkill.Asset", menuName = "CustomParameters/Skills/AddingTimeSkill")]
 public class AddingTimeSkill : Skill
 {
     private float addingPercentTime;

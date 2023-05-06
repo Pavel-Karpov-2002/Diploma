@@ -7,7 +7,7 @@ public class NPCGeneratorScript : MonoBehaviour
     [SerializeField] private GameObject teacher;
     [SerializeField] private GameObject layerForNPC;
 
-    public void Generator(GameParameters parameters, List<Rect> rooms, Vector2 gridScale)
+    public void Generator(MazeParameters parameters, List<Rect> rooms, Vector2 gridScale)
     {
         ClearNPC();
         SetNPC(parameters, rooms, gridScale);
@@ -24,37 +24,32 @@ public class NPCGeneratorScript : MonoBehaviour
         }
     }
 
-    private void SetNPC(GameParameters parameters, List<Rect> rooms, Vector2 gridScale)
+    private void SetNPC(MazeParameters parameters, List<Rect> rooms, Vector2 gridScale)
     {
         int countNPC = 0;
+        int amountStudents = 5;
         List<Rect> saveRooms = new List<Rect>(rooms);
 
         while (true)
         {
             for (int i = 0; i < saveRooms.Count; i++)
             {
-                if (saveRooms[i].width > parameters.Maze.MaxRoomColumns || saveRooms[i].height > parameters.Maze.MaxRoomColumns)
-                {
-                    if (Random.Range(0, saveRooms.Count) > saveRooms.Count / 2)
-                    {
-                        float x = saveRooms[i].x + saveRooms[i].width / 2;
-                        float y = saveRooms[i].y + saveRooms[i].height / 2;
+                float x = saveRooms[i].x + saveRooms[i].width / 2;
+                float y = saveRooms[i].y + saveRooms[i].height / 2;
 
-                        GameObject npc = SetNPC(
-                            new Vector3(
-                                (x + (Random.Range(0, 1.5f) * (x < parameters.Maze.Width / 2 ? 1 : -1))) * gridScale.x,
-                                (y + (Random.Range(0, 1.5f) * (y < parameters.Maze.Height / 2 ? 1 : -1))) * gridScale.y,
-                                0), 
-                            (countNPC == 0 ? teacher : student));
+                GameObject npc = SetNPC(
+                    new Vector3(
+                        (x + (Random.Range(0, 1.5f) * (x < parameters.Width / 2 ? 1 : -1))) * gridScale.x,
+                        (y + (Random.Range(0, 1.5f) * (y < parameters.Height / 2 ? 1 : -1))) * gridScale.y,
+                        0),
+                    (countNPC == amountStudents - 1 ? teacher : student));
 
-                        npc.transform.SetParent(layerForNPC.transform);
+                npc.transform.SetParent(layerForNPC.transform);
 
-                        saveRooms.Remove(saveRooms[i]);
-                        countNPC++;
-                        if (countNPC >= parameters.Maze.MinNPCCountOnFloor + (GameSaveParameters.OccupiedFloor / parameters.NPC.AdditionalNPCTroughtFloor))
-                            return;
-                    }
-                }
+                saveRooms.Remove(saveRooms[i]);
+                countNPC++;
+                if (countNPC >= amountStudents)
+                    return;
             }
         }
     }

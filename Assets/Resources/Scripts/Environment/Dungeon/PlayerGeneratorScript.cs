@@ -15,7 +15,7 @@ public class PlayerGeneratorScript : MonoBehaviour
                     {
                         float x = room.x + room.width / 2;
                         float y = room.y + room.height / 2;
-                        PlayerConstructor.GetInstance().gameObject.transform.position = new Vector3(x * gridScale.x, y * gridScale.y, 0);
+                        PlayerMovement.GetInstance().gameObject.transform.position = new Vector3(x * gridScale.x, y * gridScale.y, 0);
                         return;
                     }
                 }

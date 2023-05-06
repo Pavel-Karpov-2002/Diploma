@@ -8,7 +8,7 @@ public class TimerDialogScript : MonoBehaviour
     private TimerScript timer;
     private float timeDuration;
 
-    public bool IsPaused { get; set; }
+    public bool IsPaused { get; set; } = true;
     public float TimeDuration { get { return timeDuration; } set { timeDuration = value; } }
 
     private static TimerDialogScript instance;

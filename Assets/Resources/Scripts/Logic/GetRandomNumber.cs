@@ -4,8 +4,6 @@ using System.Linq;
 
 public static class GetRandomNumber
 {
-    private static string exception = "The entire list has been used";
-
     public static int GenerateRandomNumberNotUsed(int min, int max, HashSet<int> used)
     {
         if (used == null)
@@ -18,7 +16,7 @@ public static class GetRandomNumber
         if (range.Count != 0)
             return range[index];
 
-        return 0;
+        return -1;
     }
 
     public static IEnumerable<int> GenerateRandomNumbersNotUsed(int min, int max, int countNumbers, HashSet<int> used)
