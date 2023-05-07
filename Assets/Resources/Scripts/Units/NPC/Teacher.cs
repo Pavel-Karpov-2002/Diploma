@@ -18,6 +18,7 @@ public class Teacher : NPC
         countedScoreToSay = SetCountedScoreToSay();
         amountResponses = DialogPanelSingleton.GetInstance().NpcQuestions.Teacher.AmountQuestionsForTest;
         scoreToHave.text = "<color=#" + colorText.ToHexString() + ">" + countedScoreToSay + "</color>";
+        SetSkin();
     }
 
     private int SetCountedScoreToSay()
@@ -75,5 +76,11 @@ public class Teacher : NPC
         bool isPassed = countCorrectAnswers >= (npcParameters.Teacher.AmountQuestionsForTest * percent);
         PlayerScores.GetInstance().ChangeScores(isPassed ? amountPointsCorrectAnswers : amountPointsForWrongAnswer);
         SceneChangeScript.GetInstance().MainMenuScene();
+    }
+
+    protected override void SetSkin()
+    {
+        npcSkin.sprite = npcParameters.Teachers[Random.Range(0, npcParameters.Teachers.Count - 1)].Skin;
+        npcAnimator.runtimeAnimatorController = npcParameters.Teachers[Random.Range(0, npcParameters.Teachers.Count - 1)].SkinAnimator;
     }
 }

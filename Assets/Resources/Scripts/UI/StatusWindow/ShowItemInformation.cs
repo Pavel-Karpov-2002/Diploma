@@ -7,16 +7,21 @@ public class ShowItemInformation : MonoBehaviour
     [SerializeField] private Image itemImage;
     [SerializeField] private TextMeshProUGUI textInformation;
     [SerializeField] private TextMeshProUGUI textNameItem;
+    [SerializeField] private Image playerSkin;
 
     private bool isShow;
     private Item lastItem;
+
+    private void Start()
+    {
+        playerSkin.sprite = PlayerMovement.GetInstance().GetComponent<SpriteRenderer>().sprite;
+    }
 
     public void SetIventoryItemInformation(Item item)
     {
         ChangePlayerItem(item);
         if (item == null)
             return;
-
         itemImage.sprite = item.ItemSprite;
         textNameItem.text = item.Skill.SkillName;
         textInformation.text = item.Skill.SkillInformation;

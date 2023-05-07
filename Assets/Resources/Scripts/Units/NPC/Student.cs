@@ -6,6 +6,11 @@ public class Student : NPC
 
     public NPCQuestionsInformation NPCQuestionsInformation { get; set; }
 
+    private void Start()
+    {
+        SetSkin();
+    }
+
     public override void SetExpectation(bool expectation)
     {
         warn.SetActive(expectation);
@@ -19,5 +24,12 @@ public class Student : NPC
     public void ChangeScores(int countPoints)
     {
         PlayerScores.GetInstance().ChangeScores(countPoints);
+    }
+
+    protected override void SetSkin()
+    {
+        int rnd = Random.Range(0, npcParameters.Students.Count - 1);
+        npcSkin.sprite = npcParameters.Students[rnd].Skin;
+        npcAnimator.runtimeAnimatorController = npcParameters.Students[Random.Range(0, npcParameters.Students.Count - 1)].SkinAnimator;
     }
 }

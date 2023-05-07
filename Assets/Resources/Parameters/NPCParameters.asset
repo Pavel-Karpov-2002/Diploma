@@ -12,8 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25559e46c0ac4f443aad10ed7c66fe94, type: 3}
   m_Name: NPCParameters
   m_EditorClassIdentifier: 
-  studentsSprites: []
-  teachersSprites: []
-  additionalNPCTroughtFloor: 0
-  percentageOfCorrectAnswers: 0
-  minPercentageOfCompletion: 0
+  students:
+  - skin: {fileID: 189511381, guid: 8b2aedad3b16c0f49aad653b7a4db73b, type: 3}
+    skinAnimator: {fileID: 22100000, guid: 56d8a2176207b2b469363f2a2d1ac4f3, type: 2}
+  - skin: {fileID: -1503633609, guid: af6419904f4aade46bd0f0a8792a0e74, type: 3}
+    skinAnimator: {fileID: 22100000, guid: 11caa42daa515964f982a54636f42e55, type: 2}
+  - skin: {fileID: -671564572, guid: 366b9ca0ca197f14c8389a54ec6e1c7d, type: 3}
+    skinAnimator: {fileID: 22100000, guid: 9918497c48a2a3e428a0c3e15ee9a295, type: 2}
+  - skin: {fileID: -1034820056, guid: 29a899418fa5d7843a2e14b2876a019a, type: 3}
+    skinAnimator: {fileID: 22100000, guid: 5540268debce8034f90bfc07f16d2d20, type: 2}
+  - skin: {fileID: 1191949892, guid: b9b378aeaae4fbb4ead8e941b75ed941, type: 3}
+    skinAnimator: {fileID: 22100000, guid: fd6ab02fa8f396f42a598253d697bbdb, type: 2}
+  - skin: {fileID: 873441441, guid: 8bc6e3a48dbe5714a800ded2cc0a9a00, type: 3}
+    skinAnimator: {fileID: 22100000, guid: ff61a16d292995341ac6cdd50293f36c, type: 2}
+  - skin: {fileID: 2073757953, guid: e347ebbbb28ae3840ae351cd675b643b, type: 3}
+    skinAnimator: {fileID: 22100000, guid: be8f99c6cf8089c49975f1e99b2c1617, type: 2}
+  - skin: {fileID: 1462882466, guid: 13bd37931c008984ca8a7a8034de87c5, type: 3}
+    skinAnimator: {fileID: 22100000, guid: 56ff13fb20cd00948b0e0ced7198485d, type: 2}
+  - skin: {fileID: -1299003915, guid: 4bb61796c158af2429d74f31ff8c7735, type: 3}
+    skinAnimator: {fileID: 22100000, guid: c06f3a8a5a5285e44ae456d4ec8ecd5c, type: 2}
+  teachers:
+  - skin: {fileID: -705487487, guid: 11b05a30374060a4e9493ab1f331d450, type: 3}
+    skinAnimator: {fileID: 22100000, guid: b340cf6d0824def4f96ac25ac2d66340, type: 2}

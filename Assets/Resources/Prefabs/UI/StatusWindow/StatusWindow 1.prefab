@@ -1580,6 +1580,7 @@ MonoBehaviour:
   itemImage: {fileID: 422764022644075404}
   textInformation: {fileID: 422764024486716195}
   textNameItem: {fileID: 422764023832911612}
+  playerSkin: {fileID: 422764024468274274}
 --- !u!114 &1888148931402300397
 MonoBehaviour:
   m_ObjectHideFlags: 0

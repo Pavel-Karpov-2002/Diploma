@@ -30,7 +30,7 @@ public class PlayerActivate : PlayerConstructor
         ChangeWindowActive(window, true);
     }
 
-    public void CloseLevelWindow(GameObject window)
+    public void CloseWindow(GameObject window)
     {
         ChangeWindowActive(window, false);
     }

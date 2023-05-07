@@ -1,10 +1,12 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(Collider2D), typeof(Animator), typeof(SpriteRenderer))]
 public abstract class NPC : Unit
 {
     [SerializeField] protected DialogParameters dialogParameters;
-    [SerializeField] protected NPCParameters nPCParameters;
+    [SerializeField] protected NPCParameters npcParameters;
+    [SerializeField] protected SpriteRenderer npcSkin;
+    [SerializeField] protected Animator npcAnimator;
 
     private bool isExpectation;
 
@@ -17,15 +19,11 @@ public abstract class NPC : Unit
         isExpectation = true;
     }
 
-    public abstract void SetExpectation(bool expectation);
-
     protected virtual void NewQuestions()
     {
         DialogPanelSingleton.GetInstance().ShowNewQuestion();
     }
 
-    private void SetSkin()
-    {
-        // рандомная генерация модельки
-    }
+    public abstract void SetExpectation(bool expectation);
+    protected abstract void SetSkin();
 }
