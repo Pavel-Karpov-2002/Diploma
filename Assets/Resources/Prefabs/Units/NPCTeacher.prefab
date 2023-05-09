@@ -54,6 +54,7 @@ MonoBehaviour:
   npcParameters: {fileID: 11400000, guid: da9490d7cac957a47b035a1ebba55563, type: 2}
   npcSkin: {fileID: 6091973827797786434}
   npcAnimator: {fileID: 7641137549165771211}
+  gameParameters: {fileID: 11400000, guid: 5c9843972f45f8d48bba9dd477373a0e, type: 2}
   scoreToHave: {fileID: 2938434625616145772}
   colorText: {r: 1, g: 1, b: 0.36078432, a: 1}
 --- !u!70 &1970863908904599069

@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c6d5ce50fb45024c8368f91bc8c6a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameParameters: {fileID: 11400000, guid: 5c9843972f45f8d48bba9dd477373a0e, type: 2}
   facultyParameters: {fileID: 11400000, guid: 3c136b9fcd9dcf2418550dc5927a0811, type: 2}
   facultyButton: {fileID: 3479628473926464209, guid: 9f5c2c6f6fea4ad4382826671bd43c7c, type: 3}
   facultyPanel: {fileID: 1128453165269963553}

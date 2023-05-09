@@ -27,7 +27,6 @@ public class PlayerMovement : PlayerConstructor
     {
         if (MovementJoystick.GetInstance() == null)
             return;
-
         if (MovementJoystick.GetInstance().JoystickDirection.y != 0)
         {
             rb.velocity = new Vector2(MovementJoystick.GetInstance().JoystickDirection.x * speed, MovementJoystick.GetInstance().JoystickDirection.y * speed);

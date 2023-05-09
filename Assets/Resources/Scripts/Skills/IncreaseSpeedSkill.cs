@@ -4,10 +4,6 @@ using UnityEngine;
 public class IncreaseSpeedSkill : Skill
 {
     private int addingPercentageSpeed;
-    public override string SkillInformation => "¬ одном древнем городе жил мудрец.  ак-то раз он заскучал и решил создать артефакт, который задавал бы мудрецу сложные вопросы, которые заставл€ли его искать ответы на них по всему свету." +
-        "<br><br><b>ѕредмет уведичивает скорость передвижени€.</b><br>";
-
-    public override string SkillName => "—апоги-скороходы";
 
     public IncreaseSpeedSkill(int addingPercentageSpeed) : base()
     {

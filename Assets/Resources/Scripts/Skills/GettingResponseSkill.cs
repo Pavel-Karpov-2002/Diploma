@@ -7,11 +7,6 @@ public class GettingResponseSkill : Skill
     private int amountUses;
     private TextMeshProUGUI responseText;
 
-    public override string SkillInformation => "¬ одном древнем храме сто€ло зеркало мудрости. Ћюбой человек, который смотрел на зеркало и задавал ему вопрос, получал ответ. Ќо однажды один человек задал зеркалу очень сложный вопрос. «еркало не смогло дать ему ответ и разбилось на кусочки. » из этих кусочков создали зеркала разослав по всему континенту." +
-        "<br><br><b>ѕредмет демонстрирует ответ на вопрос.</b><br>";
-
-    public override string SkillName => "«еркало мудрости";
-
     public GettingResponseSkill(int amountUses, TextMeshProUGUI responseText) : base()
     {
         this.amountUses = amountUses;

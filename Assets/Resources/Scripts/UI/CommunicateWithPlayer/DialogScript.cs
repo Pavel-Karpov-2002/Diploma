@@ -17,6 +17,7 @@ public abstract class DialogScript : MonoBehaviour
     private int countQuestionPerOneNPC;
     private NPCQuestions npcQuestions;
 
+    public static int countNPCCompleted;
     public static string Path { get; set; }
     public static NPCType NpcType { get; set; }
     protected DialogParameters DialogParameters => dialogParameters;
@@ -49,11 +50,10 @@ public abstract class DialogScript : MonoBehaviour
     {
         questions = questionsInformation.Questions;
         numberQuestion = GetRandomNumber.GenerateRandomNumberNotUsed(0, questions.Length, enteringQuestion);
-
         if (numberQuestion == -1)
         {
-            ExitDialog();
-            return;
+            enteringQuestion.Clear();
+            numberQuestion = GetRandomNumber.GenerateRandomNumberNotUsed(0, questions.Length, enteringQuestion);
         }
 
         enteringQuestion.Add(numberQuestion);
@@ -83,6 +83,7 @@ public abstract class DialogScript : MonoBehaviour
             }
             else
             {
+                enteringQuestion.Clear();
                 countQuestionPerOneNPC = npcQuestions.Teacher.AmountQuestionsForTest + 1;
                 questionsInformation = npcQuestions.Teacher;
             }
@@ -111,8 +112,8 @@ public abstract class DialogScript : MonoBehaviour
         DialogPanelSingleton.GetInstance().gameObject.SetActive(false);
         MovementJoystick.GetInstance().gameObject.SetActive(true);
         AnswerButton.ResetOnPlayerAnswered();
-        enteringQuestion.Clear();
         countQuestionPerOneNPC = 0;
+        countNPCCompleted++;
     }
 
     private void OnDestroy()

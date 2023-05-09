@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Newtonsoft.Json;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,10 +11,6 @@ public class SceneChangeScript : MonoBehaviour
     [SerializeField] private Image spriteAttenuation;
     [SerializeField] private GameParameters gameParameters;
     [SerializeField] private CanvasGroup canvasGroup;
-
-    private const string mainMenu = "MainMenuScene";
-    private const string floorScene = "FloorScene";
-    private const string loseScene = "LoseScene";
 
     private Sequence sequence;
     private IEnumerator fadeCoroutine;
@@ -32,19 +29,20 @@ public class SceneChangeScript : MonoBehaviour
         StartCoroutine(fadeCoroutine);
     }
 
-    public void MainMenuScene()
+    public void ChangeScene(string sceneName)
     {
-        NextSceneWithAttenuation(1, gameParameters.TimeLoadSceneAttenuation, mainMenu);
+        NextSceneWithAttenuation(1, gameParameters.TimeLoadSceneAttenuation, sceneName);
     }
 
-    public void GoToFloor()
+    public void LoadGameData()
     {
-        NextSceneWithAttenuation(1, gameParameters.TimeLoadSceneAttenuation, floorScene);
-    }
-
-    public void LoseScene()
-    {
-        NextSceneWithAttenuation(1, gameParameters.TimeLoadSceneAttenuation, loseScene);
+        string json = SerializeContent.Desiralize<string>(gameParameters.DataPath);
+        var settings = new JsonSerializerSettings();
+        settings.TypeNameHandling = TypeNameHandling.Auto;
+        if (json != null && json != "")
+            GameData.Data = JsonConvert.DeserializeObject<GameData>(json.ToString(), settings);
+        else
+            GameData.Data = new GameData();
     }
 
     public void ExitGame()

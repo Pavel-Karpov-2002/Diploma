@@ -1,9 +1,11 @@
+using Newtonsoft.Json;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class Teacher : NPC
 {
+    [SerializeField] private GameParameters gameParameters;
     [SerializeField] private TextMeshPro scoreToHave;
     [SerializeField] private Color colorText;
 
@@ -49,6 +51,10 @@ public class Teacher : NPC
             DialogScript.NpcType = NPCType.Teacher;
             NewQuestions();
         }
+        else if (DialogScript.countNPCCompleted >= DialogPanelSingleton.GetInstance().NpcQuestions.AmountStudentsOnFloor - 1)
+        {
+            SceneChangeScript.GetInstance().ChangeScene(gameParameters.LobbySceneName);
+        }
     }
 
     private bool IsNormFulfilled()
@@ -68,14 +74,38 @@ public class Teacher : NPC
         {
             amountPointsForWrongAnswer += amountPoints;
         }
+
         if (amountResponses > 0)
             return;
 
         NPCQuestions npcParameters = DialogPanelSingleton.GetInstance().NpcQuestions;
         float percent = (npcParameters.MinPercentCorrectTeacher / 100f);
         bool isPassed = countCorrectAnswers >= (npcParameters.Teacher.AmountQuestionsForTest * percent);
-        PlayerScores.GetInstance().ChangeScores(isPassed ? amountPointsCorrectAnswers : amountPointsForWrongAnswer);
-        SceneChangeScript.GetInstance().MainMenuScene();
+        if (isPassed)
+        {
+            GameData.Data.AmountMoney += amountPointsCorrectAnswers;
+            FloorCompleted(PlayerScores.GetInstance().Scores + amountPointsCorrectAnswers);
+            SerializeContent.SerializeGameData(gameParameters.DataPath);
+        }
+        
+        SceneChangeScript.GetInstance().ChangeScene(gameParameters.LobbySceneName);
+    }
+
+    private void FloorCompleted(int scorePoints)
+    {
+        foreach (var levelInformation in FacultyPanelScript.levelsInformation)
+        {
+            if (levelInformation.LevelCompletedName.Equals(DialogScript.Path))
+            {
+                if (levelInformation.LevelRecord < scorePoints)
+                    levelInformation.LevelRecord = scorePoints;
+                return;
+            }
+        }
+        
+        FacultyPanelScript.levelsInformation.Add(new LevelInformation() { LevelCompletedName = DialogScript.Path, LevelRecord = scorePoints });
+        GameData.Data.AmountPassedLevels += 1;
+        SerializeContent.Serialize(System.IO.Path.GetDirectoryName(DialogScript.Path) + "\\completedLevels.json", FacultyPanelScript.levelsInformation);
     }
 
     protected override void SetSkin()

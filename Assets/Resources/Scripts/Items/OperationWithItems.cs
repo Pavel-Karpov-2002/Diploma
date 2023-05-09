@@ -33,14 +33,14 @@ public class OperationWithItems : MonoBehaviour
             item.transform.localScale = itemParameters.ItemSlot.transform.localScale;
             item.transform.position = itemParameters.ItemSlot.transform.position;
             itemsInventory.Add(item);
-            if (GameSaveParameters.PlayerItems.Count <= i)
+            if (GameData.Data.PlayerItems.Count <= i)
             {
                 item.ItemButton.onClick.AddListener(() => showItemInformation.SetIventoryItemInformation(null));
                 continue;
             }
 
-            Item playerItem = GameSaveParameters.PlayerItems[i];
-            item.ItemImage.sprite = playerItem.ItemSprite;
+            Item playerItem = GameData.Data.PlayerItems[i];
+            item.ItemImage.sprite = ConvertTexture2D.GetSprite(ConvertTexture2D.GetTexture2D(playerItem.ItemSpritePath));
             item.ItemButton.onClick.AddListener(() => showItemInformation.SetIventoryItemInformation(playerItem));
         }
     }
@@ -48,16 +48,16 @@ public class OperationWithItems : MonoBehaviour
     public void GetRandomItem()
     {
         droppedItem = GetRandomItem(gameParameters.Items);
-        droppedItemButton.ItemImage.sprite = DroppedItem.ItemSprite;
+        droppedItemButton.ItemImage.sprite = ConvertTexture2D.GetSprite(ConvertTexture2D.GetTexture2D(DroppedItem.ItemSpritePath));
         droppedItemButton.ItemButton.onClick.AddListener(() => showItemInformation.SetIventoryItemInformation(DroppedItem));
     }
 
     public void DeleteItem()
     {
-        int activeItem = GameSaveParameters.PlayerItems.FindIndex(item => item == ActiveItem);
+        int activeItem = GameData.Data.PlayerItems.FindIndex(item => item == ActiveItem);
         if (activeItem == -1)
             return;
-        GameSaveParameters.PlayerItems.RemoveAt(activeItem);
+        GameData.Data.PlayerItems.RemoveAt(activeItem);
         itemsInventory[activeItem].ItemImage.sprite = itemParameters.ItemSlot.ClearItemImage;
         itemsInventory[activeItem].ItemButton.onClick.RemoveAllListeners();
     }
@@ -67,23 +67,22 @@ public class OperationWithItems : MonoBehaviour
         if (newItem == null)
             return;
 
-        int changingItem = GameSaveParameters.PlayerItems.FindIndex(x => x == oldItem);
+        int changingItem = GameData.Data.PlayerItems.FindIndex(x => x == oldItem);
         if (changingItem != -1)
-            GameSaveParameters.PlayerItems[changingItem] = newItem;
+            GameData.Data.PlayerItems[changingItem] = newItem;
         else
-        {
-            GameSaveParameters.PlayerItems.Add(newItem);
-        }
+            GameData.Data.PlayerItems.Add(newItem);
 
         ChangePlayerItemInInventary(changingItem, newItem);
+        SerializeContent.SerializeGameData(gameParameters.DataPath);
         ClearDroppedItem();
     }
 
     private void ChangePlayerItemInInventary(int changingItem, Item newItem)
     {
         if (changingItem == -1)
-            changingItem = GameSaveParameters.PlayerItems.Count - 1;
-        itemsInventory[changingItem].ItemImage.sprite = newItem.ItemSprite;
+            changingItem = GameData.Data.PlayerItems.Count - 1;
+        itemsInventory[changingItem].ItemImage.sprite = ConvertTexture2D.GetSprite(ConvertTexture2D.GetTexture2D(newItem.ItemSpritePath));
         itemsInventory[changingItem].ItemButton.onClick.RemoveAllListeners();
         itemsInventory[changingItem].ItemButton.onClick.AddListener(() => showItemInformation.SetIventoryItemInformation(newItem));
     }

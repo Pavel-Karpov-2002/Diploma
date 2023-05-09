@@ -119,7 +119,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef806b866b92c19479d8a18aa438179e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerParameters: {fileID: 0}
+  playerParameters: {fileID: 11400000, guid: 15b8cfeca889a1747a0a53747253cae9, type: 2}
+  gameParameters: {fileID: 11400000, guid: 5c9843972f45f8d48bba9dd477373a0e, type: 2}
 --- !u!114 &8752508798144651935
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
@@ -5,9 +6,24 @@ using UnityEngine;
 public class Item
 {
     [SerializeReference] private Skill skill;
+    [SerializeField] private string itemName;
+    [SerializeField] private string itemInformation;
+    [SerializeField] private string itemSpritePath;
 
-    [SerializeField] private Sprite itemSprite;
+    [JsonProperty("Skill")]
+    public Skill Skill { get => skill; set => skill = value; }
+    [JsonProperty("ItemSpritePath")]
+    public string ItemSpritePath { get => itemSpritePath; set => itemSpritePath = value; }
+    [JsonProperty("ItemName")]
+    public string ItemName { get => itemName; set => itemName = value; }
+    [JsonProperty("ItemInformation")]
+    public string ItemInformation { get => itemInformation; set => itemInformation = value; }
 
-    public Skill Skill => skill;
-    public Sprite ItemSprite => itemSprite;
+    public override string ToString()
+    {
+        //"Skill: " + skill.ToString() + "\n"
+        return "Item path: " + itemSpritePath + "\n"
+            + "Item name: " + itemName + "\n"
+            + "Item information: " + itemInformation +"\n";
+    }
 }

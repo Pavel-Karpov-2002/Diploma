@@ -33,9 +33,9 @@ public class DialogPanelSingleton : MonoBehaviour
 
     public static DialogPanelSingleton GetInstance()
     {
-        /*if (instance == null)
+        if (instance == null)
             instance = Resources.FindObjectsOfTypeAll<DialogPanelSingleton>()[0];
-*/
+
         return instance;
     }
 

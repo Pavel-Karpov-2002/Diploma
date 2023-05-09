@@ -1,0 +1,129 @@
+{
+    "minPercentCorrectTeacher" : 60, 
+    "minPercentCorrectToUnlockTeacher" : 40, 
+    "amountStudentsOnFloor" : 10,
+    "student" : {
+        "amountQuestionsForTest" : 2,
+        "questions" : [
+            {
+                "questionText" : "Какой тип данных в C# используется для хранения целых чисел?",
+                "answers" : [
+                    "string",
+                    "int",
+                    "double",
+                    "float"
+                ],
+                "correctAnswer" : "int",
+                "pointsForCorrectAnswer" : 10,
+                "pointsForWrongAnswer" : 5,
+                "questionTime" : 10
+            },
+            {
+                "questionText" : "Какой тип данных в C# используется для хранения строк?",
+                "answers" : [
+                ],
+                "correctAnswer" : "string",
+                "pointsForCorrectAnswer" : 10,
+                "pointsForWrongAnswer" : 5,
+                "questionTime" : 10
+            },
+            {
+                "questionText" : "int a = 1, b = 5;\n bool some = false;",
+                "answers" : [
+                    "(b <= 5 || a == 3) && some",
+                    "(b != 5 || a == 3) || (!some && a > 1)",
+                    "(b > 5 && a <= 3) || (!some || a < 1)",
+                    "(some && a != 2) || b > 5"
+                ],
+                "correctAnswer" : "(b > 5 && a <= 3) || (!some || a < 1)",
+                "pointsForCorrectAnswer" : 10,
+                "pointsForWrongAnswer" : 5,
+                "questionTime" : 10
+            },
+            {
+                "questionText" : "Где правильно создана переменная?",
+                "answers" : [
+                    "$x = 10;",
+                    "x = 0;",
+                    "int num = \"1\";",
+                    "char symbol = 'A';"
+                ],
+                "correctAnswer" : "char symbol = 'A';",
+                "pointsForCorrectAnswer" : 10,
+                "pointsForWrongAnswer" : 5,
+                "questionTime" : 10
+            },
+            {
+                "questionText" : "namespace ProjectOne {\nclass MainClass {\nstatic int num = 0;\npublic static void Main (string[] args) {\ntestFunc(num);\ntestFunc(num);\n}\npublic static void testFunc (int num) {\nMainClass.num++;\nConsole.Write(MainClass.num);\n}\n}\n}",
+                "answers" : [
+                ],
+                "correctAnswer" : "12",
+                "pointsForCorrectAnswer" : 10,
+                "pointsForWrongAnswer" : 5,
+                "questionTime" : 10
+            }
+        ]
+    },
+    "teacher" : {
+        "amountQuestionsForTest" : 5,
+        "questions" : [
+            {
+                "questionText" : "Какой тип данных в C# используется для хранения целых чисел?",
+                "answers" : [
+                    "string",
+                    "int",
+                    "double",
+                    "float"
+                ],
+                "correctAnswer" : "int",
+                "pointsForCorrectAnswer" : 10,
+                "pointsForWrongAnswer" : 5,
+                "questionTime" : 10
+            },
+            {
+                "questionText" : "Какой тип данных в C# используется для хранения строк?",
+                "answers" : [
+                ],
+                "correctAnswer" : "string",
+                "pointsForCorrectAnswer" : 10,
+                "pointsForWrongAnswer" : 5,
+                "questionTime" : 10
+            },
+            {
+                "questionText" : "int a = 1, b = 5;\n bool some = false;",
+                "answers" : [
+                    "(b <= 5 || a == 3) && some",
+                    "(b != 5 || a == 3) || (!some && a > 1)",
+                    "(b > 5 && a <= 3) || (!some || a < 1)",
+                    "(some && a != 2) || b > 5"
+                ],
+                "correctAnswer" : "(b > 5 && a <= 3) || (!some || a < 1)",
+                "pointsForCorrectAnswer" : 10,
+                "pointsForWrongAnswer" : 5,
+                "questionTime" : 10
+            },
+            {
+                "questionText" : "Где правильно создана переменная?",
+                "answers" : [
+                    "$x = 10;",
+                    "x = 0;",
+                    "int num = \"1\";",
+                    "char symbol = 'A';"
+                ],
+                "correctAnswer" : "char symbol = 'A';",
+                "pointsForCorrectAnswer" : 10,
+                "pointsForWrongAnswer" : 5,
+                "questionTime" : 10
+            },
+            {
+                "questionText" : "namespace ProjectOne {\nclass MainClass {\nstatic int num = 0;\npublic static void Main (string[] args) {\ntestFunc(num);\ntestFunc(num);\n}\npublic static void testFunc (int num) {\nMainClass.num++;\nConsole.Write(MainClass.num);\n}\n}\n}",
+                "answers" : [
+                ],
+                "correctAnswer" : "12",
+                "pointsForCorrectAnswer" : 10,
+                "pointsForWrongAnswer" : 5,
+                "questionTime" : 10
+            }
+        ]
+    }
+}

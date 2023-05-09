@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerScores : PlayerConstructor
 {
+    [SerializeField] private GameParameters gameParameters;
     private int scores;
 
     public static PlayerScores instance;
@@ -21,7 +22,7 @@ public class PlayerScores : PlayerConstructor
 
             if (scores < 0)
             {
-                SceneChangeScript.GetInstance().LoseScene();
+                SceneChangeScript.GetInstance().ChangeScene(gameParameters.LobbySceneName);
                 return;
             }
 

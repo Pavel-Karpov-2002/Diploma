@@ -4,12 +4,10 @@ using UnityEngine.UI;
 
 public class CreateSkills : MonoBehaviour
 {
-    public static Skill CreateIncreaseSpeedSkill(SkillsParameters skillsParameters)
+    public static IncreaseSpeedSkill CreateIncreaseSpeedSkill(SkillsParameters skillsParameters)
     {
         IncreaseSpeedSkill skill = new IncreaseSpeedSkill(skillsParameters.AmountAdditionPercentagelSpeed);
         skill.Activate();
-        Debug.Log(skill.GetType() + " activate");
-
         return skill;
     }
 

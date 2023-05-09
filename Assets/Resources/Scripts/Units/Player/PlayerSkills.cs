@@ -18,10 +18,8 @@ public class PlayerSkills : PlayerConstructor
 
     private void Start()
     {
-        foreach (var item in GameSaveParameters.PlayerItems)
-        {
+        foreach (var item in GameData.Data.PlayerItems)
             item.Skill.InitializeSkill();
-        }
         GetPassiveSkills?.Invoke(skillsParameters);
         GetActiveSkills?.Invoke(skillButton, skillsPanel, skillsParameters);
         GetResponseSkill?.Invoke(skillButton, skillsPanel, skillsParameters, response);

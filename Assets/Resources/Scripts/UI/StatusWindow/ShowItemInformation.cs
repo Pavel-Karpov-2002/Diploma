@@ -22,9 +22,9 @@ public class ShowItemInformation : MonoBehaviour
         ChangePlayerItem(item);
         if (item == null)
             return;
-        itemImage.sprite = item.ItemSprite;
-        textNameItem.text = item.Skill.SkillName;
-        textInformation.text = item.Skill.SkillInformation;
+        itemImage.sprite = ConvertTexture2D.GetSprite(ConvertTexture2D.GetTexture2D(item.ItemSpritePath));
+        textNameItem.text = item.ItemName;
+        textInformation.text = item.ItemInformation;
         OperationWithItems.GetInstance().ActiveItem = item;
     }
 
@@ -38,7 +38,7 @@ public class ShowItemInformation : MonoBehaviour
             return;
         }
 
-        foreach (var playerItem in GameSaveParameters.PlayerItems)
+        foreach (var playerItem in GameData.Data.PlayerItems)
         {
             if (playerItem.Skill.GetType() == newItem.Skill.GetType())
             {

@@ -4,8 +4,6 @@ public class Student : NPC
 {
     [SerializeField] private GameObject warn;
 
-    public NPCQuestionsInformation NPCQuestionsInformation { get; set; }
-
     private void Start()
     {
         SetSkin();
