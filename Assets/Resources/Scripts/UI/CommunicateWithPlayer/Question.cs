@@ -25,7 +25,7 @@ public class Question
 
     public bool IsTest()
     {
-        return Answers.Length > 0;
+        return Answers.Length > 1;
     }
 
     public override bool Equals(object obj)

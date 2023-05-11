@@ -1,5 +1,4 @@
 using DG.Tweening;
-using Newtonsoft.Json;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,9 +7,9 @@ using UnityEngine.UI;
 [RequireComponent(typeof(CanvasGroup), typeof(Image))]
 public class SceneChangeScript : MonoBehaviour
 {
-    [SerializeField] private Image spriteAttenuation;
     [SerializeField] private GameParameters gameParameters;
     [SerializeField] private CanvasGroup canvasGroup;
+    [SerializeField] private Slider loaderBar;
 
     private Sequence sequence;
     private IEnumerator fadeCoroutine;
@@ -23,7 +22,6 @@ public class SceneChangeScript : MonoBehaviour
 
     private void Start()
     {
-        spriteAttenuation.gameObject.SetActive(true);
         canvasGroup.blocksRaycasts = true;
         fadeCoroutine = TimeAttenuation(0, gameParameters.TimeLoadSceneAttenuation);
         StartCoroutine(fadeCoroutine);
@@ -31,16 +29,15 @@ public class SceneChangeScript : MonoBehaviour
 
     public void ChangeScene(string sceneName)
     {
-        NextSceneWithAttenuation(1, gameParameters.TimeLoadSceneAttenuation, sceneName);
+        canvasGroup.blocksRaycasts = true;
+        NextScene(1, gameParameters.TimeLoadSceneAttenuation, sceneName);
     }
 
     public void LoadGameData()
     {
-        string json = SerializeContent.Desiralize<string>(gameParameters.DataPath);
-        var settings = new JsonSerializerSettings();
-        settings.TypeNameHandling = TypeNameHandling.Auto;
-        if (json != null && json != "")
-            GameData.Data = JsonConvert.DeserializeObject<GameData>(json.ToString(), settings);
+        GameData data = FileEncryption.ReadFile<GameData>(gameParameters.DataPath);
+        if (data != null)
+            GameData.Data = data;
         else
             GameData.Data = new GameData();
     }
@@ -50,11 +47,10 @@ public class SceneChangeScript : MonoBehaviour
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
-
         Application.Quit();
     }
 
-    private void NextSceneWithAttenuation(float endTime, float duration, string sceneName)
+    private void NextScene(float endTime, float duration, string sceneName)
     {
         fadeCoroutine = TimeAttenuation(endTime, duration);
         StartCoroutine(fadeCoroutine);
@@ -63,7 +59,7 @@ public class SceneChangeScript : MonoBehaviour
 
     private IEnumerator TimeAttenuation(float endTime, float duration)
     {
-        spriteAttenuation.DOFade(endTime, duration).SetEase(Ease.Linear);
+        canvasGroup.DOFade(endTime, duration).SetEase(Ease.Linear);
 
         yield return new WaitForSeconds(duration);
 
@@ -74,7 +70,18 @@ public class SceneChangeScript : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
 
-        SceneManager.LoadScene(sceneName);
+        StartCoroutine(LoadSync(sceneName));
+    }
+
+    private IEnumerator LoadSync(string sceneName)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+
+        while (!asyncLoad.isDone)
+        {
+            loaderBar.value = asyncLoad.progress;
+            yield return null;
+        }
     }
 
     public static SceneChangeScript GetInstance()
@@ -90,5 +97,4 @@ public class SceneChangeScript : MonoBehaviour
         sequence.Kill();
         instance = null;
     }
-
 }

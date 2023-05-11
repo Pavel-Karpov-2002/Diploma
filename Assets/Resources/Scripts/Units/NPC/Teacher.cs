@@ -1,4 +1,3 @@
-using Newtonsoft.Json;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -85,7 +84,7 @@ public class Teacher : NPC
         {
             GameData.Data.AmountMoney += amountPointsCorrectAnswers;
             FloorCompleted(PlayerScores.GetInstance().Scores + amountPointsCorrectAnswers);
-            SerializeContent.SerializeGameData(gameParameters.DataPath);
+            FileEncryption.WriteFile(gameParameters.DataPath, GameData.Data);
         }
         
         SceneChangeScript.GetInstance().ChangeScene(gameParameters.LobbySceneName);
@@ -103,9 +102,9 @@ public class Teacher : NPC
             }
         }
         
-        FacultyPanelScript.levelsInformation.Add(new LevelInformation() { LevelCompletedName = DialogScript.Path, LevelRecord = scorePoints });
+        FacultyPanelScript.levelsInformation.Add(new LevelInformation() { LevelCompletedName = System.IO.Path.GetFileNameWithoutExtension(DialogScript.Path), LevelRecord = scorePoints });
         GameData.Data.AmountPassedLevels += 1;
-        SerializeContent.Serialize(System.IO.Path.GetDirectoryName(DialogScript.Path) + "\\completedLevels.json", FacultyPanelScript.levelsInformation);
+        FileEncryption.WriteFile(System.IO.Path.GetDirectoryName(DialogScript.Path) + "\\completedLevels.json", FacultyPanelScript.levelsInformation);
     }
 
     protected override void SetSkin()

@@ -144,6 +144,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1343704431816256599, guid: bb4741108cd0dca4fa0f3da11ad245ec, type: 3}
+      propertyPath: m_fontSize
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 1343704432058633252, guid: bb4741108cd0dca4fa0f3da11ad245ec, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -167,6 +171,10 @@ PrefabInstance:
     - target: {fileID: 1343704432058633252, guid: bb4741108cd0dca4fa0f3da11ad245ec, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2946420599254740892, guid: bb4741108cd0dca4fa0f3da11ad245ec, type: 3}
+      propertyPath: m_fontSize
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 2946420600690135023, guid: bb4741108cd0dca4fa0f3da11ad245ec, type: 3}
       propertyPath: m_AnchorMax.y
@@ -227,6 +235,10 @@ PrefabInstance:
     - target: {fileID: 3745699126793083895, guid: bb4741108cd0dca4fa0f3da11ad245ec, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3745699126793083895, guid: bb4741108cd0dca4fa0f3da11ad245ec, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -342.50513
       objectReference: {fileID: 0}
     - target: {fileID: 4921051551339710997, guid: bb4741108cd0dca4fa0f3da11ad245ec, type: 3}
       propertyPath: m_RootOrder
@@ -539,6 +551,14 @@ PrefabInstance:
     - target: {fileID: 7133902615366857376, guid: bb4741108cd0dca4fa0f3da11ad245ec, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133902615671493331, guid: bb4741108cd0dca4fa0f3da11ad245ec, type: 3}
+      propertyPath: m_fontSize
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133902616257666547, guid: bb4741108cd0dca4fa0f3da11ad245ec, type: 3}
+      propertyPath: m_fontSize
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7999550911275814142, guid: bb4741108cd0dca4fa0f3da11ad245ec, type: 3}
       propertyPath: m_MinHeight

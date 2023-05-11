@@ -74,7 +74,7 @@ public class OperationWithItems : MonoBehaviour
             GameData.Data.PlayerItems.Add(newItem);
 
         ChangePlayerItemInInventary(changingItem, newItem);
-        SerializeContent.SerializeGameData(gameParameters.DataPath);
+        FileEncryption.WriteFile(gameParameters.DataPath, GameData.Data);
         ClearDroppedItem();
     }
 

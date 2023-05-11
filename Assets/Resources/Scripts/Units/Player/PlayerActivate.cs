@@ -30,6 +30,14 @@ public class PlayerActivate : PlayerConstructor
         ChangeWindowActive(window, true);
     }
 
+    public void OpenStoriesWindow(GameObject window)
+    {
+        var trigger = Physics2D.OverlapCircle(transform.position, PlayerParameters.DiastanceForActivateStoryWindow, PlayerParameters.StoryLayer);
+        if (!trigger)
+            return;
+        ChangeWindowActive(window, true);
+    }
+
     public void CloseWindow(GameObject window)
     {
         ChangeWindowActive(window, false);

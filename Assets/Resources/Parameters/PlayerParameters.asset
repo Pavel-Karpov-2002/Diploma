@@ -18,3 +18,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   itemStatusWindow: {fileID: 11400000, guid: 29b7e19ef4f28144394f8d6415379f92, type: 2}
+  storyLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  diastanceForActivateStoryWindow: 3

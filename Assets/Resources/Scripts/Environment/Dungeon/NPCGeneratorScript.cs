@@ -41,12 +41,12 @@ public class NPCGeneratorScript : MonoBehaviour
                         (x + (UnityEngine.Random.Range(0, 2f) * (x < parameters.Width / 2 ? 1 : -1))) * gridScale.x,
                         (y + (UnityEngine.Random.Range(0, 2f) * (y < parameters.Height / 2 ? 1 : -1))) * gridScale.y,
                         0),
-                    (countNPC == amountStudents - 1 ? teacher : student));
+                    (countNPC == amountStudents ? teacher : student));
 
                 npc.transform.SetParent(layerForNPC.transform);
 
                 countNPC++;
-                if (countNPC >= amountStudents)
+                if (countNPC >= amountStudents + 1)
                     return;
             }
         }
