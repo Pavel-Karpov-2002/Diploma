@@ -10,10 +10,9 @@ public class IncreaseSpeedSkill : Skill
         this.addingPercentageSpeed = addingPercentageSpeed;
     }
 
-
     public override void Activate()
     {
-        PlayerMovement.GetInstance().Speed += PlayerMovement.GetInstance().Speed * (addingPercentageSpeed / 100f);
+        PlayerMovement.Instance.Speed += PlayerMovement.Instance.Speed * (addingPercentageSpeed / 100f);
     }
 
     public override void InitializeSkill()

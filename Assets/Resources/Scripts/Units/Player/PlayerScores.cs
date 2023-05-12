@@ -1,17 +1,9 @@
 using UnityEngine;
 
-public class PlayerScores : PlayerConstructor
+public class PlayerScores : CustomSingleton<PlayerScores>
 {
     [SerializeField] private GameParameters gameParameters;
     private int scores;
-
-    public static PlayerScores instance;
-
-    private void Start()
-    {
-        if (instance == null)
-            instance = this;
-    }
 
     public int Scores 
     {
@@ -19,14 +11,12 @@ public class PlayerScores : PlayerConstructor
         private set 
         {  
             scores = value;
-
             if (scores < 0)
             {
                 SceneChangeScript.GetInstance().ChangeScene(gameParameters.LobbySceneName);
                 return;
             }
-
-            ScoresUI.GetInstance().ChangeScoresText(scores);
+            ScoresUI.Instance.ChangeScoresText(scores);
         }
     }
 
@@ -37,18 +27,5 @@ public class PlayerScores : PlayerConstructor
         if (countPoints > 0)
             Scores += (int)(countPoints * AdditionalPointsInPercentage);
         Scores += countPoints;
-    }
-
-    public static PlayerScores GetInstance()
-    {
-        if (instance == null)
-            instance = Resources.FindObjectsOfTypeAll<PlayerScores>()[0];
-
-        return instance;
-    }
-
-    private void OnDestroy()
-    {
-        instance = null;
     }
 }

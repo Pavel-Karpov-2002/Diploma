@@ -14,7 +14,7 @@ public class ShowItemInformation : MonoBehaviour
 
     private void Start()
     {
-        playerSkin.sprite = PlayerMovement.GetInstance().GetComponent<SpriteRenderer>().sprite;
+        playerSkin.sprite = PlayerMovement.Instance.gameObject.GetComponent<SpriteRenderer>().sprite;
     }
 
     public void SetIventoryItemInformation(Item item)
@@ -25,19 +25,17 @@ public class ShowItemInformation : MonoBehaviour
         itemImage.sprite = ConvertTexture2D.GetSprite(ConvertTexture2D.GetTexture2D(item.ItemSpritePath));
         textNameItem.text = item.ItemName;
         textInformation.text = item.ItemInformation;
-        OperationWithItems.GetInstance().ActiveItem = item;
+        OperationWithItems.Instance.ActiveItem = item;
     }
 
     private void ChangePlayerItem(Item item)
     {
-        Item newItem = OperationWithItems.GetInstance().DroppedItem;
-
+        Item newItem = OperationWithItems.Instance.DroppedItem;
         if (newItem == null || newItem == item)
         {
             isShow = false;
             return;
         }
-
         foreach (var playerItem in GameData.Data.PlayerItems)
         {
             if (playerItem.Skill.GetType() == newItem.Skill.GetType())
@@ -46,24 +44,22 @@ public class ShowItemInformation : MonoBehaviour
                 return;
             }
         }
-
-        if (item == null && !isShow)
+        if (item == null)
         {
-            isShow = true;
+            OperationWithItems.Instance.ChangePlayerItem(item, newItem);
+            isShow = false;
             return;
         }
-
-        if (isShow)
-        {
-            OperationWithItems.GetInstance().ChangePlayerItem(item, newItem);
-            isShow = false;
-        }
-
         if (lastItem != item)
         {
             lastItem = item;
             isShow = true;
             return;
+        }
+        if (isShow)
+        {
+            OperationWithItems.Instance.ChangePlayerItem(item, newItem);
+            isShow = false;
         }
     }
 }

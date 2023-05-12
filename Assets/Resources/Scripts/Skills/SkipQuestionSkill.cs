@@ -14,13 +14,12 @@ public class SkipQuestionSkill : Skill
     {
         if (amountSkipQuestions < 0)
             return;
-
-        DialogPanelSingleton.GetInstance().ShowNewQuestion();
+        DialogScript.Instance.ShowNewQuestion();
         amountSkipQuestions--;
     }
 
     public override void InitializeSkill()
     {
-        PlayerSkills.GetPassiveSkills += CreateSkills.CreateSkipQuestionSkill;
+        PlayerSkills.GetActiveSkills += CreateSkills.CreateSkipQuestionSkill;
     }
 }

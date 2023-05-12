@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MovementJoystick : MonoBehaviour
+public class MovementJoystick : CustomSingleton<MovementJoystick>
 {
     [SerializeField] private GameObject joystick;
     [SerializeField] private GameObject joystickBG;
@@ -11,14 +11,10 @@ public class MovementJoystick : MonoBehaviour
     private Vector2 joystickOriginalPos;
     private float joystickRadius;
 
-    private static MovementJoystick instance;
-
     public Vector2 JoystickDirection => joystickDirection;
 
     void Start()
     {
-        if (instance == null)
-            instance = this;
         joystickOriginalPos = joystickBG.transform.position;
         joystickRadius = joystickBG.GetComponent<RectTransform>().sizeDelta.y / 4;
     }
@@ -58,12 +54,5 @@ public class MovementJoystick : MonoBehaviour
         joystickDirection = Vector2.zero;
         joystick.transform.position = joystickOriginalPos;
         joystickBG.transform.position = joystickOriginalPos;
-    }
-
-    public static MovementJoystick GetInstance()
-    {
-        if (instance == null)
-            instance = FindObjectOfType<MovementJoystick>();
-        return instance;
     }
 }

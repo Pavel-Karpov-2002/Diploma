@@ -20,7 +20,7 @@ public class GettingResponseSkill : Skill
 
         amountUses--;
 
-        TestingAnswersScript buttonsAnswersTest = DialogPanelSingleton.GetInstance().Testing;
+        TestingAnswersScript buttonsAnswersTest = DialogScript.Instance.Testing;
 
         if (buttonsAnswersTest.gameObject.activeSelf)
         {
@@ -34,7 +34,7 @@ public class GettingResponseSkill : Skill
             }
         }
 
-        EnteringResponseScript buttonEnteringAnswer = DialogPanelSingleton.GetInstance().EnteringResponse;
+        EnteringResponseScript buttonEnteringAnswer = DialogScript.Instance.EnteringResponse;
 
         if (buttonEnteringAnswer.gameObject.activeSelf)
         {

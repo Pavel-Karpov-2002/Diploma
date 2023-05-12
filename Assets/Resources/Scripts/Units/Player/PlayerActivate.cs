@@ -1,29 +1,37 @@
 using UnityEngine;
 
 public class PlayerActivate : PlayerConstructor
-{ 
+{
+    private bool isWindowActive;
+
     public void StartSayingWithNPC()
     {
-        var trigger = Physics2D.OverlapCircle(transform.position, PlayerParameters.NPCTriggerDistance, PlayerParameters.NPCLayer);
+        var trigger = Physics2D.OverlapCircleAll(transform.position, PlayerParameters.NPCTriggerDistance, PlayerParameters.NPCLayer);
         
-        if (!trigger)
+        if (trigger.Length == 0)
             return;
         
-        NPC npc = trigger.gameObject.GetComponent<NPC>();
-
-        if (npc.IsExpectation)
+        foreach (var npcTrigger in trigger)
         {
-            npc.SetExpectation(false);
+            NPC npc = npcTrigger.gameObject.GetComponent<NPC>();
+
             if (npc.IsExpectation)
-                return;
-            MovementJoystick.GetInstance().gameObject.SetActive(false);
-            DialogPanelSingleton.GetInstance().gameObject.SetActive(true);
+            {
+                npc.SetExpectation(false);
+                if (npc.IsExpectation)
+                    return;
+                MovementJoystick.Instance.gameObject.SetActive(false);
+                DialogScript.Instance.gameObject.SetActive(true);
+                break;
+            }
         }
     }
 
     public void OpenLevelWindow(GameObject window)
     {
-        FacultyParameters facultyParameters = FacultyPanelScript.GetInstance().FacultyParameters;
+        if (isWindowActive)
+            return;
+        FacultyParameters facultyParameters = FacultyPanelScript.Instance.FacultyParameters;
         var trigger = Physics2D.OverlapCircle(transform.position, facultyParameters.DistanceActivateFacultyPanel, facultyParameters.LayerActivateFacultyPanel);
         if (!trigger)
             return;
@@ -32,6 +40,8 @@ public class PlayerActivate : PlayerConstructor
 
     public void OpenStoriesWindow(GameObject window)
     {
+        if (isWindowActive)
+            return;
         var trigger = Physics2D.OverlapCircle(transform.position, PlayerParameters.DiastanceForActivateStoryWindow, PlayerParameters.StoryLayer);
         if (!trigger)
             return;
@@ -45,19 +55,39 @@ public class PlayerActivate : PlayerConstructor
 
     public void GetNewItem()
     {
+        if (isWindowActive)
+            return;
+
         ItemParameters itemParameters = PlayerParameters.ItemStatusWindow;
         var trigger = Physics2D.OverlapCircle(transform.position, itemParameters.DistanceActivateItemDrop, itemParameters.LayerActivateItemDrop);
         if (!trigger)
             return;
-        OperationWithItems.GetInstance().GetRandomItem();
+
+        if (GameData.Data.AmountMoney - PlayerParameters.CostRollingItems < PlayerParameters.CostRollingItems)
+        {
+            Debug.Log("У Вас не достаточно кристаллов");
+            return;
+        }
+
+        OperationWithItems.Instance.GetRandomItem();
+        GameData.Data.AmountMoney -= PlayerParameters.CostRollingItems;
     }
 
     public void OpenStatusWindow(GameObject window)
     {
-        FacultyParameters facultyParameters = FacultyPanelScript.GetInstance().FacultyParameters;
-        var trigger = Physics2D.OverlapCircle(transform.position, facultyParameters.DistanceActivateFacultyPanel, facultyParameters.LayerActivateFacultyPanel);
-        if (trigger)
+        if (isWindowActive)
             return;
+        var triggers = Physics2D.OverlapCircleAll(transform.position, 3);
+
+        if (triggers.Length == 0)
+            return;
+
+        foreach (var trigger in triggers)
+        {
+            if (trigger.gameObject != gameObject)
+                return;
+        }
+
         ChangeWindowActive(window, true);
     }
 
@@ -68,8 +98,9 @@ public class PlayerActivate : PlayerConstructor
 
     private void ChangeWindowActive(GameObject window, bool active)
     {
+        isWindowActive = active;
         window.SetActive(active);
-        MovementJoystick.GetInstance().gameObject.SetActive(!active);
+        MovementJoystick.Instance.gameObject.SetActive(!active);
     }
 
 #if UNITY_EDITOR

@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class FacultyPanelScript : MonoBehaviour
+public class FacultyPanelScript : CustomSingleton<FacultyPanelScript>
 {
     [SerializeField] private GameParameters gameParameters;
     [SerializeField] private FacultyParameters facultyParameters;
     [SerializeField] private PanelButton facultyButton;
     [SerializeField] private GameObject facultyPanel;
 
-    private static FacultyPanelScript instance;
     public static List<LevelInformation> levelsInformation;
 
     private delegate void NextPanelDelegate(string path);
@@ -52,7 +51,7 @@ public class FacultyPanelScript : MonoBehaviour
                     facultyButton,
                     facultyPanel,
                     null,
-                    () => DialogScript.GetQuestions += FileEncryption.ReadFile<NPCQuestions>,
+                    () => DialogScript.GetQuestions += (path) => FileReader.ReadJsonWithTypes<NPCQuestions>(FileEncryption.ReadFile(path)),
                     () => SceneChangeScript.GetInstance().ChangeScene(gameParameters.FloorSceneName),
                     () => DialogScript.Path = levelPath);
                 SetCompletedButton(button, ChangePanelScript.GetLastName(levelName));
@@ -70,7 +69,7 @@ public class FacultyPanelScript : MonoBehaviour
         try
         {
             completedPath = Directory.GetFiles(path, "completedLevels.json")[0];
-            levelsInformation = FileEncryption.ReadFile<List<LevelInformation>>(completedPath);
+            levelsInformation = FileReader.ReadJsonWithTypes<List<LevelInformation>>(FileEncryption.ReadFile(completedPath));
         }
         catch (Exception e)
         {
@@ -90,17 +89,5 @@ public class FacultyPanelScript : MonoBehaviour
                 button.ButtonText.text += "\n Рекорд: (" + levelInformation.LevelRecord + ") ";
             }
         }
-    }
-
-    public static FacultyPanelScript GetInstance()
-    {
-        if (instance == null)
-            instance = Resources.FindObjectsOfTypeAll<FacultyPanelScript>()[0];
-        return instance;
-    }
-
-    private void OnDestroy()
-    {
-        instance = null;
     }
 }

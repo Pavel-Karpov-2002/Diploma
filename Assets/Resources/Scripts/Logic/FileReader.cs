@@ -3,12 +3,8 @@ using System.IO;
 
 public class FileReader
 {
-    public static T ReadJsonFile<T>(string path)
+    public static T ReadJsonWithTypes<T>(string text)
     {
-        StreamReader reader = new StreamReader(path);
-        string text = reader.ReadToEnd();
-        reader.Close();
-
         var settings = new JsonSerializerSettings();
         settings.TypeNameHandling = TypeNameHandling.Auto;
         return JsonConvert.DeserializeObject<T>(text, settings);

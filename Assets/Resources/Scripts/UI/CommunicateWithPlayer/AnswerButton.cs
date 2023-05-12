@@ -46,7 +46,6 @@ public class AnswerButton : MonoBehaviour
         if (OnPlayerAnswered != null)
             OnPlayerAnswered?.Invoke(isCorrect ? question.PointsForCorrectAnswer : -question.PointsForWrongAnswer);
 
-        TimerDialogScript.GetInstance().IsPaused = true;
         thisButton.interactable = false;
     }
 
@@ -66,8 +65,7 @@ public class AnswerButton : MonoBehaviour
     {
         coroutineIsNotProcessed = false;
         yield return new WaitForSeconds(timeAfterQuestion);
-
-        DialogPanelSingleton.GetInstance().ShowNewQuestion();
+        DialogScript.Instance.ShowNewQuestion();
 
         coroutineIsNotProcessed = true;
     }

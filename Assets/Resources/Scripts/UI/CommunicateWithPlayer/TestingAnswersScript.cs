@@ -1,10 +1,13 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TestingAnswersScript : DialogScript
+public class TestingAnswersScript : MonoBehaviour, IWriteQuestion
 {
+    [SerializeField] private DialogParameters dialogParameters;
     [SerializeField] private GameObject buttonsPanel;
+    [SerializeField] public TextMeshProUGUI questionText;
 
     public GameObject ButtonsPanel => buttonsPanel;
 
@@ -13,33 +16,27 @@ public class TestingAnswersScript : DialogScript
         AnswerButton.OnPlayerAnswered += ChangeInterectableAtButtons;
     }
 
-    public override void WriteQuestion(Question question)
+    public void WriteQuestion(Question question)
     {
-        ClearButtonsPanel();
+        ChangePanelScript.ClearPanel(buttonsPanel);
         questionText.text = question.QuestionText;
-        AddButtonToPanel(question);
+        AddButtonsToPanel(question);
     }
 
-    private void ClearButtonsPanel()
+    private void AddButtonsToPanel(Question question)
     {
-        foreach (var buttons in buttonsPanel.GetComponentsInChildren<Transform>())
-        {
-            if (buttons.gameObject != buttonsPanel)
-                Destroy(buttons.gameObject);
-        }
-    }
-
-    private void AddButtonToPanel(Question question)
-    {
+        HashSet<int> answerUsed = new HashSet<int>();
         for (int i = 0; i < question.Answers.Length; i++)
         {
-            CreateButtonAnswers(question, question.Answers[i]);
+            int rnd = GetRandomNumber.GenerateRandomNumberNotUsed(0, question.Answers.Length, answerUsed);
+            answerUsed.Add(rnd);
+            CreateButtonAnswers(question, question.Answers[rnd]);
         }
     }
 
     private void CreateButtonAnswers(Question question, string answer)
     {
-        GameObject button = Instantiate(DialogParameters.ButtonAnswer, buttonsPanel.transform);
+        GameObject button = Instantiate(dialogParameters.ButtonAnswer, buttonsPanel.transform);
         button.GetComponentInChildren<TextMeshProUGUI>().text = answer;
         button.GetComponent<Button>().onClick.AddListener(() => button.GetComponent<AnswerButton>().AnswerTheQuestion(question, answer));
         button.GetComponent<AnswerButton>().Answer = question.CorrectAnswer;

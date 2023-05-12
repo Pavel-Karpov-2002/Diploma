@@ -9,6 +9,7 @@ public class PlayerParameters : ScriptableObject
     [SerializeField] private ItemParameters itemStatusWindow;
     [SerializeField] private LayerMask storyLayer;
     [SerializeField] private float diastanceForActivateStoryWindow;
+    [SerializeField] private int costRollingItems;
 
     public float PlayerSpeed => playerSpeed;
     public float NPCTriggerDistance => npcTriggerDistance;
@@ -16,5 +17,6 @@ public class PlayerParameters : ScriptableObject
     public ItemParameters ItemStatusWindow => itemStatusWindow;
     public LayerMask StoryLayer => storyLayer;
     public float DiastanceForActivateStoryWindow => diastanceForActivateStoryWindow;
+    public int CostRollingItems => costRollingItems;
 
 }

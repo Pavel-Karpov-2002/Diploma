@@ -60,7 +60,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 200
+  m_SortingOrder: 50
   m_TargetDisplay: 0
 --- !u!114 &3766963505536210749
 MonoBehaviour:
@@ -227,6 +227,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3766963505536209091}
     m_Modifications:
+    - target: {fileID: 2163368474879739990, guid: 1ebec316333ee4c49a3787226a180b36, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7864718250415474387, guid: 1ebec316333ee4c49a3787226a180b36, type: 3}
       propertyPath: m_Name
       value: StartScene

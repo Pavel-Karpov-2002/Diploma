@@ -19,11 +19,6 @@ public abstract class NPC : Unit
         isExpectation = true;
     }
 
-    protected virtual void NewQuestions()
-    {
-        DialogPanelSingleton.GetInstance().ShowNewQuestion();
-    }
-
     public abstract void SetExpectation(bool expectation);
     protected abstract void SetSkin();
 }

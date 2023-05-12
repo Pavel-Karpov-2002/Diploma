@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OperationWithItems : MonoBehaviour
+public class OperationWithItems : CustomSingleton<OperationWithItems>
 {
     [SerializeField] private ItemParameters itemParameters;
     [SerializeField] private GameParameters gameParameters;
@@ -16,16 +16,14 @@ public class OperationWithItems : MonoBehaviour
     public Item ActiveItem { get => activeItem; set => activeItem = value; }
     public Item DroppedItem => droppedItem;
 
-    public static OperationWithItems instance;
-
     private void Start()
     {
-        itemsInventory = new List<ItemSlot>();
         GetPlayerItems();
     }
 
     private void GetPlayerItems()
     {
+        itemsInventory = new List<ItemSlot>();
         for (int i = 0; i < itemParameters.CountItems; i++)
         {
             ItemSlot item = Instantiate(itemParameters.ItemSlot);
@@ -38,7 +36,6 @@ public class OperationWithItems : MonoBehaviour
                 item.ItemButton.onClick.AddListener(() => showItemInformation.SetIventoryItemInformation(null));
                 continue;
             }
-
             Item playerItem = GameData.Data.PlayerItems[i];
             item.ItemImage.sprite = ConvertTexture2D.GetSprite(ConvertTexture2D.GetTexture2D(playerItem.ItemSpritePath));
             item.ItemButton.onClick.AddListener(() => showItemInformation.SetIventoryItemInformation(playerItem));
@@ -48,6 +45,7 @@ public class OperationWithItems : MonoBehaviour
     public void GetRandomItem()
     {
         droppedItem = GetRandomItem(gameParameters.Items);
+        droppedItemButton.ItemButton.onClick.RemoveAllListeners();
         droppedItemButton.ItemImage.sprite = ConvertTexture2D.GetSprite(ConvertTexture2D.GetTexture2D(DroppedItem.ItemSpritePath));
         droppedItemButton.ItemButton.onClick.AddListener(() => showItemInformation.SetIventoryItemInformation(DroppedItem));
     }
@@ -58,23 +56,21 @@ public class OperationWithItems : MonoBehaviour
         if (activeItem == -1)
             return;
         GameData.Data.PlayerItems.RemoveAt(activeItem);
-        itemsInventory[activeItem].ItemImage.sprite = itemParameters.ItemSlot.ClearItemImage;
-        itemsInventory[activeItem].ItemButton.onClick.RemoveAllListeners();
+        ChangePanelScript.ClearPanel(itemsPlayerPanel);
+        GetPlayerItems();
     }
 
     public void ChangePlayerItem(Item oldItem, Item newItem)
     {
         if (newItem == null)
             return;
-
         int changingItem = GameData.Data.PlayerItems.FindIndex(x => x == oldItem);
         if (changingItem != -1)
             GameData.Data.PlayerItems[changingItem] = newItem;
         else
             GameData.Data.PlayerItems.Add(newItem);
-
-        ChangePlayerItemInInventary(changingItem, newItem);
         FileEncryption.WriteFile(gameParameters.DataPath, GameData.Data);
+        ChangePlayerItemInInventary(changingItem, newItem);
         ClearDroppedItem();
     }
 
@@ -96,19 +92,6 @@ public class OperationWithItems : MonoBehaviour
 
     private Item GetRandomItem(List<Item> items)
     {
-        return items[UnityEngine.Random.Range(0, items.Count - 1)];
-    }
-
-    public static OperationWithItems GetInstance()
-    {
-        if (instance == null)
-            instance = Resources.FindObjectsOfTypeAll<OperationWithItems>()[0];
-
-        return instance;
-    }
-
-    private void OnDestroy()
-    {
-        instance = null;
+        return items[UnityEngine.Random.Range(0, items.Count)];
     }
 }

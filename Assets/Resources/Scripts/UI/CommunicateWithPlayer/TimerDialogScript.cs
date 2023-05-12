@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TimerDialogScript : MonoBehaviour
+public class TimerDialogScript : CustomSingleton<TimerDialogScript>
 {
     [SerializeField] private Slider timerUI;
 
@@ -10,46 +10,36 @@ public class TimerDialogScript : MonoBehaviour
 
     public bool IsPaused { get; set; } = true;
     public float TimeDuration { get { return timeDuration; } set { timeDuration = value; } }
+    public float TimeRemaining => timer.GetRemainingTime();
 
-    private static TimerDialogScript instance;
     public delegate void TimeEnd();
 
-    public static event TimeEnd TimerEnd;
+    public static TimeEnd TimerEnd;
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (IsPaused)
             return;
 
         if (timer.GetRemainingTime() < 0)
+        {
+            IsPaused = true;
             TimerEnd?.Invoke();
+        }
 
         timerUI.value = (timer.GetRemainingTime() / timeDuration);
     }
 
     public void StartTimer(float timeDuration)
     {
-        if (instance == null)
-            instance = this;
-
-        IsPaused = false;
         timer = new();
         this.timeDuration = timeDuration;
         timer.Start(this.timeDuration);
+        IsPaused = false;
     }
-
-    public static TimerDialogScript GetInstance()
-    {
-        if (instance == null)
-            instance = Resources.FindObjectsOfTypeAll<TimerDialogScript>()[0];
-
-        return instance;
-    }
-
 
     private void OnDestroy()
     {
         TimerEnd = null;
-        instance = null;
     }
 }

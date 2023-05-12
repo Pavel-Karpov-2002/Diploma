@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,33 +16,57 @@ public class CreateSkills : MonoBehaviour
     {
         IncreasedScoresSkill skill = new IncreasedScoresSkill(skillsParameters.AmountIncreasedPointsInPercentage);
         skill.Activate();
-
         return skill;
     }
 
-    public static Skill CreateSkipQuestionSkill(SkillsParameters skillsParameters)
+    public static Button CreateSkipQuestionSkill(GameObject skillButton, GameObject skillsPanel, SkillsParameters skillsParameters, GameParameters gameParameters)
     {
+        Button button = CreateButton(skillButton, skillsPanel).GetComponent<Button>();
         SkipQuestionSkill skill = new SkipQuestionSkill(skillsParameters.AmountSkipQuestion);
-        skill.Activate();
-
-        return skill;
-    }
-
-    public static GameObject CreateTimeSkill(GameObject skillButton, GameObject skillsPanel, SkillsParameters skillsParameters)
-    {
-        GameObject button = CreateButton(skillButton, skillsPanel);
-        AddingTimeSkill timeSkill = new AddingTimeSkill(skillsParameters.AddedPercentTimeCountSkill, skillsParameters.AmountUseTimeSkill);
-        button.GetComponent<Button>().onClick.AddListener(() => timeSkill.Activate());
-
+        button.onClick.AddListener(() => skill.Activate());
+        button.onClick.AddListener(() => button.interactable = false);
+        foreach (var item in gameParameters.Items)
+        {
+            if (item.Skill is SkipQuestionSkill)
+            {
+                button.image.sprite = ConvertTexture2D.GetSprite(ConvertTexture2D.GetTexture2D(item.ItemSpritePath));
+                break;
+            }
+        }
         return button;
     }
 
-    public static GameObject CreateGettingResponseSkill(GameObject skillButton, GameObject skillsPanel, SkillsParameters skillsParameters, params object[] obj)
+    public static Button CreateTimeSkill(GameObject skillButton, GameObject skillsPanel, SkillsParameters skillsParameters, GameParameters gameParameters)
     {
-        GameObject button = CreateButton(skillButton, skillsPanel);
-        GettingResponseSkill timeSkill = new GettingResponseSkill(skillsParameters.AmountUsesGetResponse, (TextMeshProUGUI)obj[0]);
-        button.GetComponent<Button>().onClick.AddListener(() => timeSkill.Activate());
+        Button button = CreateButton(skillButton, skillsPanel).GetComponent<Button>();
+        AddingTimeSkill timeSkill = new AddingTimeSkill(skillsParameters.AddedPercentTimeCountSkill, skillsParameters.AmountUseTimeSkill);
+        button.onClick.AddListener(() => timeSkill.Activate());
+        button.onClick.AddListener(() => button.interactable = false);
+        foreach (var item in gameParameters.Items)
+        {
+            if (item.Skill is AddingTimeSkill)
+            {
+                button.image.sprite = ConvertTexture2D.GetSprite(ConvertTexture2D.GetTexture2D(item.ItemSpritePath));
+                break;
+            }
+        }
+        return button;
+    }
 
+    public static Button CreateGettingResponseSkill(GameObject skillButton, GameObject skillsPanel, SkillsParameters skillsParameters, GameParameters gameParameters, params object[] obj)
+    {
+        Button button = CreateButton(skillButton, skillsPanel).GetComponent<Button>();
+        GettingResponseSkill timeSkill = new GettingResponseSkill(skillsParameters.AmountUsesGetResponse, (TextMeshProUGUI)obj[0]);
+        button.onClick.AddListener(() => timeSkill.Activate());
+        button.onClick.AddListener(() => button.interactable = false);
+        foreach (var item in gameParameters.Items)
+        {
+            if (item.Skill is GettingResponseSkill)
+            {
+                button.image.sprite = ConvertTexture2D.GetSprite(ConvertTexture2D.GetTexture2D(item.ItemSpritePath));
+                break;
+            }
+        }
         return button;
     }
 
@@ -51,7 +76,6 @@ public class CreateSkills : MonoBehaviour
         button.transform.SetParent(skillsPanel.transform);
         button.transform.localScale = skillButton.transform.localScale;
         button.transform.position = skillButton.transform.position;
-
         return button;
     }
 }

@@ -12,7 +12,7 @@ public class IncreasedScoresSkill : Skill
 
     public override void Activate()
     {
-        PlayerScores.GetInstance().AdditionalPointsInPercentage = (amountPoints / 100f);
+        PlayerScores.Instance.AdditionalPointsInPercentage = (amountPoints / 100f);
     }
 
     public override void InitializeSkill()

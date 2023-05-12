@@ -16,12 +16,12 @@ public class Student : NPC
         AnswerButton.ChangeColorButton = true;
         AnswerButton.OnPlayerAnswered += ChangeScores;
         DialogScript.NpcType = NPCType.Student;
-        NewQuestions();
+        DialogScript.Instance.ShowNewQuestion();
     }
 
     public void ChangeScores(int countPoints)
     {
-        PlayerScores.GetInstance().ChangeScores(countPoints);
+        PlayerScores.Instance.ChangeScores(countPoints);
     }
 
     protected override void SetSkin()

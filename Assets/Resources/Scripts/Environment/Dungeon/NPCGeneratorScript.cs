@@ -28,7 +28,7 @@ public class NPCGeneratorScript : MonoBehaviour
     private void SetNPC(MazeParameters parameters, List<Rect> rooms, Vector2 gridScale)
     {
         int countNPC = 0;
-        int amountStudents = DialogPanelSingleton.GetInstance().NpcQuestions.AmountStudentsOnFloor;
+        int amountStudents = DialogScript.Instance.NpcQuestions.AmountStudentsOnFloor;
         while (true)
         {
             for (int i = 0; i < rooms.Count; i++)

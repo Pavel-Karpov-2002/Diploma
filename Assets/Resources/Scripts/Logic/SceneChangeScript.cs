@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Newtonsoft.Json;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -35,7 +36,7 @@ public class SceneChangeScript : MonoBehaviour
 
     public void LoadGameData()
     {
-        GameData data = FileEncryption.ReadFile<GameData>(gameParameters.DataPath);
+        GameData data = FileReader.ReadJsonWithTypes<GameData>(FileEncryption.ReadFile(gameParameters.DataPath));
         if (data != null)
             GameData.Data = data;
         else

@@ -12,19 +12,18 @@ public class Teacher : NPC
     private int amountResponses;
     private int countedScoreToSay;
     private int amountPointsCorrectAnswers;
-    private int amountPointsForWrongAnswer;
 
     private void Start()
     {
         countedScoreToSay = SetCountedScoreToSay();
-        amountResponses = DialogPanelSingleton.GetInstance().NpcQuestions.Teacher.AmountQuestionsForTest;
+        amountResponses = DialogScript.Instance.NpcQuestions.Teacher.AmountQuestionsForTest;
         scoreToHave.text = "<color=#" + colorText.ToHexString() + ">" + countedScoreToSay + "</color>";
         SetSkin();
     }
 
     private int SetCountedScoreToSay()
     {
-        NPCQuestions npcParameters = DialogPanelSingleton.GetInstance().NpcQuestions;
+        NPCQuestions npcParameters = DialogScript.Instance.NpcQuestions;
         int countPoints = 0;
         int j = 0;
         for (int i = 0; i < npcParameters.Student.AmountQuestionsForTest * npcParameters.AmountStudentsOnFloor; i++)
@@ -48,9 +47,10 @@ public class Teacher : NPC
             AnswerButton.ChangeColorButton = false;
             AnswerButton.OnPlayerAnswered += ChangeScoreOnCompletedDialog;
             DialogScript.NpcType = NPCType.Teacher;
-            NewQuestions();
+            DialogScript.Instance.ShowNewQuestion();
+            DialogScript.Instance.QuestionsInformation = null;
         }
-        else if (DialogScript.countNPCCompleted >= DialogPanelSingleton.GetInstance().NpcQuestions.AmountStudentsOnFloor - 1)
+        else if (DialogScript.countNPCCompleted >= DialogScript.Instance.NpcQuestions.AmountStudentsOnFloor - 1)
         {
             SceneChangeScript.GetInstance().ChangeScene(gameParameters.LobbySceneName);
         }
@@ -58,7 +58,7 @@ public class Teacher : NPC
 
     private bool IsNormFulfilled()
     {
-        return PlayerScores.GetInstance().Scores >= countedScoreToSay;
+        return PlayerScores.Instance.Scores >= countedScoreToSay;
     }
 
     private void ChangeScoreOnCompletedDialog(int amountPoints)
@@ -69,21 +69,17 @@ public class Teacher : NPC
             amountPointsCorrectAnswers += amountPoints;
             countCorrectAnswers++;
         }
-        else
-        {
-            amountPointsForWrongAnswer += amountPoints;
-        }
 
         if (amountResponses > 0)
             return;
 
-        NPCQuestions npcParameters = DialogPanelSingleton.GetInstance().NpcQuestions;
+        NPCQuestions npcParameters = DialogScript.Instance.NpcQuestions;
         float percent = (npcParameters.MinPercentCorrectTeacher / 100f);
         bool isPassed = countCorrectAnswers >= (npcParameters.Teacher.AmountQuestionsForTest * percent);
         if (isPassed)
         {
             GameData.Data.AmountMoney += amountPointsCorrectAnswers;
-            FloorCompleted(PlayerScores.GetInstance().Scores + amountPointsCorrectAnswers);
+            FloorCompleted(PlayerScores.Instance.Scores + amountPointsCorrectAnswers);
             FileEncryption.WriteFile(gameParameters.DataPath, GameData.Data);
         }
         
@@ -94,7 +90,7 @@ public class Teacher : NPC
     {
         foreach (var levelInformation in FacultyPanelScript.levelsInformation)
         {
-            if (levelInformation.LevelCompletedName.Equals(DialogScript.Path))
+            if (levelInformation.LevelCompletedName.Equals(System.IO.Path.GetFileNameWithoutExtension(DialogScript.Path)))
             {
                 if (levelInformation.LevelRecord < scorePoints)
                     levelInformation.LevelRecord = scorePoints;

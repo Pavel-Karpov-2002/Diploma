@@ -8,7 +8,7 @@ public class AddingTimeSkill : Skill
 
     public AddingTimeSkill(float addingPercentTime, int amountUseTimeSkill) : base()
     {
-        this.addingPercentTime = addingPercentTime;
+        this.addingPercentTime = (addingPercentTime / 100f);
         this.amountUseTimeSkill = amountUseTimeSkill;
     }
 
@@ -16,9 +16,8 @@ public class AddingTimeSkill : Skill
     {
         if (amountUseTimeSkill < 0)
             return;
-
-        TimerDialogScript timer = TimerDialogScript.GetInstance();
-        timer.StartTimer(timer.TimeDuration * addingPercentTime);
+        TimerDialogScript timer = TimerDialogScript.Instance;
+        timer.StartTimer(timer.TimeRemaining + timer.TimeDuration * addingPercentTime);
         amountUseTimeSkill--;
     }
 

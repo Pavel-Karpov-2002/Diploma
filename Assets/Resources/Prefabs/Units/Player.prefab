@@ -138,6 +138,7 @@ MonoBehaviour:
   skillsPanel: {fileID: 0}
   response: {fileID: 0}
   skillsParameters: {fileID: 11400000, guid: e6aafd4d7a2c5ec46b2f8532611f6696, type: 2}
+  gameParameters: {fileID: 11400000, guid: 5c9843972f45f8d48bba9dd477373a0e, type: 2}
 --- !u!114 &1640258915
 MonoBehaviour:
   m_ObjectHideFlags: 0
