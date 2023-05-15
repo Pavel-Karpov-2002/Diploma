@@ -36,16 +36,13 @@ public class AnswerButton : MonoBehaviour
     {
         bool isCorrect = CheckCorrectAnswer(answer);
         ChangeButton(isCorrect ? dialogParameters.ButtonTrueColor : dialogParameters.ButtonFalseColor);
-
         if (coroutineIsNotProcessed)
         {
             nextQuestionCoroutine = NextQuestion(dialogParameters.TimeAfterResponse);
             StartCoroutine(nextQuestionCoroutine);
         }
-
         if (OnPlayerAnswered != null)
             OnPlayerAnswered?.Invoke(isCorrect ? question.PointsForCorrectAnswer : -question.PointsForWrongAnswer);
-
         thisButton.interactable = false;
     }
 

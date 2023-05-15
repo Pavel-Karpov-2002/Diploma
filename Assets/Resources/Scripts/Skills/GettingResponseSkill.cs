@@ -7,6 +7,8 @@ public class GettingResponseSkill : Skill
     private int amountUses;
     private TextMeshProUGUI responseText;
 
+    public int AmountUses => amountUses;
+
     public GettingResponseSkill(int amountUses, TextMeshProUGUI responseText) : base()
     {
         this.amountUses = amountUses;
@@ -17,11 +19,8 @@ public class GettingResponseSkill : Skill
     {
         if (responseText == null || amountUses <= 0)
             return;
-
         amountUses--;
-
         TestingAnswersScript buttonsAnswersTest = DialogScript.Instance.Testing;
-
         if (buttonsAnswersTest.gameObject.activeSelf)
         {
             foreach (var button in buttonsAnswersTest.ButtonsPanel.GetComponentsInChildren<AnswerButton>())
@@ -33,7 +32,6 @@ public class GettingResponseSkill : Skill
                 }
             }
         }
-
         EnteringResponseScript buttonEnteringAnswer = DialogScript.Instance.EnteringResponse;
 
         if (buttonEnteringAnswer.gameObject.activeSelf)

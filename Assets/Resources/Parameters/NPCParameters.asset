@@ -34,3 +34,7 @@ MonoBehaviour:
   teachers:
   - skin: {fileID: -705487487, guid: 11b05a30374060a4e9493ab1f331d450, type: 3}
     skinAnimator: {fileID: 22100000, guid: b340cf6d0824def4f96ac25ac2d66340, type: 2}
+  - skin: {fileID: -1318726456, guid: f746128f3e9a11044ba5e7862544c255, type: 3}
+    skinAnimator: {fileID: 22100000, guid: 3da4a5a5ddd5ae6478acceede7d9b6e2, type: 2}
+  - skin: {fileID: -1742889569, guid: 1bcbdb3429a35d94d9236a8e54879031, type: 3}
+    skinAnimator: {fileID: 22100000, guid: 6a41412d45bfc01458fc188d03d81cbd, type: 2}

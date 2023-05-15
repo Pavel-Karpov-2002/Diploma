@@ -69,7 +69,8 @@ public class OperationWithItems : CustomSingleton<OperationWithItems>
             GameData.Data.PlayerItems[changingItem] = newItem;
         else
             GameData.Data.PlayerItems.Add(newItem);
-        FileEncryption.WriteFile(gameParameters.DataPath, GameData.Data);
+
+        GameData.UpdateGameDataFile(gameParameters.DataPath);
         ChangePlayerItemInInventary(changingItem, newItem);
         ClearDroppedItem();
     }

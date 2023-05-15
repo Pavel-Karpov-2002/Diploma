@@ -15,6 +15,7 @@ public class Teacher : NPC
 
     private void Start()
     {
+        SetSkin();
         countedScoreToSay = SetCountedScoreToSay();
         amountResponses = DialogScript.Instance.NpcQuestions.Teacher.AmountQuestionsForTest;
         scoreToHave.text = "<color=#" + colorText.ToHexString() + ">" + countedScoreToSay + "</color>";
@@ -80,9 +81,10 @@ public class Teacher : NPC
         {
             GameData.Data.AmountMoney += amountPointsCorrectAnswers;
             FloorCompleted(PlayerScores.Instance.Scores + amountPointsCorrectAnswers);
-            FileEncryption.WriteFile(gameParameters.DataPath, GameData.Data);
+            GameData.UpdateGameDataFile(gameParameters.DataPath);
         }
-        
+
+        DialogScript.Instance.CloseDialogWindow();
         SceneChangeScript.GetInstance().ChangeScene(gameParameters.LobbySceneName);
     }
 
@@ -93,13 +95,21 @@ public class Teacher : NPC
             if (levelInformation.LevelCompletedName.Equals(System.IO.Path.GetFileNameWithoutExtension(DialogScript.Path)))
             {
                 if (levelInformation.LevelRecord < scorePoints)
+                {
                     levelInformation.LevelRecord = scorePoints;
+                    SaveCompletedLevel();
+                }
                 return;
             }
         }
         
         FacultyPanelScript.levelsInformation.Add(new LevelInformation() { LevelCompletedName = System.IO.Path.GetFileNameWithoutExtension(DialogScript.Path), LevelRecord = scorePoints });
         GameData.Data.AmountPassedLevels += 1;
+        SaveCompletedLevel();
+    }
+
+    private void SaveCompletedLevel()
+    {
         FileEncryption.WriteFile(System.IO.Path.GetDirectoryName(DialogScript.Path) + "\\completedLevels.json", FacultyPanelScript.levelsInformation);
     }
 

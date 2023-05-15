@@ -29,7 +29,6 @@ public class DialogScript : CustomSingleton<DialogScript>
     protected override void Awake()
     {
         base.Awake();
-        enteringQuestion = new HashSet<int>();
         TimerDialogScript.TimerEnd += ShowNewQuestion;
         TimerDialogScript.TimerEnd += TakeAwayPoints;
         NpcQuestions = GetQuestions?.Invoke(Path);
@@ -50,7 +49,7 @@ public class DialogScript : CustomSingleton<DialogScript>
 
     private void InitializeQuestion()
     {
-        PlayerSkills.Instance.SetButtonsIntractable();
+        PlayerSkills.Instance.SetInteractableSkillsButton();
         numberQuestion = GetRandomNumber.GenerateRandomNumberNotUsed(0, questions.Length, enteringQuestion);
         if (numberQuestion == -1)
         {
@@ -84,12 +83,12 @@ public class DialogScript : CustomSingleton<DialogScript>
                     countQuestionPerOneNPC = NpcQuestions.Student.AmountQuestionsForTest + 1;
                     break;
                 case NPCType.Teacher:
+                    enteringQuestion.Clear();
                     countQuestionPerOneNPC = NpcQuestions.Teacher.AmountQuestionsForTest + 1;
                     questionsInformation = NpcQuestions.Teacher;
                     PlayerSkills.Instance.SkillsPanel.SetActive(false);
                     break;
             }
-            enteringQuestion.Clear();
             questions = questionsInformation.Questions;
         }
     }
@@ -112,11 +111,13 @@ public class DialogScript : CustomSingleton<DialogScript>
 
     public void CloseDialogWindow()
     {
-        DialogScript.Instance.gameObject.SetActive(false);
+        gameObject.SetActive(false);
         MovementJoystick.Instance.gameObject.SetActive(true);
         AnswerButton.ResetOnPlayerAnswered();
+        questionsInformation = null;
         countQuestionPerOneNPC = 0;
         countNPCCompleted++;
+        ScoresUI.Instance.ChangeAlphaPanel(1);
     }
 
     private void OnDestroy()

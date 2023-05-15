@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -65,7 +66,7 @@ public class BinarySpacePartitioningAlgorithm : DungeonGenerator
                         Vector3Int pos = new Vector3Int(i, j, 0);
                         if (i == rooms[room].x || j == rooms[room].y || i == parameters.Width - 1 || j == parameters.Height - 1)
                         {
-                            SetTileInTilemap(pos, wallsMap, parameters.WallTile);
+                            SetTileInTilemap(pos, wallsMap, parameters.WallTile[((j == rooms[room].y && i != rooms[room].x) ? 0 : 1)]);
                         }
                     }
                 }
@@ -87,9 +88,8 @@ public class BinarySpacePartitioningAlgorithm : DungeonGenerator
     {
         Vector2 center1 = new Vector2(room1.x + room1.width / 2f, room1.y + room1.height / 2f);
         Vector2 center2 = new Vector2(room2.x + room2.width / 2f, room2.y + room2.height / 2f);
-
-        CreateHorizontalTunnel((int)center2.x, (int)center1.x, (int)center2.y, floorLayer, parameters.FloorTile);
-        CreateVerticalTunnel((int)center1.y, (int)center2.y, (int)center1.x, floorLayer, parameters.FloorTile);
+        CreateHorizontalTunnel((int)center2.x, (int)center1.x, (int)center2.y, floorLayer, GetRandomTile(parameters.FloorTile));
+        CreateVerticalTunnel((int)center1.y, (int)center2.y, (int)center1.x, floorLayer, GetRandomTile(parameters.FloorTile));
     }
 
     private static void CreateHorizontalTunnel(int x1, int x2, int y, Tilemap layer, Tile tileSprite)
@@ -120,28 +120,39 @@ public class BinarySpacePartitioningAlgorithm : DungeonGenerator
             for (int j = 0; j < parameters.Height; j++)
             {
                 Vector3Int pos = new Vector3Int(i, j, 0);
-                SetTileInTilemap(pos, floorMap, parameters.FloorTile);
+                SetTileInTilemap(pos, floorMap, GetRandomTile(parameters.FloorTile));
             }
         }
     }
 
     private static void GenerateEdgesFloor(Tilemap wallsMap, MazeParameters parameters)
     {
+        Tile edgeTile = parameters.WallTile[1];
         for (int j = 0; j < parameters.Height; j++)
         {
-            SetTileInTilemap(new Vector3Int(0, j, 0), wallsMap, parameters.WallTile);
-            SetTileInTilemap(new Vector3Int(parameters.Width - 1, j, 0), wallsMap, parameters.WallTile);
+            SetTileInTilemap(new Vector3Int(0, j, 0), wallsMap, edgeTile);
+            SetTileInTilemap(new Vector3Int(parameters.Width - 1, j, 0), wallsMap, edgeTile);
         }
 
         for (int i = 0; i < parameters.Width; i++)
         {
-            SetTileInTilemap(new Vector3Int(i, 0, 0), wallsMap, parameters.WallTile);
-            SetTileInTilemap(new Vector3Int(i, parameters.Height - 1, 0), wallsMap, parameters.WallTile);
+            SetTileInTilemap(new Vector3Int(i, 0, 0), wallsMap, edgeTile);
+            SetTileInTilemap(new Vector3Int(i, parameters.Height - 1, 0), wallsMap, edgeTile);
         }
     }
 
     private static void SetTileInTilemap(Vector3Int position, Tilemap tilemaps, Tile tile)
     {
         tilemaps.SetTile(position, tile);
+    }
+
+    private static Tile GetRandomTile(List<TileParameters> tiles)
+    {
+        foreach (var tile in tiles)
+        {
+            if (Random.Range(0, 100) <= tile.ChanceOfReceiving)
+                return tile.Tile;
+        }
+        return new Tile();
     }
 }

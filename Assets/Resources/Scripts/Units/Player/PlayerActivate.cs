@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerActivate : PlayerConstructor
 {
+    [SerializeField] private GameParameters gameParameters;
     private bool isWindowActive;
 
     public void StartSayingWithNPC()
@@ -22,9 +23,20 @@ public class PlayerActivate : PlayerConstructor
                     return;
                 MovementJoystick.Instance.gameObject.SetActive(false);
                 DialogScript.Instance.gameObject.SetActive(true);
+                ScoresUI.Instance.ChangeAlphaPanel(0);
                 break;
             }
         }
+    }
+
+    public void OpenSkinChangeWindow(GameObject window)
+    {
+        if (isWindowActive)
+            return;
+        var trigger = Physics2D.OverlapCircle(transform.position, PlayerParameters.DistanceForActivateSkinChangeWindow, PlayerParameters.ChangeSkinLayer);
+        if (!trigger)
+            return;
+        ChangeWindowActive(window, true);
     }
 
     public void OpenLevelWindow(GameObject window)
@@ -42,7 +54,7 @@ public class PlayerActivate : PlayerConstructor
     {
         if (isWindowActive)
             return;
-        var trigger = Physics2D.OverlapCircle(transform.position, PlayerParameters.DiastanceForActivateStoryWindow, PlayerParameters.StoryLayer);
+        var trigger = Physics2D.OverlapCircle(transform.position, PlayerParameters.DistanceForActivateStoryWindow, PlayerParameters.StoryLayer);
         if (!trigger)
             return;
         ChangeWindowActive(window, true);
@@ -53,31 +65,32 @@ public class PlayerActivate : PlayerConstructor
         ChangeWindowActive(window, false);
     }
 
-    public void GetNewItem()
+    public void GetNewItem(GameObject window)
     {
         if (isWindowActive)
             return;
-
         ItemParameters itemParameters = PlayerParameters.ItemStatusWindow;
         var trigger = Physics2D.OverlapCircle(transform.position, itemParameters.DistanceActivateItemDrop, itemParameters.LayerActivateItemDrop);
         if (!trigger)
             return;
-
-        if (GameData.Data.AmountMoney - PlayerParameters.CostRollingItems < PlayerParameters.CostRollingItems)
+        if (GameData.Data.AmountMoney - PlayerParameters.CostRollingItems <= 0)
         {
             Debug.Log("У Вас не достаточно кристаллов");
             return;
         }
-
         OperationWithItems.Instance.GetRandomItem();
+        ChangeWindowActive(window, true);
         GameData.Data.AmountMoney -= PlayerParameters.CostRollingItems;
+        PlayerStatsInformation.Instance.UpdateInformationText();
+        GameData.UpdateGameDataFile(gameParameters.DataPath);
     }
 
     public void OpenStatusWindow(GameObject window)
     {
         if (isWindowActive)
             return;
-        var triggers = Physics2D.OverlapCircleAll(transform.position, 3);
+        int ignoredMask = ~LayerMask.GetMask("Default");
+        var triggers = Physics2D.OverlapCircleAll(transform.position, 3, ignoredMask);
 
         if (triggers.Length == 0)
             return;

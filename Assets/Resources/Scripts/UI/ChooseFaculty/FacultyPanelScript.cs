@@ -59,6 +59,7 @@ public class FacultyPanelScript : CustomSingleton<FacultyPanelScript>
         }
         catch (Exception e)
         {
+            UnityEngine.Debug.Log("TET");
             Debug.Log(e.Message);
         }
     }

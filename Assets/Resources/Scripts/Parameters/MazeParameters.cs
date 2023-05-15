@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -9,14 +10,14 @@ public class MazeParameters : ScriptableObject
 
     [SerializeField] private int width = 40;
     [SerializeField] private int height = 40;
-    [SerializeField] private Tile floorTile;
-    [SerializeField] private Tile wallTile;
+    [SerializeField] private List<TileParameters> floorTile;
+    [SerializeField] private List<Tile> wallTile;
 
     public int MaxRoomRows => maxRoomRows;
     public int MaxRoomColumns => maxRoomColumns;
     public int Width => width;
     public int Height => height;
-    public Tile FloorTile => floorTile;
-    public Tile WallTile => wallTile;
+    public List<TileParameters> FloorTile => floorTile;
+    public List<Tile> WallTile => wallTile;
 
 }

@@ -7,21 +7,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 813564832, guid: 5a0da02be8e9d3648aeaa4525c88307d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2659374031605472682, guid: 5a0da02be8e9d3648aeaa4525c88307d, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4161470101407774883, guid: 5a0da02be8e9d3648aeaa4525c88307d, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: c06f3a8a5a5285e44ae456d4ec8ecd5c, type: 2}
     - target: {fileID: 5427798063366714411, guid: 5a0da02be8e9d3648aeaa4525c88307d, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5427798063366714411, guid: 5a0da02be8e9d3648aeaa4525c88307d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.68648
+      value: -5.99
       objectReference: {fileID: 0}
     - target: {fileID: 5427798063366714411, guid: 5a0da02be8e9d3648aeaa4525c88307d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.8630786
+      value: -2.8
       objectReference: {fileID: 0}
     - target: {fileID: 5427798063366714411, guid: 5a0da02be8e9d3648aeaa4525c88307d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -55,6 +63,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5427798063366714412, guid: 5a0da02be8e9d3648aeaa4525c88307d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5427798063366714412, guid: 5a0da02be8e9d3648aeaa4525c88307d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 5427798063366714413, guid: 5a0da02be8e9d3648aeaa4525c88307d, type: 3}
       propertyPath: m_Name
       value: PlayerLobby
@@ -68,3 +84,25 @@ PrefabInstance:
     - {fileID: 8752508798144651935, guid: 5a0da02be8e9d3648aeaa4525c88307d, type: 3}
     - {fileID: 9004229128892523597, guid: 5a0da02be8e9d3648aeaa4525c88307d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5a0da02be8e9d3648aeaa4525c88307d, type: 3}
+--- !u!1 &825554108291710240 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5427798063366714413, guid: 5a0da02be8e9d3648aeaa4525c88307d, type: 3}
+  m_PrefabInstance: {fileID: 4622835628169611533}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1552629987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 825554108291710240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 424bd833d1ed3ab42b942526820ad72d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  windows:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

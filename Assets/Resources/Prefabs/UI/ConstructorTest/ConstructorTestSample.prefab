@@ -1017,7 +1017,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3033089983232204102, guid: 334f4baba730c2a4fa1fb8eebec80c37, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -118.90255
+      value: -117.28476
       objectReference: {fileID: 0}
     - target: {fileID: 3033089983305910553, guid: 334f4baba730c2a4fa1fb8eebec80c37, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1157,11 +1157,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3033089984603621444, guid: 334f4baba730c2a4fa1fb8eebec80c37, type: 3}
       propertyPath: m_fontSize
-      value: 39
+      value: 38.3
       objectReference: {fileID: 0}
     - target: {fileID: 3033089984727025562, guid: 334f4baba730c2a4fa1fb8eebec80c37, type: 3}
       propertyPath: m_fontSize
-      value: 49.9
+      value: 49.2
       objectReference: {fileID: 0}
     - target: {fileID: 7977677646762490101, guid: 334f4baba730c2a4fa1fb8eebec80c37, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

@@ -33,13 +33,13 @@ public class NPCGeneratorScript : MonoBehaviour
         {
             for (int i = 0; i < rooms.Count; i++)
             {
-                float x = rooms[i].x + rooms[i].width / 2;
-                float y = rooms[i].y + rooms[i].height / 2;
+                float x = UnityEngine.Random.Range(rooms[i].x + 2, rooms[i].x + rooms[i].width - 2);
+                float y = UnityEngine.Random.Range(rooms[i].y + 2, rooms[i].y + rooms[i].height - 2);
 
                 GameObject npc = SetNPC(
                     new Vector3(
-                        (x + (UnityEngine.Random.Range(0, 2f) * (x < parameters.Width / 2 ? 1 : -1))) * gridScale.x,
-                        (y + (UnityEngine.Random.Range(0, 2f) * (y < parameters.Height / 2 ? 1 : -1))) * gridScale.y,
+                        x * gridScale.x,
+                        y * gridScale.y,
                         0),
                     (countNPC == amountStudents ? teacher : student));
 

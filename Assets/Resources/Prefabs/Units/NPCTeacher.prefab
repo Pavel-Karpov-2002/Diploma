@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1970863908904599059}
   - component: {fileID: 1970863908904599069}
   - component: {fileID: 1970863908904599058}
-  - component: {fileID: 2001090403638696068}
   - component: {fileID: 7641137549165771211}
   - component: {fileID: 6091973827797786434}
   m_Layer: 7
@@ -67,7 +66,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -94,22 +93,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!70 &2001090403638696068
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1970863908904599056}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.0000016449317, y: -0.7986859}
-  m_Size: {x: 1.2304015, y: 0.84641325}
-  m_Direction: 1
 --- !u!95 &7641137549165771211
 Animator:
   serializedVersion: 5
@@ -120,7 +103,7 @@ Animator:
   m_GameObject: {fileID: 1970863908904599056}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1bb759a89700798438eb516bc461b069, type: 2}
+  m_Controller: {fileID: 22100000, guid: b340cf6d0824def4f96ac25ac2d66340, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -150,7 +133,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 43093fefc580d15469ce6f2fd9b79190, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

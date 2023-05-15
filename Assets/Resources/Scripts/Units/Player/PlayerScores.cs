@@ -13,6 +13,7 @@ public class PlayerScores : CustomSingleton<PlayerScores>
             scores = value;
             if (scores < 0)
             {
+                DialogScript.Instance.gameObject.SetActive(false);
                 SceneChangeScript.GetInstance().ChangeScene(gameParameters.LobbySceneName);
                 return;
             }

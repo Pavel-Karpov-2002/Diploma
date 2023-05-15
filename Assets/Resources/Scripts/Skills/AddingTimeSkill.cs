@@ -4,21 +4,23 @@ using UnityEngine;
 public class AddingTimeSkill : Skill
 {
     private float addingPercentTime;
-    private int amountUseTimeSkill;
+    private int amountUses;
 
-    public AddingTimeSkill(float addingPercentTime, int amountUseTimeSkill) : base()
+    public int AmountUses => amountUses;
+
+    public AddingTimeSkill(float addingPercentTime, int amountUses) : base()
     {
         this.addingPercentTime = (addingPercentTime / 100f);
-        this.amountUseTimeSkill = amountUseTimeSkill;
+        this.amountUses = amountUses;
     }
 
     public override void Activate()
     {
-        if (amountUseTimeSkill < 0)
+        if (amountUses < 0)
             return;
         TimerDialogScript timer = TimerDialogScript.Instance;
         timer.StartTimer(timer.TimeRemaining + timer.TimeDuration * addingPercentTime);
-        amountUseTimeSkill--;
+        amountUses--;
     }
 
     public override void InitializeSkill()

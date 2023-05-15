@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CreateSkills : MonoBehaviour
 {
+    private delegate void SetListenerDelegate();
+
     public static IncreaseSpeedSkill CreateIncreaseSpeedSkill(SkillsParameters skillsParameters)
     {
         IncreaseSpeedSkill skill = new IncreaseSpeedSkill(skillsParameters.AmountAdditionPercentagelSpeed);
@@ -19,54 +20,36 @@ public class CreateSkills : MonoBehaviour
         return skill;
     }
 
-    public static Button CreateSkipQuestionSkill(GameObject skillButton, GameObject skillsPanel, SkillsParameters skillsParameters, GameParameters gameParameters)
+    public static SkillButton CreateSkipQuestionSkill(GameObject skillButton, GameObject skillsPanel, SkillsParameters skillsParameters, GameParameters gameParameters)
     {
-        Button button = CreateButton(skillButton, skillsPanel).GetComponent<Button>();
         SkipQuestionSkill skill = new SkipQuestionSkill(skillsParameters.AmountSkipQuestion);
-        button.onClick.AddListener(() => skill.Activate());
-        button.onClick.AddListener(() => button.interactable = false);
-        foreach (var item in gameParameters.Items)
-        {
-            if (item.Skill is SkipQuestionSkill)
-            {
-                button.image.sprite = ConvertTexture2D.GetSprite(ConvertTexture2D.GetTexture2D(item.ItemSpritePath));
-                break;
-            }
-        }
+        SkillButton button = CreateButton(skillButton, skillsPanel).GetComponent<SkillButton>();
+        SetListeners(button, skill, gameParameters.Items);
+        button.TextMeshPro.text = skill.AmountUses.ToString();
+        button.AmountUses = skill.AmountUses;
+        button.Button.onClick.AddListener(() => button.TextMeshPro.text = button.AmountUses.ToString());
         return button;
     }
 
-    public static Button CreateTimeSkill(GameObject skillButton, GameObject skillsPanel, SkillsParameters skillsParameters, GameParameters gameParameters)
+    public static SkillButton CreateTimeSkill(GameObject skillButton, GameObject skillsPanel, SkillsParameters skillsParameters, GameParameters gameParameters)
     {
-        Button button = CreateButton(skillButton, skillsPanel).GetComponent<Button>();
-        AddingTimeSkill timeSkill = new AddingTimeSkill(skillsParameters.AddedPercentTimeCountSkill, skillsParameters.AmountUseTimeSkill);
-        button.onClick.AddListener(() => timeSkill.Activate());
-        button.onClick.AddListener(() => button.interactable = false);
-        foreach (var item in gameParameters.Items)
-        {
-            if (item.Skill is AddingTimeSkill)
-            {
-                button.image.sprite = ConvertTexture2D.GetSprite(ConvertTexture2D.GetTexture2D(item.ItemSpritePath));
-                break;
-            }
-        }
+        AddingTimeSkill skill = new AddingTimeSkill(skillsParameters.AddedPercentTimeCountSkill, skillsParameters.AmountUseTimeSkill);
+        SkillButton button = CreateButton(skillButton, skillsPanel).GetComponent<SkillButton>();
+        SetListeners(button, skill, gameParameters.Items);
+        button.TextMeshPro.text = skill.AmountUses.ToString();
+        button.AmountUses = skill.AmountUses;
+        button.Button.onClick.AddListener(() => button.TextMeshPro.text = button.AmountUses.ToString());
         return button;
     }
 
-    public static Button CreateGettingResponseSkill(GameObject skillButton, GameObject skillsPanel, SkillsParameters skillsParameters, GameParameters gameParameters, params object[] obj)
+    public static SkillButton CreateGettingResponseSkill(GameObject skillButton, GameObject skillsPanel, SkillsParameters skillsParameters, GameParameters gameParameters, params object[] obj)
     {
-        Button button = CreateButton(skillButton, skillsPanel).GetComponent<Button>();
-        GettingResponseSkill timeSkill = new GettingResponseSkill(skillsParameters.AmountUsesGetResponse, (TextMeshProUGUI)obj[0]);
-        button.onClick.AddListener(() => timeSkill.Activate());
-        button.onClick.AddListener(() => button.interactable = false);
-        foreach (var item in gameParameters.Items)
-        {
-            if (item.Skill is GettingResponseSkill)
-            {
-                button.image.sprite = ConvertTexture2D.GetSprite(ConvertTexture2D.GetTexture2D(item.ItemSpritePath));
-                break;
-            }
-        }
+        GettingResponseSkill skill = new GettingResponseSkill(skillsParameters.AmountUsesGetResponse, (TextMeshProUGUI)obj[0]);
+        SkillButton button = CreateButton(skillButton, skillsPanel).GetComponent<SkillButton>();
+        SetListeners(button, skill, gameParameters.Items);
+        button.TextMeshPro.text = skill.AmountUses.ToString();
+        button.AmountUses = skill.AmountUses;
+        button.Button.onClick.AddListener(() => button.TextMeshPro.text = skill.AmountUses.ToString());
         return button;
     }
 
@@ -76,6 +59,24 @@ public class CreateSkills : MonoBehaviour
         button.transform.SetParent(skillsPanel.transform);
         button.transform.localScale = skillButton.transform.localScale;
         button.transform.position = skillButton.transform.position;
+        Vector3 pos = button.transform.position;
+        pos.z = 0;
+        button.transform.position = pos;
         return button;
+    }
+
+    private static void SetListeners(SkillButton button, Skill skill, List<Item> items)
+    {
+        button.Button.onClick.AddListener(() => button.Button.interactable = false);
+        button.Button.onClick.AddListener(() => button.AmountUses--);
+        button.Button.onClick.AddListener(() => skill.Activate());
+        foreach (var item in items)
+        {
+            if (item.Skill.GetType() == skill.GetType())
+            {
+                button.Image.sprite = ConvertTexture2D.GetSprite(ConvertTexture2D.GetTexture2D(item.ItemSpritePath));
+                break;
+            }
+        }
     }
 }

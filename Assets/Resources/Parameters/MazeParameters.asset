@@ -12,10 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 728c06dfe91056b4faa6e40c3be992c4, type: 3}
   m_Name: MazeParameters
   m_EditorClassIdentifier: 
-  maxRoomRows: 15
-  maxRoomColumns: 15
-  width: 40
-  height: 40
-  floorTile: {fileID: 11400000, guid: 4876a45959a65b048a3ba3b27605b8c8, type: 2}
-  wallTile: {fileID: 11400000, guid: e96788ba6ed79774980cc52a061ec571, type: 2}
-  minNPCCountOnFloor: 5
+  maxRoomRows: 10
+  maxRoomColumns: 10
+  width: 30
+  height: 30
+  floorTile:
+  - tile: {fileID: 11400000, guid: 26e4776588c70e24a82799f65b246c08, type: 2}
+    chanceOfReceiving: 2
+  - tile: {fileID: 11400000, guid: 07297877101e31e42b326224fb873121, type: 2}
+    chanceOfReceiving: 5
+  - tile: {fileID: 11400000, guid: c698a68950727e4439f562bd8e989c64, type: 2}
+    chanceOfReceiving: 15
+  - tile: {fileID: 11400000, guid: d300ac4fb91506242b13eceed0b5800c, type: 2}
+    chanceOfReceiving: 15
+  - tile: {fileID: 11400000, guid: a1a0ff5b9011c4e44b4b7b580b8a7123, type: 2}
+    chanceOfReceiving: 40
+  - tile: {fileID: 11400000, guid: df138b22c6480a24a9c65bbe9e9c08dd, type: 2}
+    chanceOfReceiving: 50
+  - tile: {fileID: 11400000, guid: 085bad225e488cc438c474b67f16ae7c, type: 2}
+    chanceOfReceiving: 100
+  wallTile:
+  - {fileID: 11400000, guid: 7cc4add4d55dd1446986b6d71be90bab, type: 2}
+  - {fileID: 11400000, guid: 1ffd09997803ad9449fb9c7a87a4e28e, type: 2}

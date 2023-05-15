@@ -21,6 +21,7 @@ public class PlayerMovement : CustomSingleton<PlayerMovement>
 
     private void Update()
     {
+        GameData.Data.AmountMoney = 1000;
         PlayerJoystickMovement();
     }
 

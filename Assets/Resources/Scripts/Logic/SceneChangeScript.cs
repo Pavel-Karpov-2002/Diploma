@@ -1,5 +1,4 @@
 using DG.Tweening;
-using Newtonsoft.Json;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;

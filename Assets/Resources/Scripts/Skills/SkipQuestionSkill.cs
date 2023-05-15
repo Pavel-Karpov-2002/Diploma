@@ -3,19 +3,21 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SkipQuestionSkill.Asset", menuName = "CustomParameters/Skills/SkipQuestionSkill")]
 public class SkipQuestionSkill : Skill
 {
-    private int amountSkipQuestions;
+    private int amountUses;
 
-    public SkipQuestionSkill(int amountSkipQuestions) : base()
+    public int AmountUses => amountUses;
+
+    public SkipQuestionSkill(int amountUses) : base()
     {
-        this.amountSkipQuestions = amountSkipQuestions;
+        this.amountUses = amountUses;
     }
 
     public override void Activate()
     {
-        if (amountSkipQuestions < 0)
+        if (amountUses < 0)
             return;
         DialogScript.Instance.ShowNewQuestion();
-        amountSkipQuestions--;
+        amountUses--;
     }
 
     public override void InitializeSkill()

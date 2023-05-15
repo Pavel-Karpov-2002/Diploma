@@ -16,6 +16,13 @@ public class GameData
     [JsonProperty("AmountPassedLevels")]
     public int AmountPassedLevels { get; set; }
 
+    public static void UpdateGameDataFile(string path)
+    {
+        var settings = new JsonSerializerSettings();
+        settings.TypeNameHandling = TypeNameHandling.Auto;
+        FileEncryption.WriteFile(path, Data);
+    }
+
     public override string ToString()
     {
         return "Player items count: " + PlayerItems.Count + "\n"

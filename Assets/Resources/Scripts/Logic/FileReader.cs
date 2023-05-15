@@ -1,13 +1,22 @@
 using Newtonsoft.Json;
+using System;
 using System.IO;
 
 public class FileReader
 {
     public static T ReadJsonWithTypes<T>(string text)
     {
-        var settings = new JsonSerializerSettings();
-        settings.TypeNameHandling = TypeNameHandling.Auto;
-        return JsonConvert.DeserializeObject<T>(text, settings);
+        try
+        {
+            var settings = new JsonSerializerSettings();
+            settings.TypeNameHandling = TypeNameHandling.Auto;
+            return JsonConvert.DeserializeObject<T>(text, settings);
+        }
+        catch (Exception e)
+        {
+            UnityEngine.Debug.Log(e.Message);
+        }
+        return default(T);
     }
 
     public static string ReadTextFile(string path)

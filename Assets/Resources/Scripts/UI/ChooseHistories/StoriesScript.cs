@@ -12,6 +12,11 @@ public class StoriesScript : MonoBehaviour
     [SerializeField] private GameObject textPanel;
     [SerializeField] private GameObject buttonPanel;
 
+    private void OnEnable()
+    {
+        buttonPanel.SetActive(true);
+    }
+
     public void CreateListButtons(string path)
     {
         if (Directory.GetFiles(path, "*.json").Length > 0)
@@ -52,5 +57,10 @@ public class StoriesScript : MonoBehaviour
     private void DemonstrationHistory(string story)
     {
         storyText.text = story;
+    }
+
+    private void OnDisable()
+    {
+        textPanel.SetActive(false);
     }
 }

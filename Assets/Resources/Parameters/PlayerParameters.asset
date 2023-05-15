@@ -17,9 +17,13 @@ MonoBehaviour:
   npcLayer:
     serializedVersion: 2
     m_Bits: 128
-  itemStatusWindow: {fileID: 11400000, guid: 29b7e19ef4f28144394f8d6415379f92, type: 2}
   storyLayer:
     serializedVersion: 2
     m_Bits: 1024
-  diastanceForActivateStoryWindow: 3
+  changeSkinLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  itemStatusWindow: {fileID: 11400000, guid: 29b7e19ef4f28144394f8d6415379f92, type: 2}
+  distanceForActivateStoryWindow: 3
+  distanceForActivateSkinChangeWindow: 3
   costRollingItems: 100
