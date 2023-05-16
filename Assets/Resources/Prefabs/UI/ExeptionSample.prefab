@@ -120,6 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exeptionText: {fileID: 6132481871706672948}
   exeptionPanel: {fileID: 6132481870868337484}
+  audioParameters: {fileID: 11400000, guid: d3cc2ef6d4874c041a46ad9e6ee07c33, type: 2}
   gameParameters: {fileID: 11400000, guid: 5c9843972f45f8d48bba9dd477373a0e, type: 2}
 --- !u!1 &6132481870921915671
 GameObject:

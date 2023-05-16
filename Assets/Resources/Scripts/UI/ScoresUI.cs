@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class ScoresUI : CustomSingleton<ScoresUI>
+public class ScoresUI : Singleton<ScoresUI>
 {
     [SerializeField] protected TextMeshProUGUI scoresText;
     [SerializeField] private CanvasGroup canvasGroup;

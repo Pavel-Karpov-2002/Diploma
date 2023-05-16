@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TimerDialogScript : CustomSingleton<TimerDialogScript>
+public class TimerDialogScript : Singleton<TimerDialogScript>
 {
     [SerializeField] private Slider timerUI;
 

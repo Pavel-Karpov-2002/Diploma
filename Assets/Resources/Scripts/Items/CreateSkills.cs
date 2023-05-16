@@ -70,6 +70,7 @@ public class CreateSkills : MonoBehaviour
         button.Button.onClick.AddListener(() => button.Button.interactable = false);
         button.Button.onClick.AddListener(() => button.AmountUses--);
         button.Button.onClick.AddListener(() => skill.Activate());
+        button.Button.onClick.AddListener(() => AudioController.Instance.PlayOneAudio(PlayerSkills.Instance.AudioParameters.ItemUsed));
         foreach (var item in items)
         {
             if (item.Skill.GetType() == skill.GetType())

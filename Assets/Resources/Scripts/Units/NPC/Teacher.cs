@@ -5,6 +5,7 @@ using UnityEngine;
 public class Teacher : NPC
 {
     [SerializeField] private GameParameters gameParameters;
+    [SerializeField] private AudioParameters audioParameters;
     [SerializeField] private TextMeshPro scoreToHave;
     [SerializeField] private Color colorText;
 
@@ -84,13 +85,14 @@ public class Teacher : NPC
             GameData.UpdateGameDataFile(gameParameters.DataPath);
         }
 
+        AudioController.Instance.PlayOneAudio(isPassed ? audioParameters.LevelPassed : audioParameters.LevelNotPassed);
         DialogScript.Instance.CloseDialogWindow();
         SceneChangeScript.GetInstance().ChangeScene(gameParameters.LobbySceneName);
     }
 
     private void FloorCompleted(int scorePoints)
     {
-        foreach (var levelInformation in FacultyPanelScript.levelsInformation)
+        foreach (var levelInformation in CreateButtonsLevel.levelsInformation)
         {
             if (levelInformation.LevelCompletedName.Equals(System.IO.Path.GetFileNameWithoutExtension(DialogScript.Path)))
             {
@@ -102,15 +104,15 @@ public class Teacher : NPC
                 return;
             }
         }
-        
-        FacultyPanelScript.levelsInformation.Add(new LevelInformation() { LevelCompletedName = System.IO.Path.GetFileNameWithoutExtension(DialogScript.Path), LevelRecord = scorePoints });
+
+        CreateButtonsLevel.levelsInformation.Add(new LevelInformation() { LevelCompletedName = System.IO.Path.GetFileNameWithoutExtension(DialogScript.Path), LevelRecord = scorePoints });
         GameData.Data.AmountPassedLevels += 1;
         SaveCompletedLevel();
     }
 
     private void SaveCompletedLevel()
     {
-        FileEncryption.WriteFile(System.IO.Path.GetDirectoryName(DialogScript.Path) + "\\completedLevels.json", FacultyPanelScript.levelsInformation);
+        FileEncryption.WriteFile(System.IO.Path.GetDirectoryName(DialogScript.Path) + "\\completedLevels.json", CreateButtonsLevel.levelsInformation);
     }
 
     protected override void SetSkin()

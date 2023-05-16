@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image), typeof(Animator))]
 public class SkinSelectionScript : MonoBehaviour
 {
+    [SerializeField] private AudioParameters audioParameters;
     [SerializeField] private NPCParameters npcSkins;
     [SerializeField] private Image skinWindowDemostration;
     [SerializeField] private Animator skinWindowAnimator;
@@ -27,8 +27,14 @@ public class SkinSelectionScript : MonoBehaviour
         player = Resources.Load<GameObject>("Prefabs/Units/" + PlayerNamePrefab);
     }
 
+    private void OnEnable()
+    {
+        AudioController.Instance.PlayOneAudio(audioParameters.OpenWardborde);
+    }
+
     public void UseSkin()
     {
+        AudioController.Instance.SetAudio(audioParameters.ChangeSkin);
         thisPlayer.GetComponent<SpriteRenderer>().sprite = skins[skinNumber].Skin;
         thisPlayer.GetComponent<Animator>().runtimeAnimatorController = skins[skinNumber].SkinAnimator;
         player.GetComponent<SpriteRenderer>().sprite = skins[skinNumber].Skin;
@@ -37,6 +43,7 @@ public class SkinSelectionScript : MonoBehaviour
 
     public void ChangeSelection(bool isNext)
     {
+        AudioController.Instance.SetAudio(audioParameters.OpeningInventory);
         skinNumber += (isNext ? 1 : -1);
         if (skinNumber < 0)
             skinNumber = skins.Count - 1;

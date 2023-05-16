@@ -9,6 +9,8 @@ public class GameParameters : ScriptableObject
     [SerializeField] private float timeExeptionDuration;
     [SerializeField] private List<Item> items;
     [SerializeField] private string dataPath;
+    [SerializeField] private string settingsPath;
+    [SerializeField] private string storiesPath;
     [SerializeField] private string lobbySceneName;
     [SerializeField] private string floorSceneName;
     [SerializeField] private Color passedLevelColor;
@@ -18,6 +20,8 @@ public class GameParameters : ScriptableObject
     public float TimeExeptionDuration => timeExeptionDuration;
     public List<Item> Items => items;
     public string DataPath => dataPath;
+    public string SettingsPath => settingsPath;
+    public string StoriesPath => storiesPath;
     public string LobbySceneName => lobbySceneName;
     public string FloorSceneName => floorSceneName;
     public Color PassedLevelColor => passedLevelColor;

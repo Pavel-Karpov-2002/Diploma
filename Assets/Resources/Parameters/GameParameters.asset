@@ -119,6 +119,8 @@ MonoBehaviour:
       \u0432\u043E\u043F\u0440\u043E\u0441.</b><br>"
     itemSpritePath: ..\\The Labyrinth of GSTU\\Assets\\Resources\\Sprites\\Items\\MagicalCrystal.png
   dataPath: ..\\The Labyrinth of GSTU\\Assets\\Resources\\gameData.json
+  settingsPath: ..\\The Labyrinth of GSTU\\Assets\\Resources\\settings.json
+  storiesPath: ..\\The Labyrinth of GSTU\\Assets\\Resources\\Stories\\
   lobbySceneName: LobbyScene
   floorSceneName: FloorScene
   passedLevelColor: {r: 0.069811285, g: 1, b: 0.13249578, a: 1}

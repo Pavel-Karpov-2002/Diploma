@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer), typeof(PlayerAnimation))]
-public class PlayerMovement : CustomSingleton<PlayerMovement>
+public class PlayerMovement : Singleton<PlayerMovement>
 {
     [SerializeField] private PlayerParameters playerParameters;
+    [SerializeField] private AudioParameters audioParameters;
     [SerializeField] private new PlayerAnimation animation;
     [SerializeField] private SpriteRenderer playerSprite;
 
@@ -30,9 +31,15 @@ public class PlayerMovement : CustomSingleton<PlayerMovement>
         if (MovementJoystick.Instance == null)
             return;
         if (MovementJoystick.Instance.JoystickDirection.y != 0)
-            rb.velocity = new Vector2(MovementJoystick.Instance.JoystickDirection.x * speed, MovementJoystick.Instance.JoystickDirection.y * speed);        
+        {
+            rb.velocity = new Vector2(MovementJoystick.Instance.JoystickDirection.x * speed, MovementJoystick.Instance.JoystickDirection.y * speed);
+            if (!AudioController.Instance.GetAudioSource().isPlaying)
+                AudioController.Instance.PlayOneAudio(audioParameters.Movement);
+        }
         else
+        {
             rb.velocity = Vector2.zero;
+        }
         animation.ChangeAnimation(MovementJoystick.Instance.JoystickDirection.x, MovementJoystick.Instance.JoystickDirection.y, playerSprite);
     }
 }

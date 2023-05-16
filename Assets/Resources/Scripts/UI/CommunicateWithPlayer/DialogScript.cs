@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogScript : CustomSingleton<DialogScript>
+public class DialogScript : Singleton<DialogScript>
 {
     [SerializeField] private TestingAnswersScript testing;
     [SerializeField] private EnteringResponseScript enteringResponse;

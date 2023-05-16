@@ -25,9 +25,9 @@ public class GetFileScript : MonoBehaviour
             return;
         }
         if (isGameData)
-            SaveJsonFile(FileReader.ReadJsonWithTypes<GameData>(FileEncryption.ReadFile(path)), path);
+            SaveJsonFile(FileOperations.ReadJsonWithTypes<GameData>(FileEncryption.ReadFile(path)), path);
         else
-            SaveJsonFile(FileReader.ReadJsonWithTypes<NPCQuestions>(FileEncryption.ReadFile(path)), path);
+            SaveJsonFile(FileOperations.ReadJsonWithTypes<NPCQuestions>(FileEncryption.ReadFile(path)), path);
     }
 
     public void Encryption(bool isGameData)
@@ -41,8 +41,8 @@ public class GetFileScript : MonoBehaviour
             return;
         }
         if (isGameData)
-            FileEncryption.WriteFile(path, JsonConvert.DeserializeObject<GameData>(FileReader.ReadTextFile(path), settings));
+            FileEncryption.WriteFile(path, JsonConvert.DeserializeObject<GameData>(FileOperations.ReadTextFile(path), settings));
         else
-            FileEncryption.WriteFile(path, JsonConvert.DeserializeObject<NPCQuestions>(FileReader.ReadTextFile(path), settings));
+            FileEncryption.WriteFile(path, JsonConvert.DeserializeObject<NPCQuestions>(FileOperations.ReadTextFile(path), settings));
     }
 }

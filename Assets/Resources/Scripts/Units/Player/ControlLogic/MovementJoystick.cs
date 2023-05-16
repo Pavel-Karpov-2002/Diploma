@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MovementJoystick : CustomSingleton<MovementJoystick>
+public class MovementJoystick : Singleton<MovementJoystick>
 {
     [SerializeField] private GameObject joystick;
     [SerializeField] private GameObject joystickBG;

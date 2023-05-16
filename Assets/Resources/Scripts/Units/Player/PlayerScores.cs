@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerScores : CustomSingleton<PlayerScores>
+public class PlayerScores : Singleton<PlayerScores>
 {
     [SerializeField] private GameParameters gameParameters;
     private int scores;

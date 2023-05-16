@@ -2,10 +2,11 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
-public class GameException : CustomSingleton<GameException>
+public class GameException : Singleton<GameException>
 {
     [SerializeField] private TextMeshProUGUI exeptionText;
     [SerializeField] private CanvasGroup exeptionPanel;
+    [SerializeField] private AudioParameters audioParameters;
     [SerializeField] private GameParameters gameParameters;
     Sequence sequence;
 
@@ -20,6 +21,7 @@ public class GameException : CustomSingleton<GameException>
     {
         sequence.Kill();
         sequence = DOTween.Sequence();
+        AudioController.Instance.PlayOneAudio(audioParameters.Warning);
         exeptionPanel.alpha = 1;
         exeptionText.text = exeption;
         sequence.PrependInterval(gameParameters.TimeExeptionAttenuation)

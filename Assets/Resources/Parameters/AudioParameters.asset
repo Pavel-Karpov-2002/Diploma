@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd9faa6745ae4a8479cf5c0b41718cd3, type: 3}
+  m_Name: AudioParameters
+  m_EditorClassIdentifier: 
+  doorOpen: {fileID: 8300000, guid: c9ab20a66d10654409f03c7621212a10, type: 3}
+  movement: {fileID: 8300000, guid: d302ee03430700245b332ce5238e5de7, type: 3}
+  openWardborde: {fileID: 8300000, guid: 0458b00c8ef2a0d4d820d6a7f55ac12c, type: 3}
+  openingInventory: {fileID: 8300000, guid: 2094bd9bde5fab546b6bab0ac9436360, type: 3}
+  openingBackpack: {fileID: 8300000, guid: d926530031ca01f4283fde6111f3f1e6, type: 3}
+  changeSkin: {fileID: 8300000, guid: 9a3aeebca0d4c2c4aa57164671038209, type: 3}
+  pageRustling: {fileID: 8300000, guid: b38a26fe32bd9ac48a059791c00a9c16, type: 3}
+  warning: {fileID: 8300000, guid: 5a21f17686737c64280a61f394880cab, type: 3}
+  itemUsed: {fileID: 8300000, guid: 7208bdab7e3fd45428ec88841192e4a2, type: 3}
+  levelPassed: {fileID: 8300000, guid: 21909696381ec2649ad3ef46bbb5777a, type: 3}
+  levelNotPassed: {fileID: 8300000, guid: afde7a29fcaf4a94f8a78a56d416bb67, type: 3}

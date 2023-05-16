@@ -2,15 +2,15 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class PlayerSkills : CustomSingleton<PlayerSkills>
+public class PlayerSkills : Singleton<PlayerSkills>
 {
     [SerializeField] private GameObject skillButton;
     [SerializeField] private GameObject skillsPanel;
     [SerializeField] private TextMeshProUGUI responseText;
     [SerializeField] private SkillsParameters skillsParameters;
     [SerializeField] private GameParameters gameParameters;
+    [SerializeField] private AudioParameters audioParameters;
 
     public delegate Skill GetPassiveSkillsDelegate(SkillsParameters skillsParameters);
     public delegate SkillButton GetActiveSkillsDelegate(GameObject skillButton, GameObject skillsPanel, SkillsParameters skillsParameters, GameParameters gameParameters);
@@ -21,6 +21,7 @@ public class PlayerSkills : CustomSingleton<PlayerSkills>
     public static event GetResponseSkillDelegate GetResponseSkill;
 
     private List<SkillButton> buttons = new List<SkillButton>();
+    public AudioParameters AudioParameters => audioParameters;
 
     public GameObject SkillsPanel => skillsPanel;
 

@@ -35,19 +35,11 @@ public class SceneChangeScript : MonoBehaviour
 
     public void LoadGameData()
     {
-        GameData data = FileReader.ReadJsonWithTypes<GameData>(FileEncryption.ReadFile(gameParameters.DataPath));
+        GameData data = FileOperations.ReadJsonWithTypes<GameData>(FileEncryption.ReadFile(gameParameters.DataPath));
         if (data != null)
             GameData.Data = data;
         else
             GameData.Data = new GameData();
-    }
-
-    public void ExitGame()
-    {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
-        Application.Quit();
     }
 
     private void NextScene(float endTime, float duration, string sceneName)

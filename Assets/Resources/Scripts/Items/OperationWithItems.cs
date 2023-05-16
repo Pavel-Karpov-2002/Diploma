@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OperationWithItems : CustomSingleton<OperationWithItems>
+public class OperationWithItems : Singleton<OperationWithItems>
 {
     [SerializeField] private ItemParameters itemParameters;
     [SerializeField] private GameParameters gameParameters;

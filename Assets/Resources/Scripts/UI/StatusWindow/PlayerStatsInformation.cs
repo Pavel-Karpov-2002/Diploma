@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class PlayerStatsInformation : CustomSingleton<PlayerStatsInformation>
+public class PlayerStatsInformation : Singleton<PlayerStatsInformation>
 {
     [SerializeField] private TextMeshProUGUI textAmountMoney;
     [SerializeField] private TextMeshProUGUI textAmountPassedLevels;

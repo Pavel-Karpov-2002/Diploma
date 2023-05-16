@@ -406,9 +406,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54499d983f7abf042b8fd5e49236f642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storiesPanel: {fileID: 317705368011826073}
+  audioParameters: {fileID: 11400000, guid: d3cc2ef6d4874c041a46ad9e6ee07c33, type: 2}
+  gameParameters: {fileID: 11400000, guid: 5c9843972f45f8d48bba9dd477373a0e, type: 2}
   storiesButton: {fileID: 18221334314431739, guid: 496aa1a6ba2df5a43a5510342eb7d481, type: 3}
   storyText: {fileID: 4061838870385514507}
+  storiesPanel: {fileID: 317705368011826073}
   textPanel: {fileID: 317705368314319774}
   buttonPanel: {fileID: 317705366704120916}
 --- !u!1 &317705368314319774
