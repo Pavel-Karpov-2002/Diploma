@@ -1,4 +1,4 @@
-using System;
+Ôªøusing System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -47,7 +47,7 @@ public class FacultyPanelScript : CustomSingleton<FacultyPanelScript>
                 if (levelPath.Equals(completedPath))
                     continue;
                 string levelName = ChangePanelScript.GetLastName(levelPath.Replace(".json", ""));
-                PanelButton button = ChangePanelScript.CreateButton("œÓÈÚË ˝Ú‡Ê: " + ChangePanelScript.GetLastName(levelName),
+                PanelButton button = ChangePanelScript.CreateButton("–ü—Ä–æ–π—Ç–∏ —ç—Ç–∞–∂: " + ChangePanelScript.GetLastName(levelName),
                     facultyButton,
                     facultyPanel,
                     null,
@@ -59,7 +59,6 @@ public class FacultyPanelScript : CustomSingleton<FacultyPanelScript>
         }
         catch (Exception e)
         {
-            UnityEngine.Debug.Log("TET");
             Debug.Log(e.Message);
         }
     }
@@ -87,7 +86,7 @@ public class FacultyPanelScript : CustomSingleton<FacultyPanelScript>
             if (levelInformation.LevelCompletedName.Equals(levelName))
             {
                 button.Button.image.color = gameParameters.PassedLevelColor;
-                button.ButtonText.text += "\n –ÂÍÓ‰: (" + levelInformation.LevelRecord + ") ";
+                button.ButtonText.text += "\n –†–µ–∫–æ—Ä–¥: (" + levelInformation.LevelRecord + ") ";
             }
         }
     }

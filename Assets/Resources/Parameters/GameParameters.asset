@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: GameParameters
   m_EditorClassIdentifier: 
   timeLoadSceneAttenuation: 1
+  timeExeptionAttenuation: 2.5
+  timeExeptionDuration: 2
   items:
   - skill: {fileID: 11400000, guid: f84ece4964284274ead6001a6eb6f729, type: 2}
     itemName: "\u041C\u043E\u0437\u0433 \u0432 \u0431\u0430\u043D\u043A\u0435"

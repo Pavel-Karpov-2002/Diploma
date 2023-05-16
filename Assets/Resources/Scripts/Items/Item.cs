@@ -21,8 +21,8 @@ public class Item
 
     public override string ToString()
     {
-        //"Skill: " + skill.ToString() + "\n"
-        return "Item path: " + itemSpritePath + "\n"
+        return "Skill: " + skill.ToString() + "\n"
+            + "Item path: " + itemSpritePath + "\n"
             + "Item name: " + itemName + "\n"
             + "Item information: " + itemInformation +"\n";
     }

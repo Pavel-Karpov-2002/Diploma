@@ -113,22 +113,22 @@ public class ConstructorTestScript : MonoBehaviour
     {
         if (topicNameInput.text == string.Empty)
         {
-            Debug.Log("Введите название темы");
+            GameException.Instance.ShowError("Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ С‚РµРјС‹!");
             return false;
         }
         if (amountStudentsOnFloorInput.text == string.Empty)
         {
-            Debug.Log("Введите количество студентов на этаже");
+            GameException.Instance.ShowError("Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚СѓРґРµРЅС‚РѕРІ РЅР° СЌС‚Р°Р¶Рµ!");
             return false;
         }
         if (amountQuestionsForTestInput.text == string.Empty)
         {
-            Debug.Log("Введите количество вопросов у каждого студента");
+            GameException.Instance.ShowError("Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ РІРѕРїСЂРѕСЃРѕРІ Сѓ РєР°Р¶РґРѕРіРѕ СЃС‚СѓРґРµРЅС‚Р°!");
             return false;
         }
         if (questions.Count == 0)
         {
-            Debug.Log("Создайте хотя бы один вопрос");
+            GameException.Instance.ShowError("РЎРѕР·РґР°Р№С‚Рµ С…РѕС‚СЏ Р±С‹ РѕРґРёРЅ РІРѕРїСЂРѕСЃ!");
             return false;
         }
         return true;
@@ -138,22 +138,22 @@ public class ConstructorTestScript : MonoBehaviour
     {
         if (amountQuestionsForTestTeacherInput.text == string.Empty)
         {
-            Debug.Log("Введите количество вопросов в тесте");
+            GameException.Instance.ShowError("Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ РІРѕРїСЂРѕСЃРѕРІ РІ С‚РµСЃС‚Рµ");
             return false;
         }
         if (minPercentCorrectTeacherInput.text == string.Empty)
         {
-            Debug.Log("Введите минимальное количество процентов для выполнения теста");
+            GameException.Instance.ShowError("Р’РІРµРґРёС‚Рµ РјРёРЅРёРјР°Р»СЊРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РїСЂРѕС†РµРЅС‚РѕРІ РґР»СЏ РІС‹РїРѕР»РЅРµРЅРёСЏ С‚РµСЃС‚Р°");
             return false;
         }
         if (minPercentCorrectToUnlockTeacherInput.text == string.Empty)
         {
-            Debug.Log("Введите минимальное количество процентов для получения доступа к преподавателю");
+            GameException.Instance.ShowError("Р’РІРµРґРёС‚Рµ РјРёРЅРёРјР°Р»СЊРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РїСЂРѕС†РµРЅС‚РѕРІ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РґРѕСЃС‚СѓРїР° Рє РїСЂРµРїРѕРґР°РІР°С‚РµР»СЋ");
             return false;
         }
         if (questions.Count == 0)
         {
-            Debug.Log("Создайте хотя бы один вопрос");
+            GameException.Instance.ShowError("РЎРѕР·РґР°Р№С‚Рµ С…РѕС‚СЏ Р±С‹ РѕРґРёРЅ РІРѕРїСЂРѕСЃ");
             return false;
         }
         return true;
@@ -172,7 +172,7 @@ public class ConstructorTestScript : MonoBehaviour
     private void AddComponentsToButton(ChangeQuestionButton button, Question question, string buttonName)
     {
         button.Button.onClick.RemoveAllListeners();
-        button.ButtonText.text = "Изменить: " + buttonName;
+        button.ButtonText.text = "РР·РјРµРЅРёС‚СЊ: " + buttonName;
         button.Button.onClick.AddListener(() => DemonstrateOfCreatedQuestion(question));
         button.DeleteButton.onClick.AddListener(() => DeleteQuestion(question, button.gameObject));
     }
@@ -198,32 +198,32 @@ public class ConstructorTestScript : MonoBehaviour
                 return;
             }
         }
-        Debug.Log("Вопрос не был выбран");
+        GameException.Instance.ShowError("Р’РѕРїСЂРѕСЃ РЅРµ Р±С‹Р» РІС‹Р±СЂР°РЅ");
     }
 
     private bool CheckOnNullParameters()
     {
         if (inputEnteringQuestion.text == string.Empty)
         {
-            Debug.Log("Введите вопрос");
+            GameException.Instance.ShowError("Р’РІРµРґРёС‚Рµ РІРѕРїСЂРѕСЃ");
             return true;
         }
 
         if (correctAnswerInput.text == string.Empty)
         {
-            Debug.Log("Не был введен ответ на вопрос.");
+            GameException.Instance.ShowError("РќРµ Р±С‹Р» РІРІРµРґРµРЅ РѕС‚РІРµС‚ РЅР° РІРѕРїСЂРѕСЃ.");
             return true;
         }
 
         if (questionTimeButton.text == string.Empty)
         {
-            Debug.Log("Не было назначено время для ответа на вопрос");
+            GameException.Instance.ShowError("РќРµ Р±С‹Р»Рѕ РЅР°Р·РЅР°С‡РµРЅРѕ РІСЂРµРјСЏ РґР»СЏ РѕС‚РІРµС‚Р° РЅР° РІРѕРїСЂРѕСЃ");
             return true;
         }
 
         if (pointsForCorrectAnswerInput.text == string.Empty || pointsForWrongAnswerInput.text == string.Empty)
         {
-            Debug.Log("Не была назначена стоимость вопроса");
+            GameException.Instance.ShowError("РќРµ Р±С‹Р»Р° РЅР°Р·РЅР°С‡РµРЅР° СЃС‚РѕРёРјРѕСЃС‚СЊ РІРѕРїСЂРѕСЃР°");
             return true;
         }
         return false;
@@ -241,7 +241,7 @@ public class ConstructorTestScript : MonoBehaviour
         {
             if (answerInputButtons[i].text == string.Empty)
             {
-                Debug.Log("Ответ не был заполнен");
+                GameException.Instance.ShowError("РћС‚РІРµС‚ РЅРµ Р±С‹Р» Р·Р°РїРѕР»РЅРµРЅ");
                 return null;
             }
             answers[i] = answerInputButtons[i].text;
@@ -250,7 +250,7 @@ public class ConstructorTestScript : MonoBehaviour
         }
         if (!isCorrectAnswer)
         {
-            Debug.Log("Верный ответ не найден в вариантах ответа");
+            GameException.Instance.ShowError("Р’РµСЂРЅС‹Р№ РѕС‚РІРµС‚ РЅРµ РЅР°Р№РґРµРЅ РІ РІР°СЂРёР°РЅС‚Р°С… РѕС‚РІРµС‚Р°");
             return null;
         }
         return answers;

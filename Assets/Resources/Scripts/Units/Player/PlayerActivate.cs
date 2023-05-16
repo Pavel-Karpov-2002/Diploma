@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class PlayerActivate : PlayerConstructor
 {
@@ -75,7 +75,7 @@ public class PlayerActivate : PlayerConstructor
             return;
         if (GameData.Data.AmountMoney - PlayerParameters.CostRollingItems <= 0)
         {
-            Debug.Log("Ó Âàñ íå äîñòàòî÷íî êðèñòàëëîâ");
+            GameException.Instance.ShowError("Ð£ Ð’Ð°Ñ Ð½ÐµÐ´Ð¾ÑÑ‚Ð°Ñ‚Ð¾Ñ‡Ð½Ð¾ ÐºÑ€Ð¸ÑÑ‚Ð°Ð»Ð»Ð¾Ð²!");
             return;
         }
         OperationWithItems.Instance.GetRandomItem();

@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+п»їusing Newtonsoft.Json;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -21,18 +21,13 @@ public class GetFileScript : MonoBehaviour
         string path = EditorUtility.OpenFilePanel("Overwrite with json", "", "json");
         if (path == string.Empty)
         {
-            Debug.Log("Вы не указали путь к файлу");
+            GameException.Instance.ShowError("Р’С‹ РЅРµ СѓРєР°Р·Р°Р»Рё РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ");
             return;
         }
         if (isGameData)
-        {
             SaveJsonFile(FileReader.ReadJsonWithTypes<GameData>(FileEncryption.ReadFile(path)), path);
-        }
         else
-        {
-            Debug.Log(FileEncryption.ReadFile(path));
             SaveJsonFile(FileReader.ReadJsonWithTypes<NPCQuestions>(FileEncryption.ReadFile(path)), path);
-        }
     }
 
     public void Encryption(bool isGameData)
@@ -42,7 +37,7 @@ public class GetFileScript : MonoBehaviour
         settings.TypeNameHandling = TypeNameHandling.Auto;
         if (path == string.Empty)
         {
-            Debug.Log("Вы не указали путь к файлу");
+            GameException.Instance.ShowError("Р’С‹ РЅРµ СѓРєР°Р·Р°Р»Рё РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ");
             return;
         }
         if (isGameData)

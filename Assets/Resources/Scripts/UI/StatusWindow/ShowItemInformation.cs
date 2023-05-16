@@ -1,4 +1,4 @@
-using TMPro;
+п»їusing TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -40,7 +40,8 @@ public class ShowItemInformation : MonoBehaviour
         {
             if (playerItem.Skill.GetType() == newItem.Skill.GetType())
             {
-                Debug.Log("У вас уже есть этот предмет!");
+                isShow = false;
+                GameException.Instance.ShowError("РЈ РІР°СЃ СѓР¶Рµ РµСЃС‚СЊ СЌС‚РѕС‚ РїСЂРµРґРјРµС‚!");
                 return;
             }
         }

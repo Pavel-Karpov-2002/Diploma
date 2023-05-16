@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameParameters : ScriptableObject
 {
     [SerializeField] private float timeLoadSceneAttenuation;
+    [SerializeField] private float timeExeptionAttenuation;
+    [SerializeField] private float timeExeptionDuration;
     [SerializeField] private List<Item> items;
     [SerializeField] private string dataPath;
     [SerializeField] private string lobbySceneName;
@@ -12,6 +14,8 @@ public class GameParameters : ScriptableObject
     [SerializeField] private Color passedLevelColor;
 
     public float TimeLoadSceneAttenuation => timeLoadSceneAttenuation;
+    public float TimeExeptionAttenuation => timeExeptionAttenuation;
+    public float TimeExeptionDuration => timeExeptionDuration;
     public List<Item> Items => items;
     public string DataPath => dataPath;
     public string LobbySceneName => lobbySceneName;
