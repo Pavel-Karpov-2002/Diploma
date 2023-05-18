@@ -10,9 +10,8 @@ public static class GetRandomNumber
             throw new Exception("HashSet is null");
         var random = new Random();
         var range = Enumerable.Range(min, max - min).Where(i => !used.Contains(i)).ToList();
-        var index = random.Next(range.Count);
         if (range.Count != 0)
-            return range[index];
+            return range[random.Next(range.Count)];
         return -1;
     }
 }

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShowItemInformation : MonoBehaviour
+public class ShowItemInformation : Singleton<ShowItemInformation>
 {
     [SerializeField] private Image itemImage;
     [SerializeField] private TextMeshProUGUI textInformation;
@@ -11,6 +11,7 @@ public class ShowItemInformation : MonoBehaviour
 
     private bool isShow;
     private Item lastItem;
+    public Image PlayerSkin => playerSkin;
 
     private void Start()
     {
@@ -22,7 +23,12 @@ public class ShowItemInformation : MonoBehaviour
         ChangePlayerItem(item);
         if (item == null)
             return;
-        itemImage.sprite = ConvertTexture2D.GetSprite(ConvertTexture2D.GetTexture2D(item.ItemSpritePath));
+#if UNITY_EDITOR
+        string path = Application.streamingAssetsPath;
+#elif UNITY_ANDROID             
+        string path = Application.persistentDataPath;
+#endif
+        itemImage.sprite = Resources.Load<Sprite>(item.ItemSpritePath);
         textNameItem.text = item.ItemName;
         textInformation.text = item.ItemInformation;
         OperationWithItems.Instance.ActiveItem = item;

@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Image), typeof(Animator))]
 public class SkinSelectionScript : MonoBehaviour
 {
     [SerializeField] private AudioParameters audioParameters;
@@ -14,21 +13,22 @@ public class SkinSelectionScript : MonoBehaviour
 
     private List<NPCSkin> skins;
     private int skinNumber;
-    private GameObject player;
+    private bool isStart;
 
-    private void Start()
+    private void Awake()
     {
-        if (skinWindowDemostration == null)
-            skinWindowDemostration = GetComponent<Image>();
-        if (skinWindowAnimator == null)
-            skinWindowAnimator = GetComponent<Animator>();
+        skinNumber = GetFileSkinNum();
         skins = npcSkins.Students;
-        ChangeSelection(true);
-        player = Resources.Load<GameObject>("Prefabs/Units/" + PlayerNamePrefab);
+        UseSkin();
     }
 
     private void OnEnable()
     {
+        if (!isStart)
+        {
+            isStart = true;
+            return;
+        }
         AudioController.Instance.PlayOneAudio(audioParameters.OpenWardborde);
     }
 
@@ -37,8 +37,9 @@ public class SkinSelectionScript : MonoBehaviour
         AudioController.Instance.SetAudio(audioParameters.ChangeSkin);
         thisPlayer.GetComponent<SpriteRenderer>().sprite = skins[skinNumber].Skin;
         thisPlayer.GetComponent<Animator>().runtimeAnimatorController = skins[skinNumber].SkinAnimator;
-        player.GetComponent<SpriteRenderer>().sprite = skins[skinNumber].Skin;
-        player.GetComponent<Animator>().runtimeAnimatorController = skins[skinNumber].SkinAnimator;
+        ShowItemInformation.Instance.PlayerSkin.sprite = skins[skinNumber].Skin;
+        PlayerSkin.SkinNum = skinNumber;
+        WriteFileSkinNum();
     }
 
     public void ChangeSelection(bool isNext)
@@ -51,5 +52,32 @@ public class SkinSelectionScript : MonoBehaviour
             skinNumber = 0;
         skinWindowDemostration.sprite = skins[skinNumber].Skin;
         skinWindowAnimator.runtimeAnimatorController = skins[skinNumber].SkinAnimator;
+    }
+
+    private int GetFileSkinNum()
+    {
+#if UNITY_EDITOR
+        string path = Application.streamingAssetsPath;
+#elif UNITY_ANDROID             
+        string path = Application.persistentDataPath;
+#endif
+        try
+        { 
+            return int.Parse(FileOperations.ReadTextFile(path + "/skinNum.txt"));
+        }
+        catch
+        {
+            return 0;
+        }
+    }
+
+    private void WriteFileSkinNum()
+    {
+#if UNITY_EDITOR
+        string path = Application.streamingAssetsPath;
+#elif UNITY_ANDROID
+        string path = Application.persistentDataPath;
+#endif
+        FileOperations.WriteTextFile(path + "/skinNum.txt", skinNumber.ToString());
     }
 }

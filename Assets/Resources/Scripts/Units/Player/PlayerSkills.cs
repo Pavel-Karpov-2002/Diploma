@@ -54,6 +54,7 @@ public class PlayerSkills : Singleton<PlayerSkills>
 
     public void SetInteractableSkillsButton()
     {
+        responseText.text = string.Empty;
         foreach (var button in buttons)
         {
             if (button.AmountUses > 0)

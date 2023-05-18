@@ -1,6 +1,5 @@
 using Newtonsoft.Json;
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Security.Cryptography;
 
@@ -32,6 +31,35 @@ public class FileEncryption
 
                 return text;
             }
+        }
+        catch (Exception e)
+        {
+            UnityEngine.Debug.Log(e.Message);
+        }
+        return null;
+    }
+
+    public static string ReadBytes(byte[] bytes)
+    {
+        try
+        {
+            Stream stream = new MemoryStream(bytes, 0, bytes.Length);
+
+            Aes oAes = Aes.Create();
+            byte[] outputIV = new byte[oAes.IV.Length];
+
+            stream.Read(outputIV, 0, outputIV.Length);
+
+            CryptoStream oStream = new CryptoStream(
+                   stream,
+                   oAes.CreateDecryptor(savedKey, outputIV),
+                   CryptoStreamMode.Read);
+
+            StreamReader reader = new StreamReader(oStream);
+            string content = reader.ReadToEnd();
+            reader.Close();
+
+            return content;
         }
         catch (Exception e)
         {

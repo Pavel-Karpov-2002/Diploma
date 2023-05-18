@@ -16,6 +16,8 @@ public class OperationWithItems : Singleton<OperationWithItems>
     public Item ActiveItem { get => activeItem; set => activeItem = value; }
     public Item DroppedItem => droppedItem;
 
+    string path;
+
     private void Start()
     {
         GetPlayerItems();
@@ -23,6 +25,14 @@ public class OperationWithItems : Singleton<OperationWithItems>
 
     private void GetPlayerItems()
     {
+        if (path == null)
+        {
+#if UNITY_EDITOR
+            path = Application.streamingAssetsPath;
+#elif UNITY_ANDROID             
+            path = Application.persistentDataPath;
+#endif
+        }
         itemsInventory = new List<ItemSlot>();
         for (int i = 0; i < itemParameters.CountItems; i++)
         {
@@ -37,7 +47,7 @@ public class OperationWithItems : Singleton<OperationWithItems>
                 continue;
             }
             Item playerItem = GameData.Data.PlayerItems[i];
-            item.ItemImage.sprite = ConvertTexture2D.GetSprite(ConvertTexture2D.GetTexture2D(playerItem.ItemSpritePath));
+            item.ItemImage.sprite = Resources.Load<Sprite>(playerItem.ItemSpritePath);
             item.ItemButton.onClick.AddListener(() => showItemInformation.SetIventoryItemInformation(playerItem));
         }
     }
@@ -46,7 +56,7 @@ public class OperationWithItems : Singleton<OperationWithItems>
     {
         droppedItem = GetRandomItem(gameParameters.Items);
         droppedItemButton.ItemButton.onClick.RemoveAllListeners();
-        droppedItemButton.ItemImage.sprite = ConvertTexture2D.GetSprite(ConvertTexture2D.GetTexture2D(DroppedItem.ItemSpritePath));
+        droppedItemButton.ItemImage.sprite = Resources.Load<Sprite>(DroppedItem.ItemSpritePath);
         droppedItemButton.ItemButton.onClick.AddListener(() => showItemInformation.SetIventoryItemInformation(DroppedItem));
     }
 
@@ -69,8 +79,7 @@ public class OperationWithItems : Singleton<OperationWithItems>
             GameData.Data.PlayerItems[changingItem] = newItem;
         else
             GameData.Data.PlayerItems.Add(newItem);
-
-        GameData.UpdateGameDataFile(gameParameters.DataPath);
+        GameData.UpdateGameDataFile(path + gameParameters.DataPath);
         ChangePlayerItemInInventary(changingItem, newItem);
         ClearDroppedItem();
     }
@@ -79,7 +88,7 @@ public class OperationWithItems : Singleton<OperationWithItems>
     {
         if (changingItem == -1)
             changingItem = GameData.Data.PlayerItems.Count - 1;
-        itemsInventory[changingItem].ItemImage.sprite = ConvertTexture2D.GetSprite(ConvertTexture2D.GetTexture2D(newItem.ItemSpritePath));
+        itemsInventory[changingItem].ItemImage.sprite = Resources.Load<Sprite>(newItem.ItemSpritePath);
         itemsInventory[changingItem].ItemButton.onClick.RemoveAllListeners();
         itemsInventory[changingItem].ItemButton.onClick.AddListener(() => showItemInformation.SetIventoryItemInformation(newItem));
     }

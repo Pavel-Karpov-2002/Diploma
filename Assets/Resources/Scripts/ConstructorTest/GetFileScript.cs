@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿#if UNITY_EDITOR
+using Newtonsoft.Json;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -46,3 +47,4 @@ public class GetFileScript : MonoBehaviour
             FileEncryption.WriteFile(path, JsonConvert.DeserializeObject<NPCQuestions>(FileOperations.ReadTextFile(path), settings));
     }
 }
+#endif

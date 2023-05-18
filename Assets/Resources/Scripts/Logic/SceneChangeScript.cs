@@ -1,10 +1,12 @@
 using DG.Tweening;
+using DG.Tweening.Plugins.Core.PathCore;
 using System.Collections;
+using System.IO;
 using UnityEngine;
+using UnityEngine.Android;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(CanvasGroup), typeof(Image))]
 public class SceneChangeScript : MonoBehaviour
 {
     [SerializeField] private GameParameters gameParameters;
@@ -17,14 +19,20 @@ public class SceneChangeScript : MonoBehaviour
 
     private void Awake()
     {
+        BetterStreamingAssets.Initialize();
         sequence = DOTween.Sequence();
     }
 
     private void Start()
     {
-        canvasGroup.blocksRaycasts = true;
         fadeCoroutine = TimeAttenuation(0, gameParameters.TimeLoadSceneAttenuation);
         StartCoroutine(fadeCoroutine);
+#if UNITY_ANDROID
+        if (!Permission.HasUserAuthorizedPermission(Permission.ExternalStorageWrite))
+        {
+            Permission.RequestUserPermission(Permission.ExternalStorageWrite);
+        }
+#endif
     }
 
     public void ChangeScene(string sceneName)
@@ -35,7 +43,18 @@ public class SceneChangeScript : MonoBehaviour
 
     public void LoadGameData()
     {
-        GameData data = FileOperations.ReadJsonWithTypes<GameData>(FileEncryption.ReadFile(gameParameters.DataPath));
+        GameData data = null;
+#if UNITY_EDITOR
+        using (var stream = File.Open(Application.streamingAssetsPath + gameParameters.DataPath, FileMode.OpenOrCreate))
+        {
+            data = FileOperations.ReadJsonWithTypes<GameData>(FileEncryption.ReadBytes(FileOperations.GetBytesInStream(stream)));
+        }
+#elif UNITY_ANDROID
+        using (var stream = File.Open(Application.persistentDataPath + gameParameters.DataPath, FileMode.OpenOrCreate))
+        {
+            data = FileOperations.ReadJsonWithTypes<GameData>(FileEncryption.ReadBytes(FileOperations.GetBytesInStream(stream)));
+        }
+#endif
         if (data != null)
             GameData.Data = data;
         else

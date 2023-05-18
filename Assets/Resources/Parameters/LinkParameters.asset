@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84076922cb4c41647aea4f6ef0e533ea, type: 3}
   m_Name: LinkParameters
   m_EditorClassIdentifier: 
-  folderPath: ..\\The Labyrinth of GSTU\\Assets\\Resources\\QuestionsOnLink\\
+  folderPath: /QuestionsOnLink/
   distanceActivateLinkPanel: 3
   layerActivateLinkPanel:
     serializedVersion: 2

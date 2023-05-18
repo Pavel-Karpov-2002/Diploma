@@ -15,7 +15,6 @@ public class PlayerActivate : PlayerConstructor
         foreach (var npcTrigger in trigger)
         {
             NPC npc = npcTrigger.gameObject.GetComponent<NPC>();
-
             if (npc.IsExpectation)
             {
                 npc.SetExpectation(false);

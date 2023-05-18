@@ -30,4 +30,9 @@ public class Student : NPC
         npcSkin.sprite = npcParameters.Students[rnd].Skin;
         npcAnimator.runtimeAnimatorController = npcParameters.Students[Random.Range(0, npcParameters.Students.Count - 1)].SkinAnimator;
     }
+
+    private void OnDestroy()
+    {
+        AnswerButton.OnPlayerAnswered -= ChangeScores;
+    }
 }

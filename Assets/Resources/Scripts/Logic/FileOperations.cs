@@ -1,8 +1,6 @@
 using Newtonsoft.Json;
 using System;
-using System.Diagnostics;
 using System.IO;
-using System.Runtime.InteropServices.ComTypes;
 
 public class FileOperations
 {
@@ -23,11 +21,22 @@ public class FileOperations
 
     public static string ReadTextFile(string path)
     {
-        StreamReader reader = new StreamReader(path);
-        string text = reader.ReadToEnd();
-        reader.Close();
+        using (StreamReader reader = new StreamReader(File.Open(path, FileMode.OpenOrCreate)))
+        {
+            string text = reader.ReadToEnd();
+            reader.Close();
 
-        return text;
+            return text;
+        }
+    }
+
+    public static byte[] GetBytesInStream(Stream stream)
+    {
+        using (var memoryStream = new MemoryStream())
+        {
+            stream.CopyTo(memoryStream);
+            return memoryStream.ToArray();
+        }
     }
 
     public static bool WriteTextFile(string path, string content)

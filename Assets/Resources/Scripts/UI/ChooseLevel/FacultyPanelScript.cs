@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using DG.Tweening.Plugins.Core.PathCore;
 using System.IO;
 using UnityEngine;
 
@@ -11,22 +11,62 @@ public class FacultyPanelScript : Singleton<FacultyPanelScript>
     [SerializeField] private GameObject facultyPanel;
 
     public FacultyParameters FacultyParameters => facultyParameters;
+    string path;
+
+    private void Awake()
+    {
+        base.Awake();
+#if UNITY_EDITOR
+        path = Application.streamingAssetsPath + facultyParameters.FoldersPath;
+#elif UNITY_ANDROID             
+        path = Application.persistentDataPath + facultyParameters.FoldersPath;
+#endif
+        CreateDirectories(path);
+    }
 
     private void OnEnable()
     {
-        CreateListOfFaculies(facultyParameters.FoldersPath);
+#if UNITY_EDITOR
+        CreateListOfFaculies(path);
+#elif UNITY_ANDROID             
+        CreateListOfFaculies(path);
+#endif
     }
 
     public void CreateListOfFaculies(string path)
     {
-        if (Directory.GetFiles(path, "*.json").Length > 0)
-        {
-            CreateButtonsLevel.CreateButtons(path, facultyPanel, facultyButton, audioParameters.DoorOpen, gameParameters);
-            return;
-        }
         ChangePanelScript.CreateButtonsInPanel(Directory.EnumerateDirectories(path),
             facultyButton,
             facultyPanel,
             CreateListOfFaculies);
+        if (Application.persistentDataPath + facultyParameters.FoldersPath == path)
+            return;
+#if UNITY_EDITOR
+        string[] paths = BetterStreamingAssets.GetFiles(path.Replace(Application.streamingAssetsPath, "") + "/", "*.json");
+#elif UNITY_ANDROID
+        string[] paths = BetterStreamingAssets.GetFiles(path.Replace(Application.persistentDataPath, "") + "/", "*.json");
+        
+#endif
+        if (paths.Length > 0)
+            CreateButtonsLevel.CreateButtons(paths, facultyPanel, facultyButton, audioParameters.DoorOpen, gameParameters);
+    }
+
+    private void CreateDirectories(string path)
+    {
+        if (Directory.Exists(path))
+            Directory.CreateDirectory(path);
+        foreach (var facultie in facultyParameters.Faculties)
+        {
+            string namePath = path + facultie.Name + "/";
+            if (Directory.Exists(namePath))
+                continue;
+            Directory.CreateDirectory(namePath);
+            foreach (var discipline in facultie.Discilines)
+            {
+                if (Directory.Exists(namePath + discipline))
+                    continue;
+                Directory.CreateDirectory(namePath + discipline + "/");
+            }
+        }
     }
 }

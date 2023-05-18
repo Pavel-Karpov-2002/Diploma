@@ -16,35 +16,38 @@ public class LinkPanelScript : Singleton<LinkPanelScript>
 
     private void OnEnable()
     {
-        CreateLinkButtons();
+#if UNITY_EDITOR
+        CreateLinkButtons(Application.streamingAssetsPath + linkParameters.FolderPath);
+#elif UNITY_ANDROID             
+        CreateLinkButtons(Application.persistentDataPath + linkParameters.FolderPath);
+#endif
     }
 
-    public void CreateLinkButtons()
+    public void CreateLinkButtons(string path)
     {
-        string path = linkParameters.FolderPath;
-        if (Directory.GetFiles(path, "*.json").Length > 0)
-        {
-            CreateButtonsLevel.CreateButtons(path, linkPanel, linkButton, audioParameters.DoorOpen, gameParameters);
-            return;
-        }
+        if (!Directory.Exists(path))
+            Directory.CreateDirectory(path);
+        string[] paths = Directory.GetFiles(path, "*.json");
+        if (paths.Length > 0)
+            CreateButtonsLevel.CreateButtons(paths, linkPanel, linkButton, audioParameters.DoorOpen, gameParameters, true);
     }
 
     public void AddButton()
     {
         DownloaderFile.Instance.GetFile(linkInput.text);
-        StartCoroutine(UpdateButtons());
+        StartCoroutine(UpdateButtons(Application.persistentDataPath + linkParameters.FolderPath));
     }
 
-    private IEnumerator UpdateButtons()
+    private IEnumerator UpdateButtons(string path)
     {
         yield return new WaitForSeconds(0.5f);
         if (countAttempts == 10)
             yield return null;
         if (DownloaderFile.Instance.IsDone)
         {
-            CreateLinkButtons();
+            CreateLinkButtons(path);
         }
         countAttempts++;
-        StartCoroutine(UpdateButtons());
+        StartCoroutine(UpdateButtons(path));
     }
 }

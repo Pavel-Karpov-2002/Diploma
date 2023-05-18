@@ -572,7 +572,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -70, y: -69.82031}
+  m_AnchoredPosition: {x: -70, y: -70}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3938476359615369857
@@ -658,7 +658,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerActivate, Assembly-CSharp
+        m_TargetAssemblyTypeName: PlayerActivateInLobby, Assembly-CSharp
         m_MethodName: CloseWindow
         m_Mode: 2
         m_Arguments:
@@ -786,6 +786,7 @@ MonoBehaviour:
   skinWindowAnimator: {fileID: 3938476359735835337}
   thisPlayer: {fileID: 0}
   PlayerNamePrefab: Player
+  player: {fileID: 5427798063366714413, guid: 5a0da02be8e9d3648aeaa4525c88307d, type: 3}
 --- !u!114 &1051219761
 MonoBehaviour:
   m_ObjectHideFlags: 0

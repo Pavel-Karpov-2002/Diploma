@@ -31,7 +31,7 @@ public class DownloaderFile : Singleton<DownloaderFile>
                     string reqFileName = request.GetResponseHeader("content-disposition");
                     string fileName = reqFileName.Remove(0, reqFileName.IndexOf("\"")).Replace("\"", "");
                     byte[] bytes = request.downloadHandler.data;
-                    FileOperations.WriteByteFile(linkParameters.FolderPath + fileName, bytes);
+                    FileOperations.WriteByteFile(Application.dataPath + linkParameters.FolderPath + fileName, bytes);
                     IsDone = true;
                 }
                 catch

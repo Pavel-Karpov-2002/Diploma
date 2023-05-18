@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,3 +13,4 @@ public class ChangeQuestionButton : MonoBehaviour
     public Button DeleteButton => deleteButton;
     public TextMeshProUGUI ButtonText => buttonText;
 }
+#endif

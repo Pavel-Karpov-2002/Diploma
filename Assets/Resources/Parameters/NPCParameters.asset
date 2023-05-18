@@ -25,11 +25,11 @@ MonoBehaviour:
     skinAnimator: {fileID: 22100000, guid: fd6ab02fa8f396f42a598253d697bbdb, type: 2}
   - skin: {fileID: 873441441, guid: 8bc6e3a48dbe5714a800ded2cc0a9a00, type: 3}
     skinAnimator: {fileID: 22100000, guid: ff61a16d292995341ac6cdd50293f36c, type: 2}
-  - skin: {fileID: 2073757953, guid: e347ebbbb28ae3840ae351cd675b643b, type: 3}
+  - skin: {fileID: -813380204, guid: 7ae70e08cb84b3249bfae41c7349d39c, type: 3}
     skinAnimator: {fileID: 22100000, guid: be8f99c6cf8089c49975f1e99b2c1617, type: 2}
-  - skin: {fileID: 1462882466, guid: 13bd37931c008984ca8a7a8034de87c5, type: 3}
+  - skin: {fileID: -1412083641, guid: a4cd1f7fc050a444fb69f0384e91b132, type: 3}
     skinAnimator: {fileID: 22100000, guid: 56ff13fb20cd00948b0e0ced7198485d, type: 2}
-  - skin: {fileID: -1299003915, guid: 4bb61796c158af2429d74f31ff8c7735, type: 3}
+  - skin: {fileID: -1455029599, guid: 3a35b9ca46edce247a685a8f88ec08e1, type: 3}
     skinAnimator: {fileID: 22100000, guid: c06f3a8a5a5285e44ae456d4ec8ecd5c, type: 2}
   teachers:
   - skin: {fileID: -705487487, guid: 11b05a30374060a4e9493ab1f331d450, type: 3}

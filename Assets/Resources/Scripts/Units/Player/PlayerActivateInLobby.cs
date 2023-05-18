@@ -4,6 +4,7 @@ public class PlayerActivateInLobby : PlayerActivate
 {
     [SerializeField] private FacultyParameters facultyParameters;
     [SerializeField] private LinkParameters linkParameters;
+    [SerializeField] private GameObject settingsWindow;
 
     private bool isWindowActive;
 
@@ -70,11 +71,17 @@ public class PlayerActivateInLobby : PlayerActivate
         PlayAudio(audioParameters.OpeningBackpack);
         GameData.Data.AmountMoney -= PlayerParameters.CostRollingItems;
         PlayerStatsInformation.Instance.UpdateInformationText();
-        GameData.UpdateGameDataFile(gameParameters.DataPath);
+#if UNITY_EDITOR
+        string path = Application.streamingAssetsPath;
+#elif UNITY_ANDROID             
+        string path = Application.persistentDataPath;
+#endif
+        GameData.UpdateGameDataFile(path + gameParameters.DataPath);
     }
 
     public void OpenStatusWindow(GameObject window)
     {
+        GameData.Data.AmountMoney += 100;
         if (isWindowActive)
             return;
         PlayAudio(audioParameters.OpeningInventory);
@@ -99,6 +106,7 @@ public class PlayerActivateInLobby : PlayerActivate
     {
         isWindowActive = active;
         window.SetActive(active);
+        settingsWindow.SetActive(!active);
         MovementJoystick.Instance.gameObject.SetActive(!active);
     }
 }

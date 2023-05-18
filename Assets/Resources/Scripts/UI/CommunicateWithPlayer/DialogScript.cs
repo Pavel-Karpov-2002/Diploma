@@ -14,10 +14,9 @@ public class DialogScript : Singleton<DialogScript>
 
     public delegate void ShowQuestionDelegate();
     public static ShowQuestionDelegate ShowQuestionDialog;
-    public delegate NPCQuestions GetQuestionsDelegate(string path);
+    public delegate NPCQuestions GetQuestionsDelegate();
 
     public NPCQuestions NpcQuestions { get; private set; }
-    public NPCQuestionsInformation QuestionsInformation { get => questionsInformation; set => questionsInformation = value; }
     public EnteringResponseScript EnteringResponse => enteringResponse;
     public TestingAnswersScript Testing => testing;
 
@@ -31,7 +30,7 @@ public class DialogScript : Singleton<DialogScript>
         base.Awake();
         TimerDialogScript.TimerEnd += ShowNewQuestion;
         TimerDialogScript.TimerEnd += TakeAwayPoints;
-        NpcQuestions = GetQuestions?.Invoke(Path);
+        NpcQuestions = GetQuestions?.Invoke();
     }
 
     private void Start()
@@ -50,12 +49,9 @@ public class DialogScript : Singleton<DialogScript>
     private void InitializeQuestion()
     {
         PlayerSkills.Instance.SetInteractableSkillsButton();
-        numberQuestion = GetRandomNumber.GenerateRandomNumberNotUsed(0, questions.Length, enteringQuestion);
-        if (numberQuestion == -1)
-        {
+        if (enteringQuestion.Count >= questions.Length)
             enteringQuestion.Clear();
-            numberQuestion = GetRandomNumber.GenerateRandomNumberNotUsed(0, questions.Length, enteringQuestion);
-        }
+        numberQuestion = GetRandomNumber.GenerateRandomNumberNotUsed(0, questions.Length, enteringQuestion);
         enteringQuestion.Add(numberQuestion);
         TimerDialogScript.Instance.StartTimer(questions[numberQuestion].QuestionTime);
         ChangeActiveTestingPanel(questions[numberQuestion].IsTest(), questions[numberQuestion]);
@@ -122,6 +118,9 @@ public class DialogScript : Singleton<DialogScript>
 
     private void OnDestroy()
     {
+        TimerDialogScript.TimerEnd -= ShowNewQuestion;
+        TimerDialogScript.TimerEnd -= TakeAwayPoints;
+        countNPCCompleted = 0;
         ShowQuestionDialog = null;
     }
 }

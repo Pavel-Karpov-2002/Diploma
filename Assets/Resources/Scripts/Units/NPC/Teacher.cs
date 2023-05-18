@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -50,7 +51,6 @@ public class Teacher : NPC
             AnswerButton.OnPlayerAnswered += ChangeScoreOnCompletedDialog;
             DialogScript.NpcType = NPCType.Teacher;
             DialogScript.Instance.ShowNewQuestion();
-            DialogScript.Instance.QuestionsInformation = null;
         }
         else if (DialogScript.countNPCCompleted >= DialogScript.Instance.NpcQuestions.AmountStudentsOnFloor - 1)
         {
@@ -82,7 +82,12 @@ public class Teacher : NPC
         {
             GameData.Data.AmountMoney += amountPointsCorrectAnswers;
             FloorCompleted(PlayerScores.Instance.Scores + amountPointsCorrectAnswers);
-            GameData.UpdateGameDataFile(gameParameters.DataPath);
+#if UNITY_EDITOR
+            string path = Application.streamingAssetsPath;
+#elif UNITY_ANDROID             
+            string path = Application.persistentDataPath;
+#endif
+            GameData.UpdateGameDataFile(path + gameParameters.DataPath);
         }
 
         AudioController.Instance.PlayOneAudio(isPassed ? audioParameters.LevelPassed : audioParameters.LevelNotPassed);
@@ -92,6 +97,9 @@ public class Teacher : NPC
 
     private void FloorCompleted(int scorePoints)
     {
+        if (CreateButtonsLevel.levelsInformation == null)
+            CreateButtonsLevel.levelsInformation = new List<LevelInformation>();
+
         foreach (var levelInformation in CreateButtonsLevel.levelsInformation)
         {
             if (levelInformation.LevelCompletedName.Equals(System.IO.Path.GetFileNameWithoutExtension(DialogScript.Path)))
@@ -104,7 +112,6 @@ public class Teacher : NPC
                 return;
             }
         }
-
         CreateButtonsLevel.levelsInformation.Add(new LevelInformation() { LevelCompletedName = System.IO.Path.GetFileNameWithoutExtension(DialogScript.Path), LevelRecord = scorePoints });
         GameData.Data.AmountPassedLevels += 1;
         SaveCompletedLevel();
@@ -112,12 +119,22 @@ public class Teacher : NPC
 
     private void SaveCompletedLevel()
     {
-        FileEncryption.WriteFile(System.IO.Path.GetDirectoryName(DialogScript.Path) + "\\completedLevels.json", CreateButtonsLevel.levelsInformation);
+#if UNITY_EDITOR
+        string path = Application.streamingAssetsPath;
+#elif UNITY_ANDROID             
+        string path = Application.persistentDataPath;
+#endif
+        FileEncryption.WriteFile(path + "/" + System.IO.Path.GetDirectoryName(DialogScript.Path) + "/completedLevels.json", CreateButtonsLevel.levelsInformation);
     }
 
     protected override void SetSkin()
     {
         npcSkin.sprite = npcParameters.Teachers[Random.Range(0, npcParameters.Teachers.Count - 1)].Skin;
         npcAnimator.runtimeAnimatorController = npcParameters.Teachers[Random.Range(0, npcParameters.Teachers.Count - 1)].SkinAnimator;
+    }
+
+    private void OnDestroy()
+    {
+        AnswerButton.OnPlayerAnswered -= ChangeScoreOnCompletedDialog;
     }
 }

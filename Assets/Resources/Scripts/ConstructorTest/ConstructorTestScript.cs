@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -303,3 +304,4 @@ public class ConstructorTestScript : MonoBehaviour
         buttonUpdateQuestion.onClick.AddListener(() => UpdateQuestion(question, changeQuestionButton));
     }
 }
+#endif

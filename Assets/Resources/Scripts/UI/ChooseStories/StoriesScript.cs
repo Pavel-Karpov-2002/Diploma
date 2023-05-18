@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
 using TMPro;
 using UnityEngine;
 
@@ -14,40 +12,43 @@ public class StoriesScript : Singleton<StoriesScript>
     [SerializeField] private GameObject textPanel;
     [SerializeField] private GameObject buttonPanel;
 
-    private void Start()
-    {
-        CreateListButtons(gameParameters.StoriesPath);
-    }
-
     private void OnEnable()
     {
+#if UNITY_EDITOR
+        CreateListButtons(gameParameters.StoriesPath);
+#elif UNITY_ANDROID             
+        CreateListButtons(gameParameters.StoriesPath);
+#endif
         buttonPanel.SetActive(true);
     }
 
     public void CreateListButtons(string path)
     {
-        if (Directory.GetFiles(path, "*.json").Length > 0)
+        try
         {
-            CreateButtonsLevels(path);
+            string[] paths = BetterStreamingAssets.GetFiles(path, "*.json");
+            CreateButtonsLevels(paths);
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
         }
     }
 
-    private void CreateButtonsLevels(string path)
+    private void CreateButtonsLevels(string[] paths)
     {
-        ChangePanelScript.ClearPanel(storiesPanel);
-
         try
         {
-            IEnumerable<string> pathes = Directory.GetFiles(path, "*.json");
-            foreach (var storiesPathes in pathes)
+            ChangePanelScript.ClearPanel(storiesPanel);
+            foreach (var storiesPaths in paths)
             {
-                string lastName = ChangePanelScript.GetLastName(storiesPathes.Replace(".json", ""));
-                string storiesName = ChangePanelScript.GetLastName(lastName);
-                PanelButton button = ChangePanelScript.CreateButton(storiesName,
+                string storiesName = ChangePanelScript.GetLastName(storiesPaths).Replace(".json", "");
+                PanelButton button = ChangePanelScript.CreateButton(storiesPaths,
                     storiesButton, storiesPanel, null,
                     () => AudioController.Instance.PlayOneAudio(audioParameters.PageRustling),
-                    () => DemonstrationHistory(FileOperations.ReadTextFile(path + storiesName + ".json")), 
+                    () => DemonstrationHistory(BetterStreamingAssets.ReadAllText(storiesPaths)),
                     () => ChangeActivePanel(false));
+                button.ButtonText.text = storiesName;
             }
         }
         catch (Exception e)

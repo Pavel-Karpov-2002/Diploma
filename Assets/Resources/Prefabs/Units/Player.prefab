@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 2659374031605472682}
   - component: {fileID: 8752508798144651935}
   - component: {fileID: 1640258915}
+  - component: {fileID: 7691769618725351426}
   - component: {fileID: 6459344913045676494}
   - component: {fileID: 2000855414320911123}
   - component: {fileID: 5427798063366714409}
@@ -251,6 +252,22 @@ MonoBehaviour:
   playerParameters: {fileID: 11400000, guid: 15b8cfeca889a1747a0a53747253cae9, type: 2}
   gameParameters: {fileID: 11400000, guid: 5c9843972f45f8d48bba9dd477373a0e, type: 2}
   audioParameters: {fileID: 11400000, guid: d3cc2ef6d4874c041a46ad9e6ee07c33, type: 2}
+--- !u!114 &7691769618725351426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5427798063366714413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d43ac1e987b1c8542af4488a8c092c3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerParameters: {fileID: 11400000, guid: 15b8cfeca889a1747a0a53747253cae9, type: 2}
+  nPCParameters: {fileID: 11400000, guid: da9490d7cac957a47b035a1ebba55563, type: 2}
+  sprite: {fileID: 5427798063366714412}
+  animator: {fileID: 4883185694681662727}
 --- !u!114 &6459344913045676494
 MonoBehaviour:
   m_ObjectHideFlags: 0

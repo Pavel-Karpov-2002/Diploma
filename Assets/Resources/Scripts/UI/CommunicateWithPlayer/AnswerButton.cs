@@ -18,24 +18,22 @@ public class AnswerButton : MonoBehaviour
     public delegate void PlayerAnswered(int countPoints);
 
     public static event PlayerAnswered OnPlayerAnswered;
-    public event ChangeButtonColor ChangeAnswerButton;
 
     private IEnumerator nextQuestionCoroutine;
     private bool coroutineIsNotProcessed = true;
 
-    public static bool ChangeColorButton = true;
+    public static bool ChangeColorButton;
 
     private void OnEnable()
     {
         if (isActiveAndEnabled)
             thisButton.interactable = true;
-        ChangeAnswerButton = ChangeColor;
     }
 
     public void AnswerTheQuestion(Question question, string answer)
     {
         bool isCorrect = CheckCorrectAnswer(answer);
-        ChangeButton(isCorrect ? dialogParameters.ButtonTrueColor : dialogParameters.ButtonFalseColor);
+        ChangeColor(isCorrect ? dialogParameters.ButtonTrueColor : dialogParameters.ButtonFalseColor);
         if (coroutineIsNotProcessed)
         {
             nextQuestionCoroutine = NextQuestion(dialogParameters.TimeAfterResponse);
@@ -44,13 +42,6 @@ public class AnswerButton : MonoBehaviour
         if (OnPlayerAnswered != null)
             OnPlayerAnswered?.Invoke(isCorrect ? question.PointsForCorrectAnswer : -question.PointsForWrongAnswer);
         thisButton.interactable = false;
-    }
-
-    private void ChangeButton(Color color)
-    {
-        if (!ChangeColorButton)
-            return;
-        ChangeAnswerButton.Invoke(color);
     }
 
     private bool CheckCorrectAnswer(string answer)
@@ -69,6 +60,8 @@ public class AnswerButton : MonoBehaviour
 
     public void ChangeColor(Color color)
     {
+        if (!ChangeColorButton)
+            return;
         buttonImage.color = color;
     }
 

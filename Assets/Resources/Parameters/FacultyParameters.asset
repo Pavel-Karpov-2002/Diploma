@@ -12,11 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e5d293079d07d419fe9722c7f33e05, type: 3}
   m_Name: FacultyParameters
   m_EditorClassIdentifier: 
-  foldersPath: ..\\The Labyrinth of GSTU\\Assets\\Resources\\Questions\\
+  foldersPath: /Questions/
   distanceActivateFacultyPanel: 3
   layerActivateFacultyPanel:
     serializedVersion: 2
     m_Bits: 512
-  facultyName:
-  - "\u0424\u0410\u0418\u0421"
-  - "\u0413\u042D\u0424"
+  faculties:
+  - name: "\u0424\u0410\u0418\u0421"
+    discilines:
+    - C#
+    - FrontEnd
+    - Java
+    - "\u041E\u041E\u041F"
+    facultyImage: {fileID: -1872631651, guid: a388ecea5e070fd47b3655b0a6ec4f58, type: 3}

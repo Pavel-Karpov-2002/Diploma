@@ -75,7 +75,12 @@ public class CreateSkills : MonoBehaviour
         {
             if (item.Skill.GetType() == skill.GetType())
             {
-                button.Image.sprite = ConvertTexture2D.GetSprite(ConvertTexture2D.GetTexture2D(item.ItemSpritePath));
+#if UNITY_EDITOR
+                string path = Application.streamingAssetsPath;
+#elif UNITY_ANDROID             
+                string path = Application.persistentDataPath;
+#endif
+                button.Image.sprite = Resources.Load<Sprite>(item.ItemSpritePath);
                 break;
             }
         }
