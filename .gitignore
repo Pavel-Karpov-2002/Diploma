@@ -443,6 +443,7 @@ sysinfo.txt
 *.aab
 *.unitypackage
 *.app
+!Game.apk
 
 # Crashlytics generated file
 crashlytics-build.properties
