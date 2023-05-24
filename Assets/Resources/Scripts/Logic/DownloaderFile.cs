@@ -21,7 +21,7 @@ public class DownloaderFile : Singleton<DownloaderFile>
 
             if (request.result == UnityWebRequest.Result.ConnectionError)
             {
-                GameException.Instance.ShowError("Ошибка подключения!");
+                GameException.Instance.ShowError("Ошибка, попробуйте еще раз!");
                 IsDone = false;
             }
             else
@@ -31,8 +31,20 @@ public class DownloaderFile : Singleton<DownloaderFile>
                     string reqFileName = request.GetResponseHeader("content-disposition");
                     string fileName = reqFileName.Remove(0, reqFileName.IndexOf("\"")).Replace("\"", "");
                     byte[] bytes = request.downloadHandler.data;
-                    FileOperations.WriteByteFile(Application.dataPath + linkParameters.FolderPath + fileName, bytes);
-                    IsDone = true;
+#if UNITY_EDITOR
+                    string path = Application.streamingAssetsPath + linkParameters.FolderPath + "/";
+#elif UNITY_ANDROID
+                string path = Application.persistentDataPath + linkParameters.FolderPath + "/";
+#endif
+                    try
+                    {
+                        FileOperations.WriteByteFile(path + fileName, bytes);
+                        IsDone = true;
+                    }
+                    catch
+                    {
+                        GameException.Instance.ShowError("Ошибка, попробуйте еще раз!" + path + fileName);
+                    }
                 }
                 catch
                 {

@@ -49,8 +49,10 @@ public static class CreateButtonsLevel
     {
         try
         {
-            FileStream file = new FileStream(path, FileMode.OpenOrCreate);
-            levelsInformation = FileOperations.ReadJsonWithTypes<List<LevelInformation>>(FileEncryption.ReadBytes(FileOperations.GetBytesInStream(file)));
+            using (var stream = File.Open(path, FileMode.OpenOrCreate))
+            {
+                levelsInformation = FileOperations.ReadJsonWithTypes<List<LevelInformation>>(FileEncryption.ReadBytes(FileOperations.GetBytesInStream(stream)));
+            }
         }
         catch (Exception e)
         {

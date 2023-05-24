@@ -1,5 +1,4 @@
-﻿using DG.Tweening.Plugins.Core.PathCore;
-using System.IO;
+﻿using System.IO;
 using UnityEngine;
 
 public class FacultyPanelScript : Singleton<FacultyPanelScript>
@@ -45,7 +44,6 @@ public class FacultyPanelScript : Singleton<FacultyPanelScript>
         string[] paths = BetterStreamingAssets.GetFiles(path.Replace(Application.streamingAssetsPath, "") + "/", "*.json");
 #elif UNITY_ANDROID
         string[] paths = BetterStreamingAssets.GetFiles(path.Replace(Application.persistentDataPath, "") + "/", "*.json");
-        
 #endif
         if (paths.Length > 0)
             CreateButtonsLevel.CreateButtons(paths, facultyPanel, facultyButton, audioParameters.DoorOpen, gameParameters);
