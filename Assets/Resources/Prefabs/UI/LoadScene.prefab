@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AspectMode: 4
-  m_AspectRatio: 1.3465278
+  m_AspectRatio: 1.885618
 --- !u!1 &5831051990796914221
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,7 +398,7 @@ GameObject:
   - component: {fileID: 1632847816875593004}
   - component: {fileID: 1684968233143929201}
   m_Layer: 5
-  m_Name: StartScene
+  m_Name: LoadScene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

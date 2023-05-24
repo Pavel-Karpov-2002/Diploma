@@ -21,7 +21,6 @@ public class Teacher : NPC
         countedScoreToSay = SetCountedScoreToSay();
         amountResponses = DialogScript.Instance.NpcQuestions.Teacher.AmountQuestionsForTest;
         scoreToHave.text = "<color=#" + colorText.ToHexString() + ">" + countedScoreToSay + "</color>";
-        SetSkin();
     }
 
     private int SetCountedScoreToSay()
@@ -54,7 +53,7 @@ public class Teacher : NPC
         }
         else if (DialogScript.countNPCCompleted >= DialogScript.Instance.NpcQuestions.AmountStudentsOnFloor - 1)
         {
-            SceneChangeScript.GetInstance().ChangeScene(gameParameters.LobbySceneName);
+            SceneChangeScript.Instance.ChangeScene(gameParameters.LobbySceneName);
         }
     }
 
@@ -92,7 +91,8 @@ public class Teacher : NPC
 
         AudioController.Instance.PlayOneAudio(isPassed ? audioParameters.LevelPassed : audioParameters.LevelNotPassed);
         DialogScript.Instance.CloseDialogWindow();
-        SceneChangeScript.GetInstance().ChangeScene(gameParameters.LobbySceneName);
+        MovementJoystick.Instance.gameObject.SetActive(false);
+        SceneChangeScript.Instance.ChangeScene(gameParameters.LobbySceneName);
     }
 
     private void FloorCompleted(int scorePoints)

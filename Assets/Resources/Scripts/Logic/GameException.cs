@@ -19,6 +19,8 @@ public class GameException : Singleton<GameException>
 
     public void ShowError(string exeption)
     {
+        if (exeptionText.text.Equals(exeption) && exeptionPanel.alpha > 0)
+            return;
         sequence.Kill();
         sequence = DOTween.Sequence();
         AudioController.Instance.PlayOneAudio(audioParameters.Warning);

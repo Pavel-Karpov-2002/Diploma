@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class ShowItemInformation : Singleton<ShowItemInformation>
 {
+    [SerializeField] private ItemParameters itemParameters;
     [SerializeField] private Image itemImage;
     [SerializeField] private TextMeshProUGUI textInformation;
     [SerializeField] private TextMeshProUGUI textNameItem;
@@ -11,11 +12,27 @@ public class ShowItemInformation : Singleton<ShowItemInformation>
 
     private bool isShow;
     private Item lastItem;
+
     public Image PlayerSkin => playerSkin;
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
         playerSkin.sprite = PlayerMovement.Instance.gameObject.GetComponent<SpriteRenderer>().sprite;
+    }
+
+    private void OnEnable()
+    {
+        ClearSlot();
+    }
+
+    public void ClearSlot()
+    {
+        itemImage.sprite = itemParameters.ItemSlot.ClearItemImage;
+        textNameItem.text = string.Empty;
+        textInformation.text = string.Empty;
+        if (OperationWithItems.Instance != null)
+            OperationWithItems.Instance.ActiveItem = new Item();
     }
 
     public void SetIventoryItemInformation(Item item)

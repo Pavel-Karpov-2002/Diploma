@@ -1398,7 +1398,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3805d641237379240a99b1e56fffd02f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemImage: {fileID: 422764022644075404}
+  itemParameters: {fileID: 11400000, guid: 29b7e19ef4f28144394f8d6415379f92, type: 2}
+  itemImage: {fileID: 709832334507507055}
   textInformation: {fileID: 422764024486716195}
   textNameItem: {fileID: 422764023832911612}
   playerSkin: {fileID: 422764024468274274}

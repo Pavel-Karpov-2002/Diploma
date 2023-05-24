@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,24 +7,7 @@ public class NPCGeneratorScript : MonoBehaviour
     [SerializeField] private GameObject teacher;
     [SerializeField] private GameObject layerForNPC;
 
-    public void Generator(MazeParameters parameters, List<Rect> rooms, Vector2 gridScale)
-    {
-        ClearNPC();
-        SetNPC(parameters, rooms, gridScale);
-    }
-
-    private void ClearNPC()
-    { 
-        foreach (var npc in layerForNPC.GetComponentsInChildren<NPC>())
-        {
-            if (npc.gameObject != layerForNPC)
-            {
-                Destroy(npc.gameObject);
-            }
-        }
-    }
-
-    private void SetNPC(MazeParameters parameters, List<Rect> rooms, Vector2 gridScale)
+    public void SetNPC(List<Rect> rooms, Vector2 gridScale)
     {
         int countNPC = 0;
         int amountStudents = DialogScript.Instance.NpcQuestions.AmountStudentsOnFloor;

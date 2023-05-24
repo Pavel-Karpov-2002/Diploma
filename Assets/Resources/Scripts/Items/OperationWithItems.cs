@@ -67,6 +67,7 @@ public class OperationWithItems : Singleton<OperationWithItems>
             return;
         GameData.Data.PlayerItems.RemoveAt(activeItem);
         ChangePanelScript.ClearPanel(itemsPlayerPanel);
+        ShowItemInformation.Instance.ClearSlot();
         GetPlayerItems();
     }
 

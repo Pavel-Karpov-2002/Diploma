@@ -350,7 +350,7 @@ MonoBehaviour:
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
-    m_HighlightedTrigger: 
+    m_HighlightedTrigger: NaN
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
@@ -786,7 +786,6 @@ MonoBehaviour:
   skinWindowAnimator: {fileID: 3938476359735835337}
   thisPlayer: {fileID: 0}
   PlayerNamePrefab: Player
-  player: {fileID: 5427798063366714413, guid: 5a0da02be8e9d3648aeaa4525c88307d, type: 3}
 --- !u!114 &1051219761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -914,7 +913,7 @@ MonoBehaviour:
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
-    m_HighlightedTrigger: 
+    m_HighlightedTrigger: NaN
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled

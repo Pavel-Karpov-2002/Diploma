@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AudioController" Collapsed="true">
+    <Position X="5.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACQAAQAAAAAAAAAAAAABEAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Resources\Scripts\Units\Player\AudioController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerActivate" Collapsed="true">
+    <Position X="1" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAIAgAAQAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Resources\Scripts\Units\Player\PlayerActivate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerActivateInLobby" Collapsed="true">
+    <Position X="1" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAECAAAEAAAAAAABCAhAMAAAACAAAAAIAAAgAAA=</HashCode>
+      <FileName>Assets\Resources\Scripts\Units\Player\PlayerActivateInLobby.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerAnimation" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAgAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Assets\Resources\Scripts\Units\Player\PlayerAnimation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerConstructor" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAgAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Resources\Scripts\Units\Player\PlayerConstructor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerMovement" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAQAIAAEAAAAAIQJAAAAAQAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Resources\Scripts\Units\Player\PlayerMovement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerScores" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAgAAAAIAAAAAAAAAAAQAAAAACAAAAA=</HashCode>
+      <FileName>Assets\Resources\Scripts\Units\Player\PlayerScores.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerSkills" Collapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIABBAAACiQAQAAAIAECBAAIAAQAAAAQAAAAAAAAACA=</HashCode>
+      <FileName>Assets\Resources\Scripts\Units\Player\PlayerSkills.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerSkin" Collapsed="true">
+    <Position X="3.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAACAAAAAAAAAAAAAKAFAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Resources\Scripts\Units\Player\PlayerSkin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

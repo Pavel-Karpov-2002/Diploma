@@ -24,7 +24,7 @@ public class DungeonGenerator : MonoBehaviour
         floorMap.ClearAllTiles();
         rooms = new List<Rect>();
         BinarySpacePartitioningAlgorithm.StartGenerate(wallsMap, floorMap, mazeParameters);
-        npcGeneratorScript.Generator(mazeParameters, rooms, gridScale);
+        npcGeneratorScript.SetNPC(rooms, gridScale);
         PlayerGeneratorScript.SetPlayerPosition(mazeParameters, rooms, gridScale);
     }
 }

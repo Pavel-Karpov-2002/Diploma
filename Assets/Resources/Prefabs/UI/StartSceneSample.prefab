@@ -112,12 +112,24 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1043121497580675666, guid: 1ebec316333ee4c49a3787226a180b36, type: 3}
+      propertyPath: m_fontSize
+      value: 35
+      objectReference: {fileID: 0}
     - target: {fileID: 1632847816875593004, guid: 1ebec316333ee4c49a3787226a180b36, type: 3}
       propertyPath: m_Alpha
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1632847816875593004, guid: 1ebec316333ee4c49a3787226a180b36, type: 3}
+      propertyPath: m_BlocksRaycasts
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2016783788549663671, guid: 1ebec316333ee4c49a3787226a180b36, type: 3}
       propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016783788549663671, guid: 1ebec316333ee4c49a3787226a180b36, type: 3}
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2163368474879739990, guid: 1ebec316333ee4c49a3787226a180b36, type: 3}
@@ -138,7 +150,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7864718250415474387, guid: 1ebec316333ee4c49a3787226a180b36, type: 3}
       propertyPath: m_Name
-      value: StartScene
+      value: LoadScene
       objectReference: {fileID: 0}
     - target: {fileID: 8195642617773792666, guid: 1ebec316333ee4c49a3787226a180b36, type: 3}
       propertyPath: m_Pivot.x

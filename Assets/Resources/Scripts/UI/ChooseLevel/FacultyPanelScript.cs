@@ -13,7 +13,7 @@ public class FacultyPanelScript : Singleton<FacultyPanelScript>
     public FacultyParameters FacultyParameters => facultyParameters;
     string path;
 
-    private void Awake()
+    protected override void Awake()
     {
         base.Awake();
 #if UNITY_EDITOR
@@ -53,19 +53,17 @@ public class FacultyPanelScript : Singleton<FacultyPanelScript>
 
     private void CreateDirectories(string path)
     {
-        if (Directory.Exists(path))
+        if (!Directory.Exists(path))
             Directory.CreateDirectory(path);
         foreach (var facultie in facultyParameters.Faculties)
         {
             string namePath = path + facultie.Name + "/";
-            if (Directory.Exists(namePath))
-                continue;
-            Directory.CreateDirectory(namePath);
+            if (!Directory.Exists(namePath))
+                Directory.CreateDirectory(namePath);
             foreach (var discipline in facultie.Discilines)
             {
-                if (Directory.Exists(namePath + discipline))
-                    continue;
-                Directory.CreateDirectory(namePath + discipline + "/");
+                if (!Directory.Exists(namePath + discipline))
+                    Directory.CreateDirectory(namePath + discipline + "/");
             }
         }
     }

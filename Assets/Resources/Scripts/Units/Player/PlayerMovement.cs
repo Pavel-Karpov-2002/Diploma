@@ -5,7 +5,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
 {
     [SerializeField] private PlayerParameters playerParameters;
     [SerializeField] private AudioParameters audioParameters;
-    [SerializeField] private new PlayerAnimation animation;
+    [SerializeField] private PlayerAnimation _animation;
     [SerializeField] private SpriteRenderer playerSprite;
 
     private float speed;
@@ -39,6 +39,6 @@ public class PlayerMovement : Singleton<PlayerMovement>
         {
             rb.velocity = Vector2.zero;
         }
-        animation.ChangeAnimation(MovementJoystick.Instance.JoystickDirection.x, MovementJoystick.Instance.JoystickDirection.y, playerSprite);
+        _animation.ChangeAnimation(MovementJoystick.Instance.JoystickDirection.x, MovementJoystick.Instance.JoystickDirection.y, playerSprite);
     }
 }

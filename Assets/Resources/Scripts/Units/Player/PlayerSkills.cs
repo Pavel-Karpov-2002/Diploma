@@ -20,10 +20,16 @@ public class PlayerSkills : Singleton<PlayerSkills>
     public static event GetPassiveSkillsDelegate GetPassiveSkills;
     public static event GetResponseSkillDelegate GetResponseSkill;
 
-    private List<SkillButton> buttons = new List<SkillButton>();
+    private List<SkillButton> buttons;
     public AudioParameters AudioParameters => audioParameters;
 
     public GameObject SkillsPanel => skillsPanel;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        buttons = new List<SkillButton>();
+    }
 
     private void Start()
     {

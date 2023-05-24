@@ -226,6 +226,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5864987067589661416, guid: 2bdfb11b87c461d4da11b6fe2907b6c7, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6469492280119596946, guid: 2bdfb11b87c461d4da11b6fe2907b6c7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -374,7 +378,6 @@ GameObject:
   - component: {fileID: 1573623222}
   - component: {fileID: 1573623221}
   - component: {fileID: 1573623220}
-  - component: {fileID: 1573623223}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -432,18 +435,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1573623223
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1573623219}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c07e8526a4c2d1428a25e7967b9a951, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7074483168770999711
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -618,6 +609,10 @@ PrefabInstance:
     - target: {fileID: 7074483169774876050, guid: 3e94b788644674a4598ed42baa409b7f, type: 3}
       propertyPath: m_Name
       value: StartMenuSample
+      objectReference: {fileID: 0}
+    - target: {fileID: 7074483169774876050, guid: 3e94b788644674a4598ed42baa409b7f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7074483169970829258, guid: 3e94b788644674a4598ed42baa409b7f, type: 3}
       propertyPath: m_SizeDelta.y

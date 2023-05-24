@@ -1,5 +1,4 @@
 using DG.Tweening;
-using DG.Tweening.Plugins.Core.PathCore;
 using System.Collections;
 using System.IO;
 using UnityEngine;
@@ -7,20 +6,18 @@ using UnityEngine.Android;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SceneChangeScript : MonoBehaviour
+public class SceneChangeScript : Singleton<SceneChangeScript>
 {
     [SerializeField] private GameParameters gameParameters;
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private Slider loaderBar;
 
-    private Sequence sequence;
     private IEnumerator fadeCoroutine;
-    private static SceneChangeScript instance;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         BetterStreamingAssets.Initialize();
-        sequence = DOTween.Sequence();
     }
 
     private void Start()
@@ -93,19 +90,5 @@ public class SceneChangeScript : MonoBehaviour
             loaderBar.value = asyncLoad.progress;
             yield return null;
         }
-    }
-
-    public static SceneChangeScript GetInstance()
-    {
-        if (instance == null)
-            instance = Resources.FindObjectsOfTypeAll<SceneChangeScript>()[0];
-
-        return instance;
-    }
-
-    private void OnDisable()
-    {
-        sequence.Kill();
-        instance = null;
     }
 }

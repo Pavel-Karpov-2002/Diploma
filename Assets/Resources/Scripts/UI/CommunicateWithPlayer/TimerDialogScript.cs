@@ -32,7 +32,7 @@ public class TimerDialogScript : Singleton<TimerDialogScript>
 
     public void StartTimer(float timeDuration)
     {
-        timer = new();
+        timer = new TimerScript();
         this.timeDuration = timeDuration;
         timer.Start(this.timeDuration);
         IsPaused = false;

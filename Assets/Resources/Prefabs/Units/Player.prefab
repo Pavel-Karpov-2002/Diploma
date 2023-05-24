@@ -204,7 +204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerParameters: {fileID: 11400000, guid: 15b8cfeca889a1747a0a53747253cae9, type: 2}
   audioParameters: {fileID: 11400000, guid: d3cc2ef6d4874c041a46ad9e6ee07c33, type: 2}
-  animation: {fileID: 6459344913045676494}
+  _animation: {fileID: 6459344913045676494}
   playerSprite: {fileID: 5427798063366714412}
 --- !u!114 &2659374031605472682
 MonoBehaviour:

@@ -11,7 +11,6 @@ public static class CreateButtonsLevel
     {
         ChangePanelScript.ClearPanel(panel);
         levelsInformation = new List<LevelInformation>();
-        levelsInformation.Add(new LevelInformation());
         try
         {
             foreach (var levelPath in paths)
@@ -29,14 +28,13 @@ public static class CreateButtonsLevel
                 NPCQuestions questions = GetNpcQuestions(levelPath, isLink);
                 if (questions != null)
                 {
-                    PanelButton panelButton = new PanelButton();
-                    panelButton = ChangePanelScript.CreateButton("Пройти этаж: " + ChangePanelScript.GetLastName(levelName),
+                    PanelButton panelButton = ChangePanelScript.CreateButton("Пройти этаж: " + ChangePanelScript.GetLastName(levelName),
                         button,
                         panel,
                         null,
                         () => AudioController.Instance.PlayOneAudio(nextSceneAudio),
                         () => DialogScript.GetQuestions += () => questions,
-                        () => SceneChangeScript.GetInstance().ChangeScene(gameParameters.FloorSceneName),
+                        () => SceneChangeScript.Instance.ChangeScene(gameParameters.FloorSceneName),
                         () => DialogScript.Path = levelPath);
                     SetCompletedButton(panelButton, ChangePanelScript.GetLastName(levelName), gameParameters.PassedLevelColor);
                 }

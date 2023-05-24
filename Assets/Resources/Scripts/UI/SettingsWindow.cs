@@ -36,6 +36,13 @@ public class SettingsWindow : MonoBehaviour
         settings.SoundVolume = slider.value;
     }
 
+    public void GoToMenu()
+    {
+        if (MovementJoystick.Instance != null)
+            MovementJoystick.Instance.gameObject.SetActive(false);
+        SceneChangeScript.Instance.ChangeScene(gameParameters.LobbySceneName);
+    }
+
     public void ChangeWindowAcitve()
     {
         if (isChange)

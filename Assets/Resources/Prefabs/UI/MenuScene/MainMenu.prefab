@@ -771,6 +771,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7600656681920751425}
     m_Modifications:
+    - target: {fileID: 232317940283066249, guid: 1ebec316333ee4c49a3787226a180b36, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016783788549663671, guid: 1ebec316333ee4c49a3787226a180b36, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2163368474879739990, guid: 1ebec316333ee4c49a3787226a180b36, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4041997380150322218, guid: 1ebec316333ee4c49a3787226a180b36, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4041997380150322218, guid: 1ebec316333ee4c49a3787226a180b36, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4041997380150322218, guid: 1ebec316333ee4c49a3787226a180b36, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7864718250415474387, guid: 1ebec316333ee4c49a3787226a180b36, type: 3}
       propertyPath: m_Name
       value: StartScene

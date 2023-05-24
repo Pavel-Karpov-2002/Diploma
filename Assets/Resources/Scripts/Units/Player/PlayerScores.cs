@@ -14,7 +14,7 @@ public class PlayerScores : Singleton<PlayerScores>
             if (scores < 0)
             {
                 DialogScript.Instance.gameObject.SetActive(false);
-                SceneChangeScript.GetInstance().ChangeScene(gameParameters.LobbySceneName);
+                SceneChangeScript.Instance.ChangeScene(gameParameters.LobbySceneName);
                 return;
             }
             ScoresUI.Instance.ChangeScoresText(scores);

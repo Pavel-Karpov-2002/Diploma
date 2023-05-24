@@ -81,7 +81,6 @@ public class PlayerActivateInLobby : PlayerActivate
 
     public void OpenStatusWindow(GameObject window)
     {
-        GameData.Data.AmountMoney += 100;
         if (isWindowActive)
             return;
         PlayAudio(audioParameters.OpeningInventory);

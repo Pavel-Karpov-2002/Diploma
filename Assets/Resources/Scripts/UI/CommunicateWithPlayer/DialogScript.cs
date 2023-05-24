@@ -49,10 +49,10 @@ public class DialogScript : Singleton<DialogScript>
     private void InitializeQuestion()
     {
         PlayerSkills.Instance.SetInteractableSkillsButton();
-        if (enteringQuestion.Count >= questions.Length)
-            enteringQuestion.Clear();
         numberQuestion = GetRandomNumber.GenerateRandomNumberNotUsed(0, questions.Length, enteringQuestion);
         enteringQuestion.Add(numberQuestion);
+        if (enteringQuestion.Count >= questions.Length)
+            enteringQuestion.Clear();
         TimerDialogScript.Instance.StartTimer(questions[numberQuestion].QuestionTime);
         ChangeActiveTestingPanel(questions[numberQuestion].IsTest(), questions[numberQuestion]);
     }
