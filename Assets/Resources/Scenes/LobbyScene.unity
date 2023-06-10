@@ -1173,7 +1173,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1128453165269963554, guid: cd45cf26da87b6840a84863343ae3106, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -484.31934
       objectReference: {fileID: 0}
     - target: {fileID: 1128453165783398841, guid: cd45cf26da87b6840a84863343ae3106, type: 3}
       propertyPath: m_Name
@@ -1181,7 +1181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1128453165783398841, guid: cd45cf26da87b6840a84863343ae3106, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1128453165783398844, guid: cd45cf26da87b6840a84863343ae3106, type: 3}
       propertyPath: m_Camera

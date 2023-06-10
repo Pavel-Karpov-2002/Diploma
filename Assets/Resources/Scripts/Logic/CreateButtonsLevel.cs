@@ -11,19 +11,24 @@ public static class CreateButtonsLevel
     {
         ChangePanelScript.ClearPanel(panel);
         levelsInformation = new List<LevelInformation>();
+#if UNITY_ANDROID       
+        string comletedLevelsPath = Application.persistentDataPath + "/" + Path.GetDirectoryName(paths[0]) + "/completedLevels.json";
+        if (paths.Length > 0 && File.Exists(comletedLevelsPath))
+        {
+            SetLevelInformation(comletedLevelsPath);
+        }
+#endif
         try
         {
             foreach (var levelPath in paths)
             {
+#if UNITY_EDITOR
                 if (levelPath.IndexOf("completedLevels.json") != -1)
                 {
-#if UNITY_EDITOR
                     SetLevelInformation(Application.streamingAssetsPath + "/" + levelPath);
-#elif UNITY_ANDROID
-                    SetLevelInformation(Application.persistentDataPath + "/" + levelPath);
-#endif
                     continue;
                 }
+#endif
                 string levelName = ChangePanelScript.GetLastName(levelPath.Replace(".json", ""));
                 NPCQuestions questions = GetNpcQuestions(levelPath, isLink);
                 if (questions != null)
@@ -44,9 +49,13 @@ public static class CreateButtonsLevel
         {
             Debug.Log(e.Message);
         }
+        Debug.Log("---------------------------------------------");
+        Debug.Log("levelsInformation : " + levelsInformation.Count + " \n " + " PATH : " + Application.persistentDataPath);
+        Debug.Log("---------------------------------------------");
     }
     private static void SetLevelInformation(string path)
     {
+        Debug.Log("SetLevelInformation" + path);
         try
         {
             using (var stream = File.Open(path, FileMode.OpenOrCreate))

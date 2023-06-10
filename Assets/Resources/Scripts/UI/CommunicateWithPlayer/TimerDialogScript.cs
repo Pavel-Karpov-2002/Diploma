@@ -16,7 +16,7 @@ public class TimerDialogScript : Singleton<TimerDialogScript>
 
     public static TimeEnd TimerEnd;
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (IsPaused)
             return;

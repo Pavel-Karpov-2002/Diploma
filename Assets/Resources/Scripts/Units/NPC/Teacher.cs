@@ -97,9 +97,6 @@ public class Teacher : NPC
 
     private void FloorCompleted(int scorePoints)
     {
-        if (CreateButtonsLevel.levelsInformation == null)
-            CreateButtonsLevel.levelsInformation = new List<LevelInformation>();
-
         foreach (var levelInformation in CreateButtonsLevel.levelsInformation)
         {
             if (levelInformation.LevelCompletedName.Equals(System.IO.Path.GetFileNameWithoutExtension(DialogScript.Path)))
