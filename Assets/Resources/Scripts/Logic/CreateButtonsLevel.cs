@@ -49,13 +49,9 @@ public static class CreateButtonsLevel
         {
             Debug.Log(e.Message);
         }
-        Debug.Log("---------------------------------------------");
-        Debug.Log("levelsInformation : " + levelsInformation.Count + " \n " + " PATH : " + Application.persistentDataPath);
-        Debug.Log("---------------------------------------------");
     }
     private static void SetLevelInformation(string path)
     {
-        Debug.Log("SetLevelInformation" + path);
         try
         {
             using (var stream = File.Open(path, FileMode.OpenOrCreate))
